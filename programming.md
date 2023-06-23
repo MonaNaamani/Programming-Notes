@@ -169,9 +169,56 @@ last selector to be selected if they also have an ancestor (parent, grandparent,
 - Font-family
 - Background Color
 - Background
-- Height/Width (auto)
-- Border
-- Border Radius
+- Height/Width
+- Width
+- Height
+- Line-height
+
+#### The Box Model
+
+- **padding** increases the space between the border of a box and the content of the box.
+- **margin** increases the space between the borders of a box and the borders of adjacent boxes.Margins are set using lengths, percentages, or the keyword auto and can have negative values. Margin is a shorthand property and accepts up to four values. If fewer than four values are set, the missing values are assumed based on the ones that are defined.   
+  ```
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  ```
+Each of the margin properties can also accept a value of auto. Auto is useful only for horizontal centering, and so using auto for top and bottom margins will not center an element vertically.
+- **border** adds space (even if it’s only a pixel or two) between the margin and the padding.
+
+Always start by setting margin and padding to 0 for all elements to clear out all margins and paddings in the document.
+
+#### Font Families
+
+- Serif: The most prominent style attribute of serif fonts is the presence of small, additional strokes by the edges of the letters. While initially used for ink printing purposes, the style is now associated with a sense of formality and elegance.Websites mainly use Serif for body text, as it is highly legible and helps readers quickly skim written content. Popular Serif fonts include Times New Roman, Cambria, and Garamond. 
+- Sans serif: These fonts are simple and straightforward, they do not display additional strokes attached to their letters.
+- Cursive: Cursive fonts imitate handwriting, usually having the letters joined together in a looped, flowing manner.
+- Fantasy: The Fantasy font family generally features decorative attributes present on each letter.
+- Monospace: Each letter and symbol found in Monospace fonts are of the same width. Since the fonts are consistent and easy to distinguish, they are often the default font for typewriters and computer terminals.
+
+If the user has the first font in the list installed on their computer, their browser will display that font. If they don't, the browser will try to display the next font in the list. The last font in the list should always be one of the five generic font families.
+
+"Times New Roman" appears in quotation marks, whereas the other fonts don't. Anytime a font's name is more than one word, it must be in quotation marks
+
+**Best Web-Safe HTML Fonts**
+
+Web-safe fonts are fonts that come pre-installed across most operating systems. This ensures that the fonts render as intended when accessed from various devices and browsers. Most popular examples of web-safe fonts include Arial, Times New Roman, and Helvetica.
+1. <p style="font-family: Arial">Arial</p>
+2. <p style="font-family: Arial Narrow">Arial Narrow</p>
+3. <p style="font-family: 'Times New Roman'">Times New Roman</p>
+4. <p style="font-family: Helvetica">Helvetica</p>
+5. <p style="font-family: Courier">Courier</p>
+6. <p style="font-family: Verdana">Verdana</p>
+7. <p style="font-family: Candara">Candara</p>
+8.  <p style="font-family: Geneva">Geneva</p>
+10. <p style="font-family: Calibri">Calibri</p>
+11. <p style="font-family: Optima">Optima</p>
+12. <p style="font-family: Cambria">Cambria</p>
+13. <p style="font-family: Garamond">Garamond</p>
+14. <p style="font-family: Perpetua">Perpetua</p>
+15. <p style="font-family: 'Brush Script'">Brush Script</p>
+16. <p style="font-family: 'Lucida Bright'">Lucida Bright</p>
 
 #### CSS stylesheet
 
