@@ -1,6 +1,15 @@
-# Programming Notes
+# Programming Notes 
+## Table of contents
 
-#### Markdown
+1. [Markdown](#Markdown)
+2. [Terminal](#Terminal)
+3. [GitHub](#GitHub)
+4. [HTML basics](#HTML)
+5. [CSS basics](#CSS)
+6. [Flexbox](#Flexbox)
+
+
+## Markdown <a id="Markdown"></a>
 
 - Text formating: `*italics*` `**bold**` `~~Scratch this~~`
 - Colors: `<font color=red>Text</font>`
@@ -10,27 +19,23 @@
     - `[I'm an inline-style link](https://www.google.com)` 
     - `[I'm an inline-style link with title](https://www.google.com "Google's Homepage")` 
     - `[I'm a relative reference to a repository file](../blob/master/LICENSE)`
-- Internal links: To link to a heading, use this code: `[heading title](#heading-title)` For the text in the parentheses, replace spaces and special characters with a hyphen. Alternatively, you can add an ID for a heading right above the title. Use this code: `<a id="heading_ID"></a>` Make sure that the heading_ID is unique within the notebook. Use this code for the link `[heading title](#heading_ID)`
+- Internal links: To link to a heading, use this code: `[heading title](#heading-title)` For the text in the parentheses, replace spaces and special characters with a hyphen. Alternatively, you can add an ID for a heading right above the title. Use this code: `<a id="heading_ID"></a>` Make sure that the heading_ID is unique within the notebook.
 
-## Terminal
+## Terminal <a id="Terminal"></a>
 
 `/`: there are two meanings for this character. When it appears at the front of a file or directory name, it refers to the root directory. When it appears inside a path, it’s just a separator. In the ls function, any names in the output that don’t have a classification symbol are files in the current working directory.
 `~`: stands for the user’s home directory 
 
-#### Shortcuts
+#### Essential Commands
 - `cd -`: Goes back to where I was last
 - `Ctrl-L`: Clears the terminal
 - `Ctrl Shift +`: Zooms in
 - `Ctrl Alt T`: Opens terminal
-
-#### Help
 - `ls --help` or we can read its manual with `man ls`
-
-#### Essential Commands
-
 - `ls -Fa`: -a stands for ‘show all’ (including hidden files)
 - `ls -s` displays the size of files and directories alongside the names
-- `ls -S` sorts the files and directories by sizepwd: prints the user’s current working directory.
+- `ls -S` sorts the files and directories by size.
+- `pwd`: prints the user’s current working directory.
 - `ls -F`: Classifies the output by adding a marker to file and directory names to indicate what they are:
         - a trailing `/` indicates that this is a directory
         - `@` indicates a link
@@ -47,7 +52,7 @@
 - `sudo apt update && sudo apt upgrade -y`
 - `cat` : print the content of a file onto the standard output stream.
 
-## GitHub
+## GitHub <a id="GitHub"></a>
 
 In order to clone your repository from GitHub onto your computer we type git clone followed by the URL with the SHH option. The full command should look similar to `git clone git@github.com:USER-NAME/REPOSITORY-NAME.git`
 
@@ -58,35 +63,23 @@ In order to clone your repository from GitHub onto your computer we type git clo
 `git log` allows us to look at our commit history
 `git add .` to add all files in the current directory and all subsequent directories to the staging area.
 `git push` allows us to upload your work to the GitHub repository
-`git pull`
+`git pull`allows us to fetch and download content from a remote repository and update the local repository to match that content. 
 
-## HTML basics
+## HTML basics <a id="HTML"></a>
 
-All HTML documents must start with a document type declaration: `<!DOCTYPE html>`. The `<!DOCTYPE>` declaration represents the document type, and helps browsers to display web pages correctly. It must only appear once, at the top of the page (before any HTML tags).
-
-The HTML document itself begins with `<html>` and ends with `</html>`.
-The visible part of the HTML document is between `<body>` and `</body>`.
-
-You should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language: `<html lang="en">`
-
-Country codes can also be added to the language code in the lang attribute. So, the first two characters define the language of the HTML page, and the last two characters define the country, for example `<html lang="en-US">`
+All HTML documents must start with a document type declaration: `<!DOCTYPE html>`. The `<!DOCTYPE>` declaration represents the document type, and helps browsers to display web pages correctly. It must only appear once, at the top of the page (before any HTML tags). The HTML document itself begins with `<html>` and ends with `</html>`. The visible part of the HTML document is between `<body>` and `</body>`. You should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language: `<html lang="en">`. Country codes can also be added to the language code in the lang attribute. So, the first two characters define the language of the HTML page, and the last two characters define the country, for example `<html lang="en-US">`
 
 #### Meta Tag
 
 The `<meta>` tag defines metadata about an HTML document. Metadata is data (information) about data. `<meta>` tags always go inside the `<head>` element, and are typically used to specify character set, page description, keywords, author of the document, and viewport settings.
-Metadata will not be displayed on the page, but is machine parsable. Metadata is used by browsers (how to display content or reload page), search engines (keywords), and other web services.
+Metadata will not be displayed on the page, but is machine parsable.
 
-`<meta charset="utf-8"/>` This element specifies the document's character encoding — the character set that the document is permitted to use. utf-8 is a universal character set that includes pretty much any character from any human language. This means that your web page will be able to handle displaying any language; it's therefore a good idea to set this on every web page you create! 
-
-More Examples for Meta Tags
-
-- Keywords for search engines: `<meta name="keywords" content="HTML, CSS, JavaScript">`
-- Description of the web page: `<meta name="description" content="Free Web tutorials for HTML and CSS">`
-- Define the author of a page: `<meta name="author" content="John Doe">`
-- Refresh document every 30 seconds: `<meta http-equiv="refresh" content="30">`
-- Setting the viewport to make the website look good on all devices: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
-    - The viewport is the user's visible area of a web page. It varies with the device - it will be smaller on a mobile phone than on a computer screen. This code gives the browser instructions on how to control the page's dimensions and scaling. The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device).
-The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
+- `<meta charset="utf-8"/>` This element specifies the document's character encoding — the character set that the document is permitted to use. utf-8 is a universal character set that includes pretty much any character from any human language. This means that your web page will be able to handle displaying any language; it's therefore a good idea to set this on every web page you create! 
+- `<meta name="keywords" content="HTML, CSS, JavaScript">` Keywords for search engines
+- `<meta name="description" content="Free Web tutorials for HTML and CSS">` Description of the web page
+- `<meta name="author" content="John Doe">` Defines the author of a page
+- `<meta http-equiv="refresh" content="30">` Refresh document every 30 seconds
+- `<meta name="viewport" content="width=device-width, initial-scale=1.0">` Sets the viewport to make the website look good on all devices. The viewport is the user's visible area of a web page. It varies with the device - it will be smaller on a mobile phone than on a computer screen. This code gives the browser instructions on how to control the page's dimensions and scaling. The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device). The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
 
 #### Other HTML Tags
 
@@ -118,11 +111,11 @@ The initial-scale=1.0 part sets the initial zoom level when the page is first lo
 - `<hr>` Separates content (or defines a change)
 - `<a>` Hyperlink. The href attribute specifies the URL of the page the link goes to: `<a href="https://www.w3schools.com">Visit W3Schools</a>`
 
-##### Image Tag
+#### Image Tag
 
 There are two ways to specify the URL in the **src attribute**:
 1. Absolute URL - Links to an external image that is hosted on another website. Example: `src="https://www.w3schools.com/images/img_girl.jpg"`
-2. Relative URL - Links to an image that is hosted within the website. Here, the URL does not include the domain name. If the URL begins without a slash, it will be relative to the current page. Example: `src="img_girl.jpg"`. If the URL begins with a slash, it will be relative to the domain. Example: `src="/images/img_girl.jpg"`. It is almost always best to use relative URLs. They will not break if you change domain.
+2. Relative URL - Links to an image that is hosted within the website. Here, the URL does not include the domain name. If the URL begins without a slash, it will be relative to the current page. Example: `src="img_girl.jpg"`. If the URL begins with a slash, it will be relative to the domain. Example: `src="/images/img_girl.jpg"`.
 
 The required **alt attribute** for the `<img>` tag specifies an alternate text for an image, if the image for some reason cannot be displayed. This can be due to a slow connection, or an error in the src attribute, or if the user uses a screen reader. Example:
 ```
@@ -134,62 +127,54 @@ The `<img>` tag should also contain the width and height attributes, which speci
 <img src="img_girl.jpg" width="500" height="600">
 ```
 
-## CSS Basics
+## CSS Basics <a id="CSS"></a>
 
-#### Class selectors 
+#### CSS stylesheet
 
-`* { }` The universal selector will select elements of any type, hence the name “universal”, and the syntax for it is a simple asterisk.
+- External: involves creating a separate file for the CSS and linking it inside of an HTML’s opening and closing `<head>` tags with a self-closing `<link>` element: ```<head> <link rel="stylesheet" href="styles.css" /> </head>``` The href attribute is the location of the CSS file.
 
-Class selectors will select all elements with the given class, which is just an attribute you place on an HTML element. 
+- Internal: With the internal method, you place all the rules inside of a pair of opening and closing `<style>` tags, which are then placed inside of the opening and closing `<head>` tags of your HTML file.
 
-`.alert-text { color: red;}` 
+- Inline: `<body> <div style="color: white; background-color: black;">...</div> </body>`
 
-Note the syntax for class selectors: a period immediately followed by the case-sensitive value of the class attribute. Another thing you can do with the class attribute is to add multiple classes to a single element as a space-separated list, such as `class="alert-text severe-alert"`
+#### Class and ID selectors
 
-To cut down on the repetition, we can group selectors together as a comma-separated list. `.read,.unread { color: white; background-color: black;}`
-
-If we only want to apply a separate rule to the element that also has header as a second class we could chain both the class selectors together in our CSS like so: `.subsection.header { color: red;}` 
-
-#### ID selectors 
-
-Instead of a period, we use a hashtag immediately followed by the case-sensitive value of the ID attribute. An element can only have one ID. An ID cannot be repeated on a single page, and the ID attribute should not contain any whitespace at all.
-We can also chain a class and an ID `.subsection#preview { color: blue;}`
-
-#### Descendant combinator
-
-A descendant combinator will only cause elements that match the 
-last selector to be selected if they also have an ancestor (parent, grandparent, etc) that matches the previous selector. So something like `.ancestor .child` would select an element with the class child if it has an ancestor with the class ancestor.
+- `* { }` The universal selector will select elements of any type, hence the name “universal”, and the syntax for it is a simple asterisk.
+- `.alert-text { color: red;}` One class selector
+- `.read,.unread { color: white; background-color: black;}` Two class selectors
+- `class="alert-text severe-alert"` A single element with 2 classes
+- `.subsection.header { color: red;}` An element that has both subsection as a first class and header as a second class
+- `.subsection#preview { color: blue;}` chainning a class and an ID
+- `.ancestor .child` **descendant combinator**
 
 #### CSS Properties
 
 - Color
-- Font Size
+- Font-size
 - Text-align
 - Font-weight
-- Font-family
 - Background Color
-- Background
 - Height/Width
-- Width
-- Height
 - Line-height
-
-#### The Box Model
-
+- [Background-image](#background-image)
+- [Font-family](#font-family)
+- [Display](#display)
 - **padding** increases the space between the border of a box and the content of the box.
-- **margin** increases the space between the borders of a box and the borders of adjacent boxes.Margins are set using lengths, percentages, or the keyword auto and can have negative values. Margin is a shorthand property and accepts up to four values. If fewer than four values are set, the missing values are assumed based on the ones that are defined.   
-  ```
-  margin-top: 20px;
-  margin-right: 10px;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  ```
-Each of the margin properties can also accept a value of auto. Auto is useful only for horizontal centering, and so using auto for top and bottom margins will not center an element vertically.
 - **border** adds space (even if it’s only a pixel or two) between the margin and the padding.
+- **margin** increases the space between the borders of a box and the borders of adjacent boxes. Margins are set using lengths, percentages, or the keyword auto and can have negative values. Margin is a shorthand property and accepts up to four values. If fewer than four values are set, the missing values are assumed based on the ones that are defined. Each of the margin properties can also accept a value of auto. Auto is useful only for horizontal centering, and so using auto for top and bottom margins will not center an element vertically. The order is `margin-top, margin-right, margin-bottom, margin-left`
 
-Always start by setting margin and padding to 0 for all elements to clear out all margins and paddings in the document.
+**The Box Model Tip**: Always start by setting margin and padding to 0 for all elements to clear out all margins and paddings in the document.
 
-#### Font Families
+#### Background Image <a id="background-image"></a>
+
+To add a background image, you must add it in css as `background-image: url()`, always add a background color as well in case the picture doesn't load.
+
+Some of the properties to add to a background image are:
+- background-repeat
+- background-size
+- background-position
+
+#### Font Family <a id="font-family"></a>
 
 - Serif: The most prominent style attribute of serif fonts is the presence of small, additional strokes by the edges of the letters. While initially used for ink printing purposes, the style is now associated with a sense of formality and elegance.Websites mainly use Serif for body text, as it is highly legible and helps readers quickly skim written content. Popular Serif fonts include Times New Roman, Cambria, and Garamond. 
 - Sans serif: These fonts are simple and straightforward, they do not display additional strokes attached to their letters.
@@ -211,7 +196,7 @@ Web-safe fonts are fonts that come pre-installed across most operating systems. 
 5. <p style="font-family: Courier">Courier</p>
 6. <p style="font-family: Verdana">Verdana</p>
 7. <p style="font-family: Candara">Candara</p>
-8.  <p style="font-family: Geneva">Geneva</p>
+8. <p style="font-family: Geneva">Geneva</p>
 10. <p style="font-family: Calibri">Calibri</p>
 11. <p style="font-family: Optima">Optima</p>
 12. <p style="font-family: Cambria">Cambria</p>
@@ -220,18 +205,38 @@ Web-safe fonts are fonts that come pre-installed across most operating systems. 
 15. <p style="font-family: 'Brush Script'">Brush Script</p>
 16. <p style="font-family: 'Lucida Bright'">Lucida Bright</p>
 
-#### CSS stylesheet
+#### Display <a id="display"></a>
 
-- External: involves creating a separate file for the CSS and linking it inside of an HTML’s opening and closing `<head>` tags with a self-closing `<link>` element: 
-- ```<head> <link rel="stylesheet" href="styles.css" /> </head>``` The href attribute is the location of the CSS file.
+The display property specifies the display behavior (the type of rendering box) of an element.
 
-- Internal: With the internal method, you place all the rules inside of a pair of opening and closing `<style>` tags, which are then placed inside of the opening and closing `<head>` tags of your HTML file.
+- inline: displays an element as an inline element `(like <span>)`. Any height and width properties will have no effect
+- block: displays an element as a block element `(like <p>)`. It starts on a new line and takes up the full width available.
+- inline-block: The element itself is formatted as an inline element, but you can apply height and width values. inline-block brought a new way to create side by side boxes that collapse and wrap properly depending on the available space in the containing element. The major difference between inline-block and inline is that it allows us to set a width and height on the element, as for inline top and bottom margins and paddings are not respected. Now, the difference between inline-block and block is that, block, a line break happens after the element, so a block element doesn’t sit next to other elements.
 
-- Inline: `<body> <div style="color: white; background-color: black;">...</div> </body>`
-
+##### Here are all the block-level elements in HTML:
+```
+<address> / <article> / <aside> / <blockquote> / <canvas> / <dd> / <div> / <dl> / <dt> / <fieldset> / <figcaption> / <figure> / <footer> / <form> / <h1>-<h6> / <header> / <hr> / <li> / <main> / <nav> / <noscript> / <ol> / <p> / <pre> / <section> / <table> / <tfoot> / <ul> / <video>
+```
+##### Here are all the inline elements in HTML:
+```
+<a> / <abbr> /<acronym> / <b> / <bdo> / <big> / <br> / <button> / <cite>/ <code> / <dfn> / <em> / <i> / <img> / <input> / <kbd> / <label> / <map> / <object> / <output> / <q> / <samp> / <script> / <select> / <small> / <span> / <strong> / <sub> / <sup> / <textarea> / <time> / <tt> / <var>
+```
 #### Cascade
 
 Specificity: A CSS declaration that is more specific will take precedence over less specific ones.
 1. ID selectors (most specific selector)
 2. Class selectors
 3. Type selectors
+
+## Flexbox <a id="Flexbox"></a>
+
+Flexbox is a way to arrange items into rows or columns. These items will flex (i.e. grow or shrink) based on some simple rules that you can define.
+flex: 1 equates to: flex-grow: 1, flex-shrink: 1, flex-basis: 0.
+flex-grow expects a single number as its value, and that number is used as the flex-item’s “growth factor”. When we applied flex: 1 to every div inside our container, we were telling every div to grow the same amount. The result of this is that every div ends up the exact same size. If we instead add flex: 2 to just one of the divs, then that div would grow to 2x the size of the others.
+If you do not want an item to shrink then you can specify flex-shrink: 0;. You can also specify higher numbers to make certain items shrink at a higher rate than normal.
+
+Here’s an example. Note that we’ve also changed the flex-basis for reasons that will be explained shortly. If you shrink your browser window you’ll notice that .two never gets smaller than the given width of 250px, even though the flex-grow rule would otherwise specify that each element should be equally sized.
+
+flex-basis simply sets the initial size of a flex item, so any sort of flex-growing or flex-shrinking starts from that baseline size. The shorthand value defaults to flex-basis: 0%. The reason we had to change it to auto in the flex-shrink example is that with the basis set to 0, those items would ignore the item’s width, and everything would shrink evenly. Using auto as a flex-basis tells the item to check for a width declaration (width: 250px).
+
+There is a difference between the default value of flex-basis and the way the flex shorthand defines it if no flex-basis is given. The actual default value for flex-basis is auto, but when you specify flex: 1 on an element, it interprets that as flex: 1 1 0. If you want to only adjust an item’s flex-grow you can simply do so directly, without the shorthand. Or you can be more verbose and use the full 3 value shorthand flex: 1 1 auto, which is also equivalent to using flex: auto.
