@@ -163,7 +163,12 @@ The `<img>` tag should also contain the width and height attributes, which speci
 - **border** adds space (even if it’s only a pixel or two) between the margin and the padding.
 - **margin** increases the space between the borders of a box and the borders of adjacent boxes. Margins are set using lengths, percentages, or the keyword auto and can have negative values. Margin is a shorthand property and accepts up to four values. If fewer than four values are set, the missing values are assumed based on the ones that are defined. Each of the margin properties can also accept a value of auto. Auto is useful only for horizontal centering, and so using auto for top and bottom margins will not center an element vertically. The order is `margin-top, margin-right, margin-bottom, margin-left`
 
-**The Box Model Tip**: Always start by setting margin and padding to 0 for all elements to clear out all margins and paddings in the document.
+**The Box Model Tip**: Always start by setting margin and padding to 0 for all elements to clear out all margins and paddings in the document. You can do this by adding the following to the css sheet:
+```
+* {margin: 0;
+    padding: 0;
+    box-sizing: border-box;}
+```
 
 #### Background Image <a id="background-image"></a>
 
@@ -230,13 +235,66 @@ Specificity: A CSS declaration that is more specific will take precedence over l
 
 ## Flexbox <a id="Flexbox"></a>
 
-Flexbox is a way to arrange items into rows or columns. These items will flex (i.e. grow or shrink) based on some simple rules that you can define.
-flex: 1 equates to: flex-grow: 1, flex-shrink: 1, flex-basis: 0.
-flex-grow expects a single number as its value, and that number is used as the flex-item’s “growth factor”. When we applied flex: 1 to every div inside our container, we were telling every div to grow the same amount. The result of this is that every div ends up the exact same size. If we instead add flex: 2 to just one of the divs, then that div would grow to 2x the size of the others.
-If you do not want an item to shrink then you can specify flex-shrink: 0;. You can also specify higher numbers to make certain items shrink at a higher rate than normal.
+#### Summary
 
-Here’s an example. Note that we’ve also changed the flex-basis for reasons that will be explained shortly. If you shrink your browser window you’ll notice that .two never gets smaller than the given width of 250px, even though the flex-grow rule would otherwise specify that each element should be equally sized.
+- Use display: flex; to create a flex container.
+- Use justify-content to define the horizontal alignment of items.
+- Use align-items to define the vertical alignment of items.
+- Use flex-direction if you need columns instead of rows.
+- Use the row-reverse or column-reverse values to flip item order.
+- Use order to customize the order of individual elements.
+- Use align-self to vertically align individual items.
+- Use flex to create flexible boxes that can stretch and shrink.
 
-flex-basis simply sets the initial size of a flex item, so any sort of flex-growing or flex-shrinking starts from that baseline size. The shorthand value defaults to flex-basis: 0%. The reason we had to change it to auto in the flex-shrink example is that with the basis set to 0, those items would ignore the item’s width, and everything would shrink evenly. Using auto as a flex-basis tells the item to check for a width declaration (width: 250px).
 
-There is a difference between the default value of flex-basis and the way the flex shorthand defines it if no flex-basis is given. The actual default value for flex-basis is auto, but when you specify flex: 1 on an element, it interprets that as flex: 1 1 0. If you want to only adjust an item’s flex-grow you can simply do so directly, without the shorthand. Or you can be more verbose and use the full 3 value shorthand flex: 1 1 auto, which is also equivalent to using flex: auto.
+The “Flexible Box” or “Flexbox” layout mode is used for defining the overall appearance of a web page. Flexbox is a way to arrange items into rows or columns. These items will flex (i.e. grow or shrink) based on some simple rules that you can define. By giving the display a value of flex, we’re telling the browser that everything in the box should be rendered with flexbox instead of the default box model.
+
+A flex container is any element that has display: flex on it. A flex item is any element that lives directly inside of a flex container. Any element can be both a flex container and a flex item. Said another way, you can also put display: flex on a flex item and then use flexbox to arrange its children. The job of a flex container is to group a bunch of flex items together and define how they’re positioned. Flex containers only know how to position elements that are one level deep (i.e., their child elements). They don’t care one bit about what’s inside their flex items.
+
+Flexbox gives us complete control over the alignment (left or right), direction (horizontal or vertical), order (which item goes first), and size of our boxes (how big they are).
+
+#### flex container direction and alignment
+
+`flex-direction` “Direction” refers to whether a container renders its items horizontally or vertically. The default is a horizontal direction, which means items are drawn one after another in the same row before popping down to the next column when they run out of space. Flex-direction is especially useful to  build responsive layouts to tackle the problem of having mobile layouts as a single column, while most desktop layouts stack elements horizontally. When you rotate the direction of a container, you also rotate the direction of the justify-content property. It now refers to the container’s vertical alignment—not its horizontal alignment.
+
+`flex-direction` can be row, column, row-reverse, or column-reverse.
+
+- For a horizontal direction:
+`flex-direction: row`
+`justify-content`
+
+- For a vertical direction: 
+`flex-direction: column`
+`align-items`
+
+Other values for `justify-content` are shown below:
+
+- center
+- flex-start: left
+- flex-end: right
+- space-around: only useful when you have multiple flex items in a container
+- space-between: only useful when you have multiple flex items in a container
+
+The available options for `align-items` is similar to justify-content:
+
+- center
+- flex-start: (top)
+- flex-end: (bottom)
+- stretch: lets you display the background of each element. The box for each item extends the full height of the flex container, regardless of how much content it contains. A common use case for this behavior is creating equal-height columns with a variable amount of content in each one.
+- baseline
+
+Adding the following `flex-wrap` property forces items that don’t fit to get bumped down to the next row
+
+#### Flex item order and alignment
+
+Adding an order property to a flex item defines its order in the container without affecting surrounding items. Its default value is 0, and increasing or decreasing it from there moves the item to the right or left, respectively. This can be used, for example, to swap the order of the items.
+
+We can also align items individually. This is where the align-self property comes in. Adding this to a flex item overrides the align-items value from its container.
+
+#### Flex
+
+The flex property defines the width of individual items in a flex container. Or, more accurately, it allows them to have flexible widths. It works as a weight that tells the flex container how to distribute extra space to each item. For example, an item with a flex value of 2 will grow twice as fast as items with the default value of 1. Compare this to the justify-content property, which distributes extra space **between** items. This is similar, but now we’re distributing that space **into** the items themselves.
+
+We can even mix-and-match flexible boxes with fixed-width ones. `flex: initial` falls back to the item’s explicit width property. This lets us combine static and flexible boxes in complex ways. For instance, many websites have a fixed-width sidebar (or multiple sidebars) and a flexible content block containing the main text of the page.
+
+Auto-margins in flexbox can be used as an alternative to an extra `<div>` when trying to align a group of items to the left/right of a container. Think of auto-margins as a “divider” for flex items in the same container. For example: `margin-left: auto`. Auto-margins eat up all the extra space in a flex container, so instead of distributing items equally, this moves the items to the right side of the container. 
