@@ -292,7 +292,7 @@ The `align-items` property controls the alignment of flex items along the cross 
 - center: Items are centered vertically within the container.
 - baseline: Items are aligned based on their baseline.
 
-The `align-content` property is used to control the spacing between flex lines (rows or columns) when there is extra space on the cross axis. It only applies when flex items wrap into multiple lines. Available values are similar to justify-content:
+The `align-content` property is used to control the spacing between flex lines (rows or columns) when there is extra space on the cross axis. It only applies when flex items wrap into multiple lines. Available values are similar to justify-content.
 
 #### Flex Item Order and Alignment
 
@@ -307,7 +307,6 @@ The flex property is a shorthand for three individual properties: flex-grow, fle
 - `flex-basis` specifies the initial size of an item before any available space is distributed. It can be set as a fixed length, percentage, or auto.
 
 To align flex items to the left or right of a container, you can also use auto-margins (`margin-left: auto`; or `margin-right: auto`;) on flex items. This automatically consumes any available space on the main axis, pushing the item to the desired side.
-Gap
 
 - `flex: initial`: Equivalent to flex: 0 1 auto. (This is the initial value.) Makes the flex item inflexible when there is positive free space, but allows it to shrink to its minimum size when there is insufficient space.
 - `flex: auto`: Equivalent to flex: 1 1 auto. Sizes the item based on the width/height properties, but makes them fully flexible, so that they absorb any free space along the main axis. If all items are either flex: auto, flex: initial, or flex: none, any positive free space after the items have been sized will be distributed evenly to the items with flex: auto.
@@ -335,3 +334,31 @@ you'll learn about it later.
 @import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;1,900&display=swap');
 
 position: fixed;?
+
+## Assignment
+
+1. Download the design images and take a look at what you’re going to be creating here. Image One (Full Design), Image Two (Color and Fonts)
+- The font that’s being used in the images is roboto.
+- Hero text is the statement that appears at the top of a web page.
+
+2. There are many ways to tackle a project like this, and it can be overwhelming to look at a blank HTML document and not know where to start. Our suggestion: take it one section at a time. The website you’re creating has 4 main sections (and a footer), so pick one and get it into pretty good shape before moving on. Starting at the top is always a solid plan.
+
+3. For the section you’re working on, begin by getting all the content onto the page before beginning to style it. In other words, do the HTML and then do the CSS. You’ll probably have to go back to the HTML once you start styling, but bouncing back and forth from the beginning will take more time and may cause more frustration. (Note: you don’t need to use more than one stylesheet. Using only one CSS file is adequate for this project).
+
+4. Many of the elements on this page are very similar to things you saw in our flexbox exercises… feel free to go back to those if you need a refresher.
+
+5. Do not worry about making your project look nice on a mobile device. We’ll learn that later.
+
+6. When you finish, don’t forget to push it up to GitHub!
+
+For this project you’ll be creating an entire web page from a design we’ll provide for you. The design we’re providing you comes in the form of 2 images: one is an image of the complete website, and one has some details about some of the fonts and colors we’ve used.
+
+Get your project as close as you can to the design, but do not worry about getting it pixel-perfect. Don’t get out your ruler or count pixels to find the exact margins between the various sections. The point of this assignment is to create something from scratch and get the various elements in more or less the right position relative to the rest. It doesn’t matter if you use margin: 24px when the design actually has margin: 48px.
+
+Finally, feel free to substitute your own content into this design. The images have some meaningless dummy content, but if you want to make up a business and personalize this page, please feel free to do so! Insert actual images in the placeholders, and feel free to play with the colors and fonts a bit too.
+
+A note about images on the web
+
+You do not have the legal right to use just any image that you find on the web. There are many free images to be found, but make sure that the image you use is actually free for you to use, and make sure to credit the creator of the image in your project. An easy way to give credit is to put the creator’s name and contact info in a README file in your repository.
+
+Some good places to find free-to-use images on the web include Pexels, Pixabay, and Unsplash.
