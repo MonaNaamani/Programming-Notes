@@ -193,6 +193,8 @@ To style buttons, you can use the following properties:
 - `width`: both px and % to change the button size. By default, the size of a button is determined by its text content.
 - `opacity`: creates a disabled look for button by adding transparency to the button, giving it a faded appearance. Example: {opacity: 0.5;}. 
 - `cursor: not-allowed`: you can add the cursor property with a value of "not-allowed", which changes the cursor to a "no parking sign" symbol when hovering over the button.
+- `.button:active`
+- `transition`
 
 #### Font Family <a id="font-family"></a>
 
@@ -335,30 +337,129 @@ you'll learn about it later.
 
 position: fixed;?
 
-## Assignment
+## JavaScript
 
-1. Download the design images and take a look at what you’re going to be creating here. Image One (Full Design), Image Two (Color and Fonts)
-- The font that’s being used in the images is roboto.
-- Hero text is the statement that appears at the top of a web page.
+#### JavaScript can be added in two ways:
 
-2. There are many ways to tackle a project like this, and it can be overwhelming to look at a blank HTML document and not know where to start. Our suggestion: take it one section at a time. The website you’re creating has 4 main sections (and a footer), so pick one and get it into pretty good shape before moving on. Starting at the top is always a solid plan.
+- External script: involves creating a separate file for the JavaScript and linking it inside of an HTML’s body, preferably towards the end. `<script src="javascript.js"></script>`
+- Internal script: `<script> </script>`
 
-3. For the section you’re working on, begin by getting all the content onto the page before beginning to style it. In other words, do the HTML and then do the CSS. You’ll probably have to go back to the HTML once you start styling, but bouncing back and forth from the beginning will take more time and may cause more frustration. (Note: you don’t need to use more than one stylesheet. Using only one CSS file is adequate for this project).
+JavaScript ignores multiple spaces. You can add white space to your script to make it more readable.
 
-4. Many of the elements on this page are very similar to things you saw in our flexbox exercises… feel free to go back to those if you need a refresher.
+JavaScript statements can be grouped together in code blocks, inside curly brackets {...}. Variables declared inside a { } block cannot be accessed from outside the block. 
+``` 
+{
+  let x = 2;
+}
+// x can NOT be used here
+```
 
-5. Do not worry about making your project look nice on a mobile device. We’ll learn that later.
+- #### JavaScript Display Possibilities
 
-6. When you finish, don’t forget to push it up to GitHub!
+JavaScript can "display" data in different ways:
 
-For this project you’ll be creating an entire web page from a design we’ll provide for you. The design we’re providing you comes in the form of 2 images: one is an image of the complete website, and one has some details about some of the fonts and colors we’ve used.
+- Writing into an HTML element, using `innerHTML`: To access an HTML element, JavaScript can use the document.getElementById(id) method. The id attribute defines the HTML element. The innerHTML property defines the HTML content.
+- Writing into the HTML output using `document.write()`: for testing purposes, it is convenient to use this method. Using document.write() after an HTML document is loaded, will delete all existing HTML.
+- Writing into an alert box, using `alert()`
+- Writing into the browser console, `using console.log()`
+- You can also call the `window.print()` method in the browser to print the content of the current window
 
-Get your project as close as you can to the design, but do not worry about getting it pixel-perfect. Don’t get out your ruler or count pixels to find the exact margins between the various sections. The point of this assignment is to create something from scratch and get the various elements in more or less the right position relative to the rest. It doesn’t matter if you use margin: 24px when the design actually has margin: 48px.
+#### What Can JavaScript Do?
 
-Finally, feel free to substitute your own content into this design. The images have some meaningless dummy content, but if you want to make up a business and personalize this page, please feel free to do so! Insert actual images in the placeholders, and feel free to play with the colors and fonts a bit too.
+- Change HTML Content: `document.getElementById("demo").innerHTML = "Hello JavaScript";` this findss an HTML element (with id="demo"), and changes the element content (innerHTML) to "Hello JavaScript".
+- Change HTML Attribute Values: For example, JavaScript can change the value of the src (source) attribute of an image. `<button onclick="document.getElementById('myImage').src='pic_bulbon.gif'">Turn on the light</button>`
+- Change HTML Styles (CSS): `<button type="button" onclick="document.getElementById('demo').style.fontSize='35px'">Click Me!</button>`
+- Hide HTML Elements: Hiding HTML elements can be done by changing the display style. `document.getElementById("demo").style.display = "none";`
+- Show HTML Elements: Showing hidden HTML elements can also be done by changing the display style `document.getElementById("demo").style.display = "block";`
 
-A note about images on the web
+#### JavaScript Keywords
 
-You do not have the legal right to use just any image that you find on the web. There are many free images to be found, but make sure that the image you use is actually free for you to use, and make sure to credit the creator of the image in your project. An easy way to give credit is to put the creator’s name and contact info in a README file in your repository.
+- `var`	Declares a variable
+- `let`	Declares a block variable
+- `const`	Declares a block constant
+- `if`	Marks a block of statements to be executed on a condition
+- `switch`	Marks a block of statements to be executed in different cases
+- `for`	Marks a block of statements to be executed in a loop
+- `function`	Declares a function
+- `return`	Exits a function
+- `try`	Implements error handling to a block of statements
 
-Some good places to find free-to-use images on the web include Pexels, Pixabay, and Unsplash.
+#### JavaScript Values
+
+The JavaScript syntax defines two types of values:
+
+- Fixed values: called Literals, such as numbers and strings (text, written within double or single quotes). If you put a number in quotes, it will be treated as a text string.
+- Variable values: var, let and const. A JavaScript variable can hold any type of data.
+
+JavaScript has 8 Datatypes:
+1. String
+2. Number: NaN is a JavaScript reserved word indicating that a number is not a legal number. We can use isNaN() to find out if a value is a not a number.
+3. Bigint
+4. Boolean: true/false
+5. Undefined: a variable without a value, has the value undefined. The type is also undefined.
+6. Null
+7. Symbol
+8. Object: the object data type can contain: an object, an array, a date. 
+  - // Object: objects are written with curly braces {}. `const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};` The object (person) in the example above has 4 properties: firstName, lastName, age, and eyeColor.
+  - // Array object: `const cars = ["Saab", "Volvo", "BMW"];` arrays are written with square brackets.
+  - // Date object: `const date = new Date("2022-03-25");`
+
+#### Variables and Constants
+
+JavaScript Variables can be declared either automatically or using var/let/const. It's a good programming practice to declare all variables at the beginning of a script.
+
+Creating a variable in JavaScript is called "declaring" a variable, and we use the `let` keyword such as `let message;`. After the declaration, the variable has no value (technically it is undefined). To assign a value to the variable, use the equal sign: `message = 'Hello';` or `let message = 'Hello!'`. 
+
+To declare a constant (unchanging) variable, use const: `const myBirthday = '18.04.1982';` Variables declared using const are called “constants”. They cannot be reassigned. An attempt to do so would cause an error. Being a “constant” just means that a variable’s value never changes. But there are constants that are known prior to execution (like a hexadecimal value for red) and there are constants that are calculated in run-time, during the execution, but do not change after their initial assignment. Capital-named constants are only used as aliases for “hard-coded” values. For example `const COLOR_RED = "#F00";`.
+
+Declaring twice triggers an error. A variable should be declared only once.
+
+There are two limitations on variable names in JavaScript:
+1. The name must contain only letters, digits, or the symbols $ and _.
+2. The first character must not be a digit.
+
+There is a list of reserved words, which cannot be used as variable names because they are used by the language itself. For example: let, class, return, and function are reserved.
+
+#### Operators
+
+The numbers (in an arithmetic operation) are called operands. The operation (to be performed between the two operands) is defined by an operator.
+
+Increment/decrement can only be applied to variables. Trying to use it on a value like 5++ will give an error.The operators ++ and -- can be placed either before or after a variable.
+
+- “postfix form”: when the operator goes after the variable `counter++`.If we’d like to increment a value but use its previous value, we need the postfix form. counter++ returns the "old" value.
+- “prefix form”: is when it goes before the variable `++counter`. If we’d like to increase a value and immediately use the result of the operator, we need the prefix form
+
+`++`	Increment: ++ increases a variable by 1
+`--`	Decrement: -- decreases a variable by 1
+
+In JavaScript, the equal sign (=) is an **assignment operator**, not an "equal to" operator. The "equal to" operator is written like == in JavaScript.
+
+`+=`	x += y	x = x + y
+`-=`	x -= y	x = x - y
+`*=`	x *= y	x = x * y
+`/=`	x /= y	x = x / y
+`%=`	x %= y	x = x % y
+`**=`	x **= y	x = x ** y
+
+Both ==  and ===  are used for comparisons and to find the degree of sameness or equality between the things we are comparing, they return true if they find equality and false otherwise. All the **comparison operators** can also be used on strings too. 
+
+`==`	equal to: if the datatypes of the operands we are comparing are different, then the JavaScript Engine automatically converts one of the operands to be the same as the other one in order to make the comparison possible.
+`===`	equal value and equal type
+`!=`	not equal
+`!==`	not equal value or not equal type
+`>`	greater than
+`<`	less than
+`>=`	greater than or equal to
+`<=`	less than or equal to
+`?`	ternary operator
+
+**Logical Operators**
+
+- `&&`	logical and
+- `||`	logical or
+- `!`	logical not
+
+**Type Operators**
+
+- `typeof`	Returns the type of a variable
+- `instanceof`	Returns true if an object is an instance of an object type.
