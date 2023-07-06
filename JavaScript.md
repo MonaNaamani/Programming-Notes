@@ -3,9 +3,10 @@
 ## Outline
 
 1. [Introduction](#Introduction)
+2. [Datatypes](#Datatypes) 
 2.
 
-## Introduction: <a id="Introduction"></a>
+## Introduction <a id="Introduction"></a>
 
 The programs in this language are called scripts. They can be written right in a web page’s HTML and run automatically as the page loads. These are called **Internal script**: `<script> </script>`. They can also be in a a separate file, you then link it inside of an HTML’s body, preferably towards the end. **External script** `<script src="javascript.js"></script>`. The old HTML standard, HTML4, required a script to have a type. Usually it was type="text/javascript". It’s not required anymore. 
 
@@ -21,22 +22,22 @@ For a long time, JavaScript evolved without compatibility issues. New features w
 
 JavaScript ignores multiple spaces. You can add white space to your script to make it more readable.
 
-JavaScript statements can be grouped together in code blocks, inside curly brackets {...}. Variables declared inside a { } block cannot be accessed from outside the block. 
+JavaScript statements can be grouped together in code blocks, inside curly brackets {...}. Variables declared inside a { } block cannot be accessed from outside the block. For example:
 ``` 
 {
   let x = 2;
 }
 // x can NOT be used here
 ```
-## Datatypes
+## Datatypes <a id="Datatypes"></a>
 
 #### 1. String
 
 In JavaScript, there are 3 types of quotes.
 
-- Double quotes: "Hello".
-- Single quotes: 'Hello'.
-- Backticks: `Hello`.
+- Double quotes: `"Hello"`.
+- Single quotes: `'Hello'`.
+-  Backticks: ``` `Hello` ```.
 
 Double and single quotes are “simple” quotes. There’s practically no difference between them in JavaScript. Backticks are “extended functionality” quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`.
 
@@ -46,11 +47,11 @@ There are many operations for numbers, e.g. multiplication *, division /, additi
 
 Besides regular numbers, there are so-called “special numeric values” which also belong to this data type: Infinity, -Infinity, and NaN.
 - Infinity represents the mathematical Infinity ∞. It is a special value that’s greater than any number.
-- NaN represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance: `alert( "not a number" / 2 ); // NaN, such division is erroneous`. If there’s a NaN somewhere in a mathematical expression, it propagates to the whole result (there’s only one exception to that: NaN ** 0 is 1).
+- NaN represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance: alert( "not a number" / 2 ); // NaN, such division is erroneous. If there’s a NaN somewhere in a mathematical expression, it propagates to the whole result (there’s only one exception to that: NaN ** 0 is 1).
 
 #### 3. Bigint
 
-In JavaScript, the “number” type cannot safely represent integer values larger than (253-1) (that’s 9007199254740991), or less than -(253-1) for negatives. BigInt type was recently added to the language to represent integers of arbitrary length. A BigInt value is created by appending n to the end of an integer: `const bigInt = 1234567890123456789012345678901234567890n` (the "n" at the end means it's a BigInt). BigInt numbers are rarely needed.
+In JavaScript, the “number” type cannot safely represent integer values larger than (253-1) (that’s 9007199254740991), or less than -(253-1) for negatives. BigInt type was recently added to the language to represent integers of arbitrary length. A BigInt value is created by appending n to the end of an integer: const bigInt = 1234567890123456789012345678901234567890n (the "n" at the end means it's a BigInt). BigInt numbers are rarely needed.
 
 #### 4. Boolean (logical type)
 
@@ -66,26 +67,245 @@ Null is a special value which represents “nothing”, “empty” or “value 
 
 The meaning of undefined is “value is not assigned”. If a variable is declared, but not assigned, then its value is undefined. Technically, it is possible to explicitly assign undefined to a variable. …But we don’t recommend doing that. Normally, one uses null to assign an “empty” or “unknown” value to a variable, while undefined is reserved as a default initial value for unassigned things.
 
-#### 7 Symbols 
+#### 7. Symbols 
 
-#### 8 Objects 
+#### 8. Objects 
 
 The object data type can contain: an object, an array, a date. 
 
-  - // Object: objects are written with curly braces {}. `const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};` The object (person) in the example above has 4 properties: firstName, lastName, age, and eyeColor.
-  - // Array object: `const cars = ["Saab", "Volvo", "BMW"];` arrays are written with square brackets.
-  - // Date object: `const date = new Date("2022-03-25");`
+  - Object: objects are written with curly braces {}. `const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};` The object (person) in the example above has 4 properties: firstName, lastName, age, and eyeColor.
+  - Array object: arrays are written with square brackets `const cars = ["Saab", "Volvo", "BMW"];` 
+  - Date object: `const date = new Date("2022-03-25");`
 
-## Display
+## Functions
 
-JavaScript can "display" data in different ways:
+- `alert` It shows a message and waits for the user to press “OK”. `alert("Hello");`
+- `prompt` shows a message asking the user to input text. It returns the text or, if Cancel button or Esc is clicked, null. `result = prompt(title, [default]);` The square brackets around default in the syntax above denote that the parameter is optional, not required. The visitor can type something in the prompt input field and press OK. Then we get that text in the result.
+- `confirm` shows a message and waits for the user to press “OK” or “Cancel”. It returns true for OK and false for Cancel/Esc. `result = confirm(question);`
+- `String(value)` is used to convert a value to a string.
+- `Number(value)` converts a value to a number, undefined becomes NaN, null becomes	0, true and false become 1 and 0. String whitespaces (includes spaces, tabs \t, newlines \n etc.) from the start and end are removed. If the remaining string is empty, the result is 0. Otherwise, the number is “read” from the string. An error gives NaN. The unary plus or, in other words, the plus operator + applied to a single value, doesn’t do anything to numbers. But if the operand is not a number, the unary plus converts it into a number. It actually does the same thing as Number(...), but is shorter. 
+```let x = 1;
+alert( +x ); // 1
+```
+- `Boolean(value)` Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become false. Other values become true.
+- `console.log()`
+- `window.print()`
+- `document.getElementById(id)`: You can write into an HTML element by using this method, the id attribute defines the HTML element, and the innerHTML property defines the HTML content.
+- `document.write()`: for testing purposes, it is convenient to use document.write() after an HTML document is loaded, or it will delete all existing HTML.
 
-- Writing into an HTML element, using `innerHTML`: To access an HTML element, JavaScript can use the document.getElementById(id) method. The id attribute defines the HTML element. The innerHTML property defines the HTML content.
-- Writing into the HTML output using `document.write()`: for testing purposes, it is convenient to use this method. Using document.write() after an HTML document is loaded, will delete all existing HTML.
-- Writing into an alert box, using `alert()`
-- Writing into the browser console, `using console.log()`
-- You can also call the `window.print()` method in the browser to print the content of the current window
+## Operators
 
+The numbers (in an arithmetic operation) are called operands. The operation (to be performed between the two operands) is defined by an operator. Operators are things like addition +, multiplication *, subtraction -, and so on. An operator is unary if it has a single operand. An operator is binary if it has two operands. 
+
+### Maths
+
+- Addition +
+- Subtraction -
+- Multiplication *
+- Division /
+- Remainder % : despite its appearance, is not related to percents.
+- Exponentiation **
+
+The comma operator , is one of the rarest and most unusual operators. The comma operator allows us to evaluate several expressions, dividing them with a comma ,. Each of them is evaluated but only the result of the last one is returned.
+
+### Increment/Decrement
+
+Increment/decrement can only be applied to variables. Trying to use it on a value like 5++ will give an error.The operators ++ and -- can be placed either before or after a variable.
+
+- “postfix form”: when the operator goes after the variable `counter++`. If we’d like to increment a value but use its previous value, we need the postfix form. counter++ returns the "old" value.
+- “prefix form”: is when it goes before the variable `++counter`. If we’d like to increase a value and immediately use the result of the operator, we need the prefix form
+
+`++`	Increment: ++ increases a variable by 1
+`--`	Decrement: -- decreases a variable by 1
+
+``` 
+let a = 1, b = 1;
+let c = ++a; 
+let d = b++; // a = 2, b = 2, c = 2, d = 1
+```
+### Assignment Operator
+
+In JavaScript, the equal sign (=) is an **assignment operator**, not an "equal to" operator. The "equal to" operator is written like == in JavaScript.
+
+`+=`	x += y	x = x + y
+`-=`	x -= y	x = x - y
+`*=`	x *= y	x = x * y
+`/=`	x /= y	x = x / y
+`%=`	x %= y	x = x % y
+`**=`	x **= y	x = x ** y
+
+### Comparison Operators
+
+All comparison operators return a boolean value:
+- true – means “yes”, “correct” or “the truth”.
+- false – means “no”, “wrong” or “not the truth”.
+
+`!=`	not equal
+`!==`	not equal value or not equal type
+`>`	greater than
+`<`	less than: "apple" < "pineapple" because "a" is smaller than "p"
+`>=`	greater than or equal to
+`<=`	less than or equal to
+`?`	ternary operator
+
+#### `==`	
+
+If the datatypes of the operands we are comparing are different, then the JavaScript Engine automatically converts one of the operands to be the same as the other one in order to make the comparison possible. alert( 0 == false ); // true
+
+There’s a special rule. Null and undefined equal each other (in the sense of ==), but not any other value. The equality check == for undefined and null is defined such that, without any conversions, they equal each other and don’t equal anything else. alert( null == 0 ); // (2) false
+
+For maths and other comparisons < > <= >= null/undefined are converted to numbers: null becomes 0, while undefined becomes NaN. alert( null == undefined ); // true
+
+The value undefined shouldn’t be compared to other values.
+
+#### `===`	
+
+equal value and equal type
+```
+alert( 0 === false ); // false, because the types are different
+```
+### Logical Operators
+
+Although they are called “logical”, they can be applied to values of any type, not only boolean. Their result can also be of any type. There are four logical operators in JavaScript:
+
+1. `||`	logical (OR)
+2. `&&`	logical (AND)
+3. `!`	logical (NOT)
+4. `??` logical (Nullish Coalescing)
+
+#### 1. || logical (OR)
+
+In classical programming, the logical OR is meant to manipulate boolean values only. If any of its arguments are true, it returns true, otherwise it returns false. There are four possible logical combinations for boolean values:
+
+1. alert( true || true );   // true
+2. alert( false || true );  // true
+3. alert( true || false );  // true
+4. alert( false || false ); // false
+
+If an operand is not a boolean, it’s converted to a boolean for the evaluation. For instance, the number 1 is treated as true, the number 0 as false. Most of the time, OR || is used in an if statement to test if any of the given conditions is true. For example: 
+```
+let hour = 12;
+let isWeekend = true;
+
+if (hour < 10 || hour > 18 || isWeekend) {
+  alert( 'The office is closed.' ); // it is the weekend}
+```
+
+Given multiple OR’ed values:
+
+result = value1 || value2 || value3;
+The OR || operator does the following:
+
+Evaluates operands from left to right.
+For each operand, converts it to boolean. If the result is true, stops and returns the original value of that operand.
+If all operands have been evaluated (i.e. all were false), returns the last operand. For instance:
+
+1. Getting the first truthy value from a list of variables or expressions
+ 
+alert( 1 || 0 ); // 1 (1 is truthy)
+alert( null || 1 ); // 1 (1 is the first truthy value)
+alert( null || 0 || 1 ); // 1 (the first truthy value)
+alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
+
+let firstName = "";
+let lastName = "";
+let nickName = "SuperCoder";
+
+alert( firstName || lastName || nickName || "Anonymous"); // SuperCoder
+
+2. Short-circuit evaluation
+
+It means that || processes its arguments until the first truthy value is reached, and then the value is returned immediately, without even touching the other argument.
+
+true || alert("not printed");
+false || alert("printed");
+
+#### 2. && logical (AND)
+
+In classical programming, AND returns true if both operands are truthy and false otherwise:
+
+alert( true && true );   // true
+alert( false && true );  // false
+alert( true && false );  // false
+alert( false && false ); // false
+```
+let hour = 12;
+let minute = 30;
+
+if (hour == 12 && minute == 30) {
+  alert( 'The time is 12:30' );
+}
+```
+The AND && operator evaluates operands from left to right. For each operand, converts it to a boolean. If the result is false, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were truthy), returns the last operand. The rules above are similar to OR. The difference is that AND returns the first falsy value while OR returns the first truthy one. The precedence of AND && operator is higher than OR ||.
+
+#### 3. ! logical (NOT)
+
+The boolean NOT operator is represented with an exclamation sign !. The syntax is: result = !value;
+
+A double NOT !! is sometimes used for converting a value to boolean type
+
+#### 4. ?? logical (Nullish Coalescing)
+
+
+
+
+
+
+
+### Type Operators
+
+The typeof operator returns the type of the operand. It’s useful when we want to process values of different types differently or just want to do a quick check.
+
+- `typeof`	Returns the type of a variable, Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+- `instanceof`	Returns true if an object is an instance of an object type.
+
+The result of typeof null is "object". That’s an officially recognized error in typeof, coming from very early days of JavaScript and kept for compatibility.
+
+## Conditionals
+
+In order to perform different actions based on different conditions we use the if statement and the conditional operator ?, that’s also called a “question mark” operator.
+
+### The “if” statement
+
+We recommend wrapping your code block with curly braces {} every time you use an if statement, even if there is only one statement to execute. Doing so improves readability. The if (…) statement evaluates the expression in its parentheses and converts the result to a boolean. A number 0, an empty string "", null, undefined, and NaN all become false. Because of that they are called “falsy” values. Other values become true, so they are called “truthy”. The if statement may contain an optional else block. It executes when the condition is falsy.
+
+For example:
+```
+let year = prompt('In which year was the ECMAScript-2015 specification published?', '');
+
+if (year < 2015) {
+  alert( 'Too early...' );
+} else if (year > 2015) {
+  alert( 'Too late' );
+} else {
+  alert( 'Exactly!' );
+}
+```
+### Conditional operator ‘?’
+
+The operator is represented by a question mark ?. Sometimes it’s called “ternary”, because the operator has three operands. The syntax is: `let result = condition ? value1 : value2;`. The condition is evaluated: if it’s truthy then value1 is returned, otherwise – value2. Example:
+```
+let age = prompt('age?', 18);
+
+let message = (age < 3) ? 'Hi, baby!' :
+  (age < 18) ? 'Hello!' :
+  (age < 100) ? 'Greetings!' :
+  'What an unusual age!';
+
+alert( message );
+```
+Here’s how this example looks using if..else:
+```
+
+
+
+
+
+
+
+
+
+```
 ## JavaScript Uses
 
 - Change HTML Content: `document.getElementById("demo").innerHTML = "Hello JavaScript";` this findss an HTML element (with id="demo"), and changes the element content (innerHTML) to "Hello JavaScript".
@@ -106,22 +326,7 @@ JavaScript can "display" data in different ways:
 - `return`	Exits a function
 - `try`	Implements error handling to a block of statements
 
-
-## Functions
-
-- `alert` It shows a message and waits for the user to press “OK”. `alert("Hello");`
-- `prompt` shows a message asking the user to input text. It returns the text or, if Cancel button or Esc is clicked, null. `result = prompt(title, [default]);` The square brackets around default in the syntax above denote that the parameter is optional, not required. The visitor can type something in the prompt input field and press OK. Then we get that text in the result.
-- `confirm` shows a message and waits for the user to press “OK” or “Cancel”. It returns true for OK and false for Cancel/Esc. `result = confirm(question);`
-
-
-
-
-
-
-
-
-
-
+```
 
 
 
@@ -143,92 +348,11 @@ There are two limitations on variable names in JavaScript:
 
 There is a list of reserved words, which cannot be used as variable names because they are used by the language itself. For example: let, class, return, and function are reserved.
 
-## Operators
 
-The numbers (in an arithmetic operation) are called operands. The operation (to be performed between the two operands) is defined by an operator.
 
-### Increment/Decrement
+### String Methods
 
-Increment/decrement can only be applied to variables. Trying to use it on a value like 5++ will give an error.The operators ++ and -- can be placed either before or after a variable.
-
-- “postfix form”: when the operator goes after the variable `counter++`.If we’d like to increment a value but use its previous value, we need the postfix form. counter++ returns the "old" value.
-- “prefix form”: is when it goes before the variable `++counter`. If we’d like to increase a value and immediately use the result of the operator, we need the prefix form
-
-`++`	Increment: ++ increases a variable by 1
-`--`	Decrement: -- decreases a variable by 1
-
-### Assignment Operator
-
-In JavaScript, the equal sign (=) is an **assignment operator**, not an "equal to" operator. The "equal to" operator is written like == in JavaScript.
-
-`+=`	x += y	x = x + y
-`-=`	x -= y	x = x - y
-`*=`	x *= y	x = x * y
-`/=`	x /= y	x = x / y
-`%=`	x %= y	x = x % y
-`**=`	x **= y	x = x ** y
-
-Both ==  and ===  are used for comparisons and to find the degree of sameness or equality between the things we are comparing, they return true if they find equality and false otherwise. All the **comparison operators** can also be used on strings too. 
-
-`==`	equal to: if the datatypes of the operands we are comparing are different, then the JavaScript Engine automatically converts one of the operands to be the same as the other one in order to make the comparison possible.
-`===`	equal value and equal type
-`!=`	not equal
-`!==`	not equal value or not equal type
-`>`	greater than
-`<`	less than
-`>=`	greater than or equal to
-`<=`	less than or equal to
-`?`	ternary operator
-
-### Logical Operators
-
-Although they are called “logical”, they can be applied to values of any type, not only boolean. Their result can also be of any type. There are four logical operators in JavaScript:
-
-1. `&&`	logical (AND)
-2. `||`	logical (OR)
-3. `!`	logical (NOT)
-4. `??` logical (Nullish Coalescing)
-
-#### 1. && logical (AND)
-
-#### 2. || logical (OR)
-
-In classical programming, the logical OR is meant to manipulate boolean values only. If any of its arguments are true, it returns true, otherwise it returns false. There are four possible logical combinations for boolean values:
-
-1. alert( true || true );   // true
-2. alert( false || true );  // true
-3. alert( true || false );  // true
-4. alert( false || false ); // false
-
-If an operand is not a boolean, it’s converted to a boolean for the evaluation. For instance, the number 1 is treated as true, the number 0 as false. For example: 
-```
-let hour = 9;
-if (hour < 10 || hour > 18) {
-  alert( 'The office is closed.' );}
-```
-
-We can pass more conditions:
-
-let hour = 12;
-let isWeekend = true;
-
-if (hour < 10 || hour > 18 || isWeekend) {
-  alert( 'The office is closed.' ); // it is the weekend}
-
-#### 3. ! logical (NOT)
-
-#### 4. ?? logical (Nullish Coalescing)
-
-### Type Operators
-
-The typeof operator returns the type of the operand. It’s useful when we want to process values of different types differently or just want to do a quick check.
-
-- `typeof`	Returns the type of a variable, Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
-- `instanceof`	Returns true if an object is an instance of an object type.
-
-The result of typeof null is "object". That’s an officially recognized error in typeof, coming from very early days of JavaScript and kept for compatibility.
-
-### Strings
+A method is a bit of functionality that is built into the language or into specific data types. 
 
 JavaScript counts positions from zero. First position is 0. Second position is 1.
 
@@ -254,3 +378,4 @@ String padEnd()
 String charAt()
 String charCodeAt()
 String split()
+
