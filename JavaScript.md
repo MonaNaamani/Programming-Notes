@@ -3,8 +3,11 @@
 ## Outline
 
 1. [Introduction](#Introduction)
-2. [Datatypes](#Datatypes) 
-2.
+2. [Datatypes](#Datatypes)
+3. [Functions](#Functions)
+4. [Operators](#Operators)
+5. [Conditionals](#Conditionals)
+
 
 ## Introduction <a id="Introduction"></a>
 
@@ -77,7 +80,7 @@ The object data type can contain: an object, an array, a date.
   - Array object: arrays are written with square brackets `const cars = ["Saab", "Volvo", "BMW"];` 
   - Date object: `const date = new Date("2022-03-25");`
 
-## Functions
+## Functions <a id="Functions"></a>
 
 - `alert` It shows a message and waits for the user to press “OK”. `alert("Hello");`
 - `prompt` shows a message asking the user to input text. It returns the text or, if Cancel button or Esc is clicked, null. `result = prompt(title, [default]);` The square brackets around default in the syntax above denote that the parameter is optional, not required. The visitor can type something in the prompt input field and press OK. Then we get that text in the result.
@@ -93,11 +96,9 @@ alert( +x ); // 1
 - `document.getElementById(id)`: You can write into an HTML element by using this method, the id attribute defines the HTML element, and the innerHTML property defines the HTML content.
 - `document.write()`: for testing purposes, it is convenient to use document.write() after an HTML document is loaded, or it will delete all existing HTML.
 
-## Operators
+## Operators <a id="Operators"></a>
 
 The numbers (in an arithmetic operation) are called operands. The operation (to be performed between the two operands) is defined by an operator. Operators are things like addition +, multiplication *, subtraction -, and so on. An operator is unary if it has a single operand. An operator is binary if it has two operands. 
-
-### Maths
 
 - Addition +
 - Subtraction -
@@ -105,10 +106,18 @@ The numbers (in an arithmetic operation) are called operands. The operation (to 
 - Division /
 - Remainder % : despite its appearance, is not related to percents.
 - Exponentiation **
+- The comma operator , is one of the rarest and most unusual operators. The comma operator allows us to evaluate several expressions, dividing them with a comma ,. Each of them is evaluated but only the result of the last one is returned.
 
-The comma operator , is one of the rarest and most unusual operators. The comma operator allows us to evaluate several expressions, dividing them with a comma ,. Each of them is evaluated but only the result of the last one is returned.
+Other operators include:
+- [Increment/Decrement](#Inc)
+- [Assignment](#Assignment)
+- [Comparison](#Comparison)
+- [Logical](#Logical)
+- [Type](#Type)
 
-### Increment/Decrement
+
+
+### Increment/Decrement <a id="Inc"></a>
 
 Increment/decrement can only be applied to variables. Trying to use it on a value like 5++ will give an error.The operators ++ and -- can be placed either before or after a variable.
 
@@ -123,7 +132,7 @@ let a = 1, b = 1;
 let c = ++a; 
 let d = b++; // a = 2, b = 2, c = 2, d = 1
 ```
-### Assignment Operator
+### Assignment Operator <a id="Assignment"></a>
 
 In JavaScript, the equal sign (=) is an **assignment operator**, not an "equal to" operator. The "equal to" operator is written like == in JavaScript.
 
@@ -134,7 +143,7 @@ In JavaScript, the equal sign (=) is an **assignment operator**, not an "equal t
 `%=`	x %= y	x = x % y
 `**=`	x **= y	x = x ** y
 
-### Comparison Operators
+### Comparison Operators <a id="Comparison"></a>
 
 All comparison operators return a boolean value:
 - true – means “yes”, “correct” or “the truth”.
@@ -164,7 +173,7 @@ equal value and equal type
 ```
 alert( 0 === false ); // false, because the types are different
 ```
-### Logical Operators
+### Logical Operators <a id="Logical"></a>
 
 Although they are called “logical”, they can be applied to values of any type, not only boolean. Their result can also be of any type. There are four logical operators in JavaScript:
 
@@ -190,15 +199,10 @@ let isWeekend = true;
 if (hour < 10 || hour > 18 || isWeekend) {
   alert( 'The office is closed.' ); // it is the weekend}
 ```
-
-Given multiple OR’ed values:
+**Multiple OR’ed values**
 
 result = value1 || value2 || value3;
-The OR || operator does the following:
-
-Evaluates operands from left to right.
-For each operand, converts it to boolean. If the result is true, stops and returns the original value of that operand.
-If all operands have been evaluated (i.e. all were false), returns the last operand. For instance:
+The OR || operator evaluates operands from left to right. For each operand, converts it to boolean. If the result is true, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were false), returns the last operand. For instance:
 
 1. Getting the first truthy value from a list of variables or expressions
  
@@ -220,9 +224,11 @@ It means that || processes its arguments until the first truthy value is reached
 true || alert("not printed");
 false || alert("printed");
 
+The call to alert does not return a value. Or, in other words, it returns undefined.
+
 #### 2. && logical (AND)
 
-In classical programming, AND returns true if both operands are truthy and false otherwise:
+The AND && operator evaluates operands from left to right. For each operand, converts it to a boolean. If the result is false, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were truthy), returns the last operand. The rules above are similar to OR. The difference is that AND returns the first falsy value while OR returns the first truthy one. The precedence of AND && operator is higher than OR ||.
 
 alert( true && true );   // true
 alert( false && true );  // false
@@ -236,8 +242,6 @@ if (hour == 12 && minute == 30) {
   alert( 'The time is 12:30' );
 }
 ```
-The AND && operator evaluates operands from left to right. For each operand, converts it to a boolean. If the result is false, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were truthy), returns the last operand. The rules above are similar to OR. The difference is that AND returns the first falsy value while OR returns the first truthy one. The precedence of AND && operator is higher than OR ||.
-
 #### 3. ! logical (NOT)
 
 The boolean NOT operator is represented with an exclamation sign !. The syntax is: result = !value;
@@ -246,13 +250,7 @@ A double NOT !! is sometimes used for converting a value to boolean type
 
 #### 4. ?? logical (Nullish Coalescing)
 
-
-
-
-
-
-
-### Type Operators
+### Type Operators <a id="Type"></a>
 
 The typeof operator returns the type of the operand. It’s useful when we want to process values of different types differently or just want to do a quick check.
 
@@ -261,7 +259,7 @@ The typeof operator returns the type of the operand. It’s useful when we want 
 
 The result of typeof null is "object". That’s an officially recognized error in typeof, coming from very early days of JavaScript and kept for compatibility.
 
-## Conditionals
+## Conditionals <a id="Conditionals"></a>
 
 In order to perform different actions based on different conditions we use the if statement and the conditional operator ?, that’s also called a “question mark” operator.
 
@@ -294,18 +292,8 @@ let message = (age < 3) ? 'Hi, baby!' :
 
 alert( message );
 ```
-Here’s how this example looks using if..else:
-```
+# Unsorted information
 
-
-
-
-
-
-
-
-
-```
 ## JavaScript Uses
 
 - Change HTML Content: `document.getElementById("demo").innerHTML = "Hello JavaScript";` this findss an HTML element (with id="demo"), and changes the element content (innerHTML) to "Hello JavaScript".
@@ -326,12 +314,6 @@ Here’s how this example looks using if..else:
 - `return`	Exits a function
 - `try`	Implements error handling to a block of statements
 
-```
-
-
-
-
-
 ## Variables and Constants
 
 JavaScript Variables can be declared either automatically or using var/let/const. It's a good programming practice to declare all variables at the beginning of a script.
@@ -347,8 +329,6 @@ There are two limitations on variable names in JavaScript:
 2. The first character must not be a digit.
 
 There is a list of reserved words, which cannot be used as variable names because they are used by the language itself. For example: let, class, return, and function are reserved.
-
-
 
 ### String Methods
 
