@@ -98,7 +98,13 @@ alert( +x ); // 1
 
 ## Operators <a id="Operators"></a>
 
-The numbers (in an arithmetic operation) are called operands. The operation (to be performed between the two operands) is defined by an operator. Operators are things like addition +, multiplication *, subtraction -, and so on. An operator is unary if it has a single operand. An operator is binary if it has two operands. 
+- [Increment/Decrement](#Inc)
+- [Assignment](#Assignment)
+- [Comparison](#Comparison)
+- [Logical](#Logical)
+- [Type](#Type)
+  
+The numbers (in an arithmetic operation) are called operands. The operation (to be performed between the two operands) is defined by an operator. An operator is unary if it has a single operand. An operator is binary if it has two operands. Operators are things like:
 
 - Addition +
 - Subtraction -
@@ -107,15 +113,6 @@ The numbers (in an arithmetic operation) are called operands. The operation (to 
 - Remainder % : despite its appearance, is not related to percents.
 - Exponentiation **
 - The comma operator , is one of the rarest and most unusual operators. The comma operator allows us to evaluate several expressions, dividing them with a comma ,. Each of them is evaluated but only the result of the last one is returned.
-
-Other operators include:
-- [Increment/Decrement](#Inc)
-- [Assignment](#Assignment)
-- [Comparison](#Comparison)
-- [Logical](#Logical)
-- [Type](#Type)
-
-
 
 ### Increment/Decrement <a id="Inc"></a>
 
@@ -157,7 +154,7 @@ All comparison operators return a boolean value:
 `<=`	less than or equal to
 `?`	ternary operator
 
-#### `==`	
+#### Operator `==`	
 
 If the datatypes of the operands we are comparing are different, then the JavaScript Engine automatically converts one of the operands to be the same as the other one in order to make the comparison possible. alert( 0 == false ); // true
 
@@ -167,7 +164,7 @@ For maths and other comparisons < > <= >= null/undefined are converted to number
 
 The value undefined shouldn’t be compared to other values.
 
-#### `===`	
+#### Operator `===`	
 
 equal value and equal type
 ```
@@ -177,12 +174,12 @@ alert( 0 === false ); // false, because the types are different
 
 Although they are called “logical”, they can be applied to values of any type, not only boolean. Their result can also be of any type. There are four logical operators in JavaScript:
 
-1. `||`	logical (OR)
-2. `&&`	logical (AND)
-3. `!`	logical (NOT)
-4. `??` logical (Nullish Coalescing)
+1. `||`	[logical (OR)](#OR)
+2. `&&`	[logical (AND)](#AND)
+3. `!`	[logical (NOT)](#NOT)
+4. `??` [logical (Nullish Coalescing)](#NULL)
 
-#### 1. || logical (OR)
+#### 1. || logical (OR) <a id="OR"></a>
 
 In classical programming, the logical OR is meant to manipulate boolean values only. If any of its arguments are true, it returns true, otherwise it returns false. There are four possible logical combinations for boolean values:
 
@@ -202,7 +199,7 @@ if (hour < 10 || hour > 18 || isWeekend) {
 **Multiple OR’ed values**
 
 result = value1 || value2 || value3;
-The OR || operator evaluates operands from left to right. For each operand, converts it to boolean. If the result is true, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were false), returns the last operand. For instance:
+<font color=green> The OR || operator evaluates operands from left to right. For each operand, converts it to boolean. If the result is true, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were false), returns the last operand. </font> For instance:
 
 1. Getting the first truthy value from a list of variables or expressions
  
@@ -226,9 +223,11 @@ false || alert("printed");
 
 The call to alert does not return a value. Or, in other words, it returns undefined.
 
-#### 2. && logical (AND)
+#### 2. && logical (AND) <a id="AND"></a>
 
-The AND && operator evaluates operands from left to right. For each operand, converts it to a boolean. If the result is false, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were truthy), returns the last operand. The rules above are similar to OR. The difference is that AND returns the first falsy value while OR returns the first truthy one. The precedence of AND && operator is higher than OR ||.
+The AND && operator evaluates operands from left to right. For each operand, converts it to a boolean. If the result is false, stops and returns the original value of that operand. If all operands have been evaluated (i.e. all were truthy), returns the last operand. The precedence of AND && operator is higher than OR ||.
+
+<font color=green> AND returns the first falsy value while OR returns the first truthy one. </font>
 
 alert( true && true );   // true
 alert( false && true );  // false
@@ -239,16 +238,38 @@ let hour = 12;
 let minute = 30;
 
 if (hour == 12 && minute == 30) {
-  alert( 'The time is 12:30' );
-}
+  alert( 'The time is 12:30' );}
 ```
-#### 3. ! logical (NOT)
+#### 3. ! logical (NOT) <a id="NOT"></a>
 
-The boolean NOT operator is represented with an exclamation sign !. The syntax is: result = !value;
+The boolean NOT operator is represented with an exclamation sign !. The syntax is: `result = !value`;
 
 A double NOT !! is sometimes used for converting a value to boolean type
 
-#### 4. ?? logical (Nullish Coalescing)
+#### 4. ?? logical (Nullish Coalescing) <a id="NULL"></a>
+
+As it treats null and undefined similarly, we’ll use a special term here, in this article. For brevity, we’ll say that a value is “defined” when it’s neither null nor undefined.
+
+The result of a ?? b is:
+- if a is defined, then a,
+- if a isn’t defined, then b.
+
+<font color=green>?? returns the first argument if it’s not null/undefined. Otherwise, the second one.</font> The common use case for ?? is to provide a default value. For example:
+
+let firstName = null;
+let lastName = null;
+let nickName = "Supercoder";
+
+// shows the first defined value:
+alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
+
+The important difference between `??` and `||` is that:
+- || returns the first truthy value.
+- ?? returns the first defined value.
+
+|| doesn’t distinguish between false, 0, an empty string "" and null/undefined. They are all the same – falsy values. If any of these is the first argument of ||, then we’ll get the second argument as the result. In practice though, we may want to use default value only when the variable is null/undefined.
+
+Due to safety reasons, JavaScript forbids using ?? together with && and || operators, unless the precedence is explicitly specified with parentheses.
 
 ### Type Operators <a id="Type"></a>
 
@@ -292,7 +313,41 @@ let message = (age < 3) ? 'Hi, baby!' :
 
 alert( message );
 ```
-# Unsorted information
+## The "switch" statement
+
+A switch statement can replace multiple if checks. It gives a more descriptive way to compare a value with multiple variants. The switch has one or more case blocks and an optional default. If the equality is found, switch starts to execute the code starting from the corresponding case, until the nearest break (or until the end of switch). If no case is matched then the default code is executed (if it exists). The values must be of the same type to match.
+```
+let a = 2 + 2;
+
+switch (a) {
+  case 3:
+    alert( 'Too small' );
+    break;
+  case 4:
+    alert( 'Exactly!' );
+    break;
+  case 5:
+    alert( 'Too big' );
+    break;
+  default:
+    alert( "I don't know such values" );
+}
+```
+If there is no break then the execution continues with the next case without any checks. The ability to “group” cases is a side effect of how switch/case works without break. Here the execution of case 3 starts from the line (*) and goes through case 5, because there’s no break. Several variants of case which share the same code can be grouped. Such as:
+  case 3:
+  case 5:
+    alert('Wrong!');
+    break;
+
+## Loops: while and for <font color=red> (Incomplete) </font>
+
+- while
+- do..while
+- for(..;..;..)
+
+### The “while” loop
+
+# <font color=red> Unsorted information </font>
 
 ## JavaScript Uses
 
