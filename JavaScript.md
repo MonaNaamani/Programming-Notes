@@ -42,7 +42,7 @@ In JavaScript, there are 3 types of quotes.
 - Single quotes: `'Hello'`.
 -  Backticks: ``` `Hello` ```.
 
-Double and single quotes are “simple” quotes. There’s practically no difference between them in JavaScript. Backticks are “extended functionality” quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`.
+Double and single quotes are “simple” quotes. There’s practically no difference between them in JavaScript. Backticks are “extended functionality” quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`. a template literal is wrapped by backticks ` (this key is usually located on the top of your keyboard, left of the 1 key). Inside the template literal, you’ll see a placeholder, ${...}. The value of ... is inserted into the template literal.
 
 #### 2. Number
 
@@ -91,10 +91,12 @@ The object data type can contain: an object, an array, a date.
 alert( +x ); // 1
 ```
 - `Boolean(value)` Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become false. Other values become true.
-- `console.log()`
 - `window.print()`
 - `document.getElementById(id)`: You can write into an HTML element by using this method, the id attribute defines the HTML element, and the innerHTML property defines the HTML content.
-- `document.write()`: for testing purposes, it is convenient to use document.write() after an HTML document is loaded, or it will delete all existing HTML.
+- `console.log()`: is a method of the JavaScript Console, a special object incuded in browsers for developers to use to debug and test their code in an interactive terminal.
+- `document.write()`: it inserts text into the document (the webpage in the browser window). It is rather old school and hardly used anymore since it requires embedding in the actual page which is discouraged in this day and age.
+- `return`
+- `function`
 
 ## Operators <a id="Operators"></a>
 
@@ -113,6 +115,7 @@ The numbers (in an arithmetic operation) are called operands. The operation (to 
 - Remainder % : despite its appearance, is not related to percents.
 - Exponentiation **
 - The comma operator , is one of the rarest and most unusual operators. The comma operator allows us to evaluate several expressions, dividing them with a comma ,. Each of them is evaluated but only the result of the last one is returned.
+- The . is another operator called the dot operator.
 
 ### Increment/Decrement <a id="Inc"></a>
 
@@ -143,8 +146,7 @@ In JavaScript, the equal sign (=) is an **assignment operator**, not an "equal t
 ### Comparison Operators <a id="Comparison"></a>
 
 All comparison operators return a boolean value:
-- true – means “yes”, “correct” or “the truth”.
-- false – means “no”, “wrong” or “not the truth”.
+It can be helpful to think of comparison statements as questions. When the answer is “yes”, the statement evaluates to true, and when the answer is “no”, the statement evaluates to false.
 
 `!=`	not equal
 `!==`	not equal value or not equal type
@@ -153,6 +155,13 @@ All comparison operators return a boolean value:
 `>=`	greater than or equal to
 `<=`	less than or equal to
 `?`	ternary operator
+
+The list of falsy values includes:
+- 0
+- Empty strings like "" or ''
+- null which represent when there is no value at all
+- undefined which represent when a declared variable lacks a value
+- NaN, or Not a Number
 
 #### Operator `==`	
 
@@ -170,6 +179,19 @@ equal value and equal type
 ```
 alert( 0 === false ); // false, because the types are different
 ```
+
+#### `?`	ternary operator
+
+We can use a ternary operator to simplify an if...else statement.
+
+isNightTime ? console.log('Turn on the lights!') : console.log('Turn off the lights!');
+
+In the example above:
+- The condition, isNightTime, is provided before the ?.
+- Two expressions follow the ? and are separated by a colon :.
+- If the condition evaluates to true, the first expression executes.
+- If the condition evaluates to false, the second expression executes.
+
 ### Logical Operators <a id="Logical"></a>
 
 Although they are called “logical”, they can be applied to values of any type, not only boolean. Their result can also be of any type. There are four logical operators in JavaScript:
@@ -222,6 +244,13 @@ true || alert("not printed");
 false || alert("printed");
 
 The call to alert does not return a value. Or, in other words, it returns undefined.
+```
+let username = '';
+let defaultName = username || 'Stranger';
+ 
+console.log(defaultName); // Prints: Stranger
+```
+Because || or statements check the left-hand condition first, the variable defaultName will be assigned the actual value of username if it is truthy, and it will be assigned the value of 'Stranger' if username is falsy. This concept is also referred to as short-circuit evaluation.
 
 #### 2. && logical (AND) <a id="AND"></a>
 
@@ -348,6 +377,46 @@ If there is no break then the execution continues with the next case without any
 ### The “while” loop
 
 # <font color=red> Unsorted information </font>
+
+## Properties
+
+When you introduce a new piece of data into a JavaScript program, the browser saves it as an instance of the data type. All data types have access to specific properties that are passed down to each instance. For example, every string instance has a property called length that stores the number of characters in that string. You can retrieve property information by appending the string with a period and the property name:
+
+console.log('Hello'.length); // Prints 5
+
+## Methods
+
+Remember that methods are actions we can perform. Data types have access to specific methods that allow us to handle instances of that data type. JavaScript provides a number of string methods.
+
+We call, or use, these methods by appending an instance with:
+
+a period (the dot operator)
+the name of the method
+opening and closing parentheses
+E.g. 'example string'.methodName().
+
+console.log('hello'.toUpperCase()); // Prints 'HELLO'
+
+ the .toUpperCase() method is called on the string instance 'hello'. The result is logged to the console. This method returns a string in all capital letters: 'HELLO'.
+
+console.log('Hey'.startsWith('H')); // Prints true
+  On the second line, the .startsWith() method is called on the string instance 'Hey'. This method also accepts the character 'H' as an input, or argument, between the parentheses. Since the string 'Hey' does start with the letter 'H', the method returns the boolean true.
+
+`.random()` method by appending the object name with the dot operator, the name of the method, and opening and closing parentheses. This method returns a random number between 0 (inclusive) and 1 (exclusive).
+
+To generate a random number between 0 and 50, we could multiply this result by 50, like so:
+
+Math.random() * 50;
+
+The example above will likely evaluate to a decimal. To ensure the answer is a whole number, we can take advantage of another useful Math method called Math.floor().
+
+Math.floor() takes a decimal number, and rounds down to the nearest whole number. You can use Math.floor() to round down a random number like this:
+
+Math.floor(Math.random() * 50);
+
+Use the toLowerCase method like below:
+
+'Grace Hopper'.toLowerCase();
 
 ## JavaScript Uses
 
