@@ -82,21 +82,109 @@ The object data type can contain: an object, an array, a date.
 
 ## Functions <a id="Functions"></a>
 
-- `alert` It shows a message and waits for the user to press “OK”. `alert("Hello");`
-- `prompt` shows a message asking the user to input text. It returns the text or, if Cancel button or Esc is clicked, null. `result = prompt(title, [default]);` The square brackets around default in the syntax above denote that the parameter is optional, not required. The visitor can type something in the prompt input field and press OK. Then we get that text in the result.
-- `confirm` shows a message and waits for the user to press “OK” or “Cancel”. It returns true for OK and false for Cancel/Esc. `result = confirm(question);`
+### Built-in functions
+
+- `alert("Hello");` shows a message and waits for the user to press “OK”. 
+- `result = prompt(title, [default]);` shows a message asking the user to input text. It returns the text or, if Cancel button or Esc is clicked, null.
+- `confirm(question);` shows a message and waits for the user to press “OK” or “Cancel”. It returns true for OK and false for Cancel/Esc.
 - `String(value)` is used to convert a value to a string.
-- `Number(value)` converts a value to a number, undefined becomes NaN, null becomes	0, true and false become 1 and 0. String whitespaces (includes spaces, tabs \t, newlines \n etc.) from the start and end are removed. If the remaining string is empty, the result is 0. Otherwise, the number is “read” from the string. An error gives NaN. The unary plus or, in other words, the plus operator + applied to a single value, doesn’t do anything to numbers. But if the operand is not a number, the unary plus converts it into a number. It actually does the same thing as Number(...), but is shorter. 
-```let x = 1;
-alert( +x ); // 1
-```
+- `Number(value)` converts a value to a number, undefined becomes NaN, null becomes	0, true and false become 1 and 0. String whitespaces (includes spaces, tabs \t, newlines \n etc.) from the start and end are removed. If the remaining string is empty, the result is 0. Otherwise, the number is “read” from the string. An error gives NaN. The unary plus or, in other words, the plus operator + does the same thing as Number(...), but is shorter. //alert( +x );
 - `Boolean(value)` Values that are intuitively “empty”, like 0, an empty string, null, undefined, and NaN, become false. Other values become true.
 - `window.print()`
-- `document.getElementById(id)`: You can write into an HTML element by using this method, the id attribute defines the HTML element, and the innerHTML property defines the HTML content.
-- `console.log()`: is a method of the JavaScript Console, a special object incuded in browsers for developers to use to debug and test their code in an interactive terminal.
-- `document.write()`: it inserts text into the document (the webpage in the browser window). It is rather old school and hardly used anymore since it requires embedding in the actual page which is discouraged in this day and age.
-- `return`
-- `function`
+- `console.log()`: used to debug and test their code in an interactive terminal.
+- `document.write()`: inserts text into the document (the webpage in the browser window). It is rather old school and hardly used anymore since it requires embedding in the actual page which is discouraged in this day and age.
+
+### Function Declaration
+
+Just like how a variable declaration binds a value to a variable name, a function declaration binds a function to a name, or an identifier. The function keyword goes first, then goes the name of the function, then a list of parameters between the parentheses (comma-separated, or empty) and finally the code of the function, also named “the function body”, between curly braces.
+```
+function showMessage() {
+  alert( 'Hello everyone!' );
+}
+```
+Our new function can be called by its name: `showMessage();`. The call showMessage() executes the code of the function. We should be aware of the hoisting feature in JavaScript which allows access to function declarations before they’re defined.
+
+A variable declared inside a function is only visible inside that function, but a function can access an outer variable. If a same-named variable is declared inside the function then it shadows the outer one.
+
+Variables declared outside of any function, such as the outer userName in the code above, are called global. Global variables are visible from any function (unless shadowed by locals). It’s a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
+
+If a function is called, but an argument is not provided, then the corresponding value becomes undefined. We can specify the so-called **“default”** (to use if omitted) value for a parameter in the function declaration, using =:
+```
+function showMessage(from, text = "no text given") {
+  alert( from + ": " + text );
+}
+showMessage("Ann"); // Ann: no text given
+```
+
+### Returning a value
+
+The return statement can only be used within function bodies. 
+
+JavaScript allows us to return an “undefined” value. It's not defined. We don't know what the value is, so we can say it's empty. You can do that by writing `return undefined`, `return`, or by removing the statement altogether.
+
+`return` is a “blocking” statement in the scope of the parent function. Which means that it indicates the stopping of the function in which it is. It's important to understand because it means that the code is located after a return statement will never be executed. The code located after a return statement is what we call “dead code”. In fact, the return statement literally means : “this function is done running properly, here is the result you can show to the parent context. No need to read further.”.
+
+```
+function getRectArea(width, height) {
+  if (width > 0 && height > 0) {
+    return width * height;
+  }
+  return 0;
+}
+
+console.log(getRectArea(3, 4));
+// Expected output: 12
+
+console.log(getRectArea(-3, 4));
+// Expected output: 0
+```
+
+
+
+#### Writing code after a return
+
+The directive return can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code. 
+```
+function checkAge(age) {
+  if (age >= 18) {
+    return true;
+  } else {
+    return confirm('Do you have permission from your parents?');
+  }
+}
+```
+It is possible to use return without a value. That causes the function to exit immediately. If checkAge(age) returns false, then showMovie won’t proceed to the alert.
+```
+function showMovie(age) {
+  if ( !checkAge(age) ) {
+    return;
+  }
+
+  alert( "Showing you the movie" ); // (*)
+  // ...
+}
+```
+A function with an empty return or without it returns undefined
+
+For a long expression in return, it might be tempting to put it on a separate line. That doesn’t work, because JavaScript assumes a semicolon after return. If we want the returned expression to wrap across multiple lines, we should start it at the same line as return. Or at least put the opening parentheses there as follows:
+```
+return (
+  some + long + expression
+  + or +
+  whatever * f(a) + f(b)
+  )
+```
+
+### Naming a function
+
+Functions are actions. So their name is usually a verb. Function starting with:
+- "get…" – return a value,
+- "show…" – usually show something,
+- "calc…" – calculate something,
+- "create…" – create something,
+- "check…" – check something and return a boolean, etc.
+
+A function should do exactly what is suggested by its name, no more. Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
 
 ## Operators <a id="Operators"></a>
 
@@ -342,7 +430,7 @@ let message = (age < 3) ? 'Hi, baby!' :
 
 alert( message );
 ```
-## The "switch" statement
+### The "switch" statement
 
 A switch statement can replace multiple if checks. It gives a more descriptive way to compare a value with multiple variants. The switch has one or more case blocks and an optional default. If the equality is found, switch starts to execute the code starting from the corresponding case, until the nearest break (or until the end of switch). If no case is matched then the default code is executed (if it exists). The values must be of the same type to match.
 ```
@@ -368,6 +456,8 @@ If there is no break then the execution continues with the next case without any
     alert('Wrong!');
     break;
 
+# <font color=red> Unsorted information </font>
+
 ## Loops: while and for <font color=red> (Incomplete) </font>
 
 - while
@@ -375,8 +465,6 @@ If there is no break then the execution continues with the next case without any
 - for(..;..;..)
 
 ### The “while” loop
-
-# <font color=red> Unsorted information </font>
 
 ## Properties
 
