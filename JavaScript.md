@@ -7,6 +7,7 @@
 3. [Functions](#Functions)
 4. [Operators](#Operators)
 5. [Conditionals](#Conditionals)
+6. [Arrays](#Arrays)
 
 
 ## Introduction <a id="Introduction"></a>
@@ -138,11 +139,6 @@ console.log(getRectArea(3, 4));
 console.log(getRectArea(-3, 4));
 // Expected output: 0
 ```
-
-
-
-#### Writing code after a return
-
 The directive return can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code. 
 ```
 function checkAge(age) {
@@ -186,6 +182,31 @@ Functions are actions. So their name is usually a verb. Function starting with:
 
 A function should do exactly what is suggested by its name, no more. Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
 
+#### Function expression vs declaration
+
+A **function expression** is often stored in a variable in order to refer to it. Since the release of ES6, it is common practice to use const as the keyword to declare the variable. To invoke a function expression, write the name of the variable in which the function is stored followed by parentheses enclosing any arguments being passed into the function. `variableName(argument1, argument2)`. Unlike function declarations, function expressions are not hoisted so they cannot be called before they are defined.
+
+A function expression is very similar to, and has almost the same syntax as, a function declaration. The main difference between a function expression and a function declaration is the function name, which can be omitted in function expressions to create anonymous functions. Function expressions in JavaScript are not hoisted, unlike function declarations. You can't use function expressions before you create them.
+
+Function declaration: `function doStuff() {};`
+Function expression: `const doStuff = function() {}`
+Arrow function: `() => {}`
+
+#### Arrow functions
+
+Functions that take only a single parameter do not need that parameter to be enclosed in parentheses. However, if a function takes zero or multiple parameters, parentheses are required.
+
+A function body composed of a single-line block does not need curly braces. Without the curly braces, whatever that line evaluates will be automatically returned. The contents of the block should immediately follow the arrow => and the return keyword can be removed. This is referred to as implicit return.
+
+So if we have a function:
+```
+const squareNum = (num) => {
+  return num * num;
+};
+We can refactor the function to:
+
+const squareNum = num => num * num;
+```
 ## Operators <a id="Operators"></a>
 
 - [Increment/Decrement](#Inc)
@@ -456,34 +477,75 @@ If there is no break then the execution continues with the next case without any
     alert('Wrong!');
     break;
 
-# <font color=red> Unsorted information </font>
+## Arrays <a id="Arrays"></a>
 
-## Loops: while and for <font color=red> (Incomplete) </font>
+Each element in an array has a numbered position known as its index. We can access individual items using their index, which is similar to referencing an item in a list based on the item’s position. Arrays in JavaScript are zero-indexed, meaning the positions start counting from 0 rather than 1. Therefore, the first item in an array will be at position 0.
+```
+let cities = [ index0, index1, ...]
+cities[0] will access the element at index 0 in the array cities.
+```
+You can also access individual characters in a string using bracket notation and the index. For instance, you can write:
+```
+const hello = 'Hello World';
+console.log(hello[6]); // Output: W
+```
+Variables declared with the const keyword cannot be reassigned. However, elements in an array declared with const remain mutable. Meaning that we can change the contents of a const array, but cannot reassign a new array or a different value.
 
-- while
-- do..while
-- for(..;..;..)
+### Arrays Properties
 
-### The “while” loop
+- `.length()`: returns the number of items in the array.
+- `.push()`: allows us to add items to the end of an array.
+- ` .pop()`: removes the last item of an array.
+- `.join()`: Elements of an array are converted to strings and concatenated together, returning the resulting string.
+- `.slice()`: Returns a shallow copy of part of array, while original array is not modified. (from, to).
+- `.splice()`: Modifies an array by inserting, deleting, and/or replacing array elements then returns an array of deleted elements.
+- `.shift()`: Removes and returns the first element of the array. All subsequent elements will shift down one place.
+- `.unshift()`: Adds one or more elements to beginning of array and returns new length.
+- `.concat()`: Merges, or concatenates, two or more arrays.
+- `.copyWithin()`: Returns a mutated array with part of it copied to another location in the same array, and its length unchanged.
+- `.filter()`: Creates a new array with all elements that pass the test from the provided function.
+- `.find()`: Returns the first element in the array that satisfies the given function.
+- `.findIndex()`: Returns the first index that passes the callback function's test. Returns -1 if no element passes the test.
+- `.findLast()`: Returns the last instance of an element in an array that meets the specified condition.
+- `.findLastIndex()`: Iterates through the array in reverse order and returns the index that passes the provided testing function.
+- `.forEach()`: Loops over the array, passing each item in the array into the callback function provided.
+- `.includes()`: Returns true if a given value is included in an array.
+- `.indexOf()`: Returns the first index at which an element can be found. Returns -1 if element is not found.
+- `.isArray()`: Returns true for arrays, otherwise false.
+- `.lastIndexOf()`: Returns the last index at which an element can be found.
+- `.length`: Returns the specific number of elements in the array.
+- `.map()`: Creates a new array with the results of calling a function for every element in array.
+- `.pop()`: Removes the last element of an array, decrements the array length, and returns the value that it removed.
+- `.reduce()`: Combines each element of an array, using a specified reducer function, and returns a single value.
+- `.reverse()`: Reverses the order of the elements of an array in place and returns the reversed array.
+- `.some()`: Runs a conditional through an array and returns a boolean if any value fulfills the conditional.
+- `.sort()`: Returns an array with its items sorted in place.
+- `.toSorted()`: Takes an array and returns a new array with all the elements sorted in ascending order.
+- `.toString()`: Returns a string with each of the array values, separated by commas. Does not mutate the original array.
+- `.valueOf()`: Returns the value of all the elements of the original array.
 
-## Properties
+When you pass an array into a function, if the array is mutated inside the function, that change will be maintained outside the function as well.
 
-When you introduce a new piece of data into a JavaScript program, the browser saves it as an instance of the data type. All data types have access to specific properties that are passed down to each instance. For example, every string instance has a property called length that stores the number of characters in that string. You can retrieve property information by appending the string with a period and the property name:
+When an array contains another array it is known as a nested array. 
+```
+const nestedArr = [[1], [2, 3]];
 
-console.log('Hello'.length); // Prints 5
+console.log(nestedArr[1]); // Output: [2, 3]
+console.log(nestedArr[1][0]); // Output: 2
+```
+
+# <font color=yellow> Unsorted information </font>
 
 ## Methods
 
-Remember that methods are actions we can perform. Data types have access to specific methods that allow us to handle instances of that data type. JavaScript provides a number of string methods.
+Remember that methods are actions we can perform. Data types have access to specific methods that allow us to handle instances of that data type. JavaScript provides a number of string methods. We call, or use, these methods by appending an instance with:
 
-We call, or use, these methods by appending an instance with:
+- a period (the dot operator)
+- the name of the method
+- opening and closing parentheses
 
-a period (the dot operator)
-the name of the method
-opening and closing parentheses
-E.g. 'example string'.methodName().
-
-console.log('hello'.toUpperCase()); // Prints 'HELLO'
+`E.g. 'example string'.methodName().`
+`console.log('hello'.toUpperCase()); // Prints 'HELLO'`
 
  the .toUpperCase() method is called on the string instance 'hello'. The result is logged to the console. This method returns a string in all capital letters: 'HELLO'.
 
@@ -505,42 +567,6 @@ Math.floor(Math.random() * 50);
 Use the toLowerCase method like below:
 
 'Grace Hopper'.toLowerCase();
-
-## JavaScript Uses
-
-- Change HTML Content: `document.getElementById("demo").innerHTML = "Hello JavaScript";` this findss an HTML element (with id="demo"), and changes the element content (innerHTML) to "Hello JavaScript".
-- Change HTML Attribute Values: For example, JavaScript can change the value of the src (source) attribute of an image. `<button onclick="document.getElementById('myImage').src='pic_bulbon.gif'">Turn on the light</button>`
-- Change HTML Styles (CSS): `<button type="button" onclick="document.getElementById('demo').style.fontSize='35px'">Click Me!</button>`
-- Hide HTML Elements: Hiding HTML elements can be done by changing the display style. `document.getElementById("demo").style.display = "none";`
-- Show HTML Elements: Showing hidden HTML elements can also be done by changing the display style `document.getElementById("demo").style.display = "block";`
-
-## JavaScript Keywords
-
-- `var`	Declares a variable
-- `let`	Declares a block variable
-- `const`	Declares a block constant
-- `if`	Marks a block of statements to be executed on a condition
-- `switch`	Marks a block of statements to be executed in different cases
-- `for`	Marks a block of statements to be executed in a loop
-- `function`	Declares a function
-- `return`	Exits a function
-- `try`	Implements error handling to a block of statements
-
-## Variables and Constants
-
-JavaScript Variables can be declared either automatically or using var/let/const. It's a good programming practice to declare all variables at the beginning of a script.
-
-Creating a variable in JavaScript is called "declaring" a variable, and we use the `let` keyword such as `let message;`. After the declaration, the variable has no value (technically it is undefined). To assign a value to the variable, use the equal sign: `message = 'Hello';` or `let message = 'Hello!'`. 
-
-To declare a constant (unchanging) variable, use const: `const myBirthday = '18.04.1982';` Variables declared using const are called “constants”. They cannot be reassigned. An attempt to do so would cause an error. Being a “constant” just means that a variable’s value never changes. But there are constants that are known prior to execution (like a hexadecimal value for red) and there are constants that are calculated in run-time, during the execution, but do not change after their initial assignment. Capital-named constants are only used as aliases for “hard-coded” values. For example `const COLOR_RED = "#F00";`.
-
-Declaring twice triggers an error. A variable should be declared only once.
-
-There are two limitations on variable names in JavaScript:
-1. The name must contain only letters, digits, or the symbols $ and _.
-2. The first character must not be a digit.
-
-There is a list of reserved words, which cannot be used as variable names because they are used by the language itself. For example: let, class, return, and function are reserved.
 
 ### String Methods
 
