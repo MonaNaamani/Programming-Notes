@@ -8,6 +8,7 @@
 4. [Operators](#Operators)
 5. [Conditionals](#Conditionals)
 6. [Arrays](#Arrays)
+7. [Loops](#Loops)
 
 
 ## Introduction <a id="Introduction"></a>
@@ -45,6 +46,18 @@ In JavaScript, there are 3 types of quotes.
 
 Double and single quotes are “simple” quotes. There’s practically no difference between them in JavaScript. Backticks are “extended functionality” quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`. a template literal is wrapped by backticks ` (this key is usually located on the top of your keyboard, left of the 1 key). Inside the template literal, you’ll see a placeholder, ${...}. The value of ... is inserted into the template literal.
 
+**String Methods**: A method is a bit of functionality that is built into the language or into specific data types. JavaScript counts positions from zero. First position is 0. Second position is 1.
+
+- `String length`: The length property returns the length of a string
+  
+- `String slice()`: slice() extracts a part of a string and returns the extracted part in a new string. text.slice(7,13) If you omit the second parameter, the method will slice out the rest of the string. If a parameter is negative, the position is counted from the end of the string text.slice(-12)
+  
+- `String substring()`: substring() is similar to slice(). The difference is that start and end values less than 0 are treated as 0 in substring().
+  
+- `String substr()`: substr() is similar to slice(). The difference is that the second parameter specifies the length of the extracted part.If the first parameter is negative, the position counts from the end of the string.
+  
+- `String replace()`: The replace() method replaces a specified value with another value in a string. let text = "Please visit Microsoft!";let newText = text.replace("Microsoft", "W3Schools"); The replace() method does not change the string it is called on. The replace() method returns a new string. The replace() method replaces only the first match. To replace case insensitive, use a regular expression with an `/i` flag (insensitive) /MICROSOFT/i. To replace all matches, use a regular expression with a `/g` flag (global match)
+
 #### 2. Number
 
 There are many operations for numbers, e.g. multiplication *, division /, addition +, subtraction -, and so on.
@@ -52,6 +65,10 @@ There are many operations for numbers, e.g. multiplication *, division /, additi
 Besides regular numbers, there are so-called “special numeric values” which also belong to this data type: Infinity, -Infinity, and NaN.
 - Infinity represents the mathematical Infinity ∞. It is a special value that’s greater than any number.
 - NaN represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance: alert( "not a number" / 2 ); // NaN, such division is erroneous. If there’s a NaN somewhere in a mathematical expression, it propagates to the whole result (there’s only one exception to that: NaN ** 0 is 1).
+
+**Number Methods**
+
+`Math.floor(Math.random() * 4) will give us a random number from 0 to 3.`
 
 #### 3. Bigint
 
@@ -534,66 +551,123 @@ console.log(nestedArr[1]); // Output: [2, 3]
 console.log(nestedArr[1][0]); // Output: 2
 ```
 
-# <font color=yellow> Unsorted information </font>
+## Loops <a id="Loops"></a> 
 
-## Methods
+You’ll hear the generic term iterate when referring to loops; iterate simply means “to repeat”.
 
-Remember that methods are actions we can perform. Data types have access to specific methods that allow us to handle instances of that data type. JavaScript provides a number of string methods. We call, or use, these methods by appending an instance with:
+- for
+- while
+- do-while
+- forEach()
+- map()
+- for…in
+- for…of
 
-- a period (the dot operator)
-- the name of the method
-- opening and closing parentheses
+### `for` loop
 
-`E.g. 'example string'.methodName().`
-`console.log('hello'.toUpperCase()); // Prints 'HELLO'`
+The while loop and the for loop works exactly same.The for loop increases the readability & reduces the chances of error. It contains three expressions separated by ; inside the parentheses:
 
- the .toUpperCase() method is called on the string instance 'hello'. The result is logged to the console. This method returns a string in all capital letters: 'HELLO'.
+1. an initialization starts the loop and can also be used to declare the iterator variable.
+2. a stopping condition is the condition that the iterator variable is evaluated against— if the condition evaluates to true the code block will run, and if it evaluates to false the code will stop.
+3. an iteration statement is used to update the iterator variable on each loop.
 
-console.log('Hey'.startsWith('H')); // Prints true
-  On the second line, the .startsWith() method is called on the string instance 'Hey'. This method also accepts the character 'H' as an input, or argument, between the parentheses. Since the string 'Hey' does start with the letter 'H', the method returns the boolean true.
+Syntax
+```
+for ([initialization];[condition];[final-expression]){
+   Block of code
+}
+```
+Example
+```
+for (let counter = 0; counter < 4; counter++) {
+  console.log(counter);
+}
+```
+#### Looping in Reverse
 
-`.random()` method by appending the object name with the dot operator, the name of the method, and opening and closing parentheses. This method returns a random number between 0 (inclusive) and 1 (exclusive).
+To run a backward for loop, we must:
 
-To generate a random number between 0 and 50, we could multiply this result by 50, like so:
+1. Set the iterator variable to the highest desired value in the initialization expression.
+2. Set the stopping condition for when the iterator variable is less than the desired amount.
+3. The iterator should decrease in intervals after each iteration.
 
-Math.random() * 50;
+#### Looping through Arrays
 
-The example above will likely evaluate to a decimal. To ensure the answer is a whole number, we can take advantage of another useful Math method called Math.floor().
+To loop through each element in an array, a for loop should use the array’s .length property in its condition.
+```
+const animals = ['Grizzly Bear', 'Sloth', 'Sea Lion'];
+for (let i = 0; i < animals.length; i++){
+  console.log(animals[i]);
+}
+```
+When we use i to iterate through arrays we can think of it as being short-hand for the word index.
 
-Math.floor() takes a decimal number, and rounds down to the nearest whole number. You can use Math.floor() to round down a random number like this:
+#### Nested Loops
 
-Math.floor(Math.random() * 50);
+One use for a nested for loop is to compare the elements in two arrays.
+```
+const myArray = [6, 19, 20];
+const yourArray = [19, 81, 2];
+for (let i = 0; i < myArray.length; i++) {
+  for (let j = 0; j < yourArray.length; j++) {
+    if (myArray[i] === yourArray[j]) {
+      console.log('Both arrays have the number: ' + yourArray[j]);
+    }
+  }
+}
+```
+### `while` loop
 
-Use the toLowerCase method like below:
+The syntax of a while loop is ideal when we don’t know in advance how many times the loop should run. In situations when we want a loop to execute an undetermined number of times, while loops are the best choice. The while loop syntax is the following:
 
-'Grace Hopper'.toLowerCase();
+```
+for (let counterOne = 1; counterOne < 4; counterOne++){
+  console.log(counterOne);
+}
 
-### String Methods
+let counterTwo = 1; //The counterTwo variable is declared before the loop.
+while (counterTwo < 4) { //stopping condition, or test condition
+  console.log(counterTwo);
+  counterTwo++;
+}
+```
 
-A method is a bit of functionality that is built into the language or into specific data types. 
+The while statement generates a loop that gets executed over a particular block of statement (code) as long as the condition is true. Every time before executing the block of code the condition gets checked.
 
-JavaScript counts positions from zero. First position is 0. Second position is 1.
+Syntax
+```
+while (condition) {
+  Block of code
+}
+```
+Example:
+```
+let i=8;
+while (i<10){
+ console.log("I is less than 10");
+ i++;
+}
+```
+In the above example, the condition is getting checked if the value of i is less than 10 or not. If the condition is true, the block of code gets executed and before iterating next time the value of i is getting increases by 1 as we’ve added a statement i++.
 
-- `String length`: The length property returns the length of a string
-  
-- `String slice()`: slice() extracts a part of a string and returns the extracted part in a new string. text.slice(7,13) If you omit the second parameter, the method will slice out the rest of the string. If a parameter is negative, the position is counted from the end of the string text.slice(-12)
-  
-- `String substring()`: substring() is similar to slice(). The difference is that start and end values less than 0 are treated as 0 in substring().
-  
-- `String substr()`: substr() is similar to slice(). The difference is that the second parameter specifies the length of the extracted part.If the first parameter is negative, the position counts from the end of the string.
-  
-- `String replace()`: The replace() method replaces a specified value with another value in a string. let text = "Please visit Microsoft!";let newText = text.replace("Microsoft", "W3Schools"); The replace() method does not change the string it is called on. The replace() method returns a new string. The replace() method replaces only the first match. To replace case insensitive, use a regular expression with an `/i` flag (insensitive) /MICROSOFT/i. To replace all matches, use a regular expression with a `/g` flag (global match)
-  
-- `String replaceAll()`: 
-String toUpperCase()
-String toLowerCase()
-String concat()
-String trim()
-String trimStart()
-String trimEnd()
-String padStart()
-String padEnd()
-String charAt()
-String charCodeAt()
-String split()
+### `do-while` loop
+
+do-while loop is slightly different from while as it includes one extra feature. 
+
+Syntax
+```
+do {
+    Block of code
+ }
+while (condition);
+```
+Example
+```
+let i=7;
+do{
+    console.log("The value of i is " + i);
+    i++;
+}
+while(i>7 && i<10);
+```
 
