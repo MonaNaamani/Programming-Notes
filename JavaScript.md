@@ -9,6 +9,7 @@
 5. [Conditionals](#Conditionals)
 6. [Arrays](#Arrays)
 7. [Loops](#Loops)
+8. [Errors](#Errors)
 
 
 ## Introduction <a id="Introduction"></a>
@@ -223,6 +224,45 @@ const squareNum = (num) => {
 We can refactor the function to:
 
 const squareNum = num => num * num;
+```
+We wrote a higher-order function higherOrderFunc that accepts a single parameter, param. Inside the body, param gets invoked using parentheses. And finally, a string is returned, telling us the name of the callback function that was passed in.
+
+Below the higher-order function, we have another function aptly named anotherFunc. This function aspires to be called inside the higher-order function.
+
+Lastly, we invoke higherOrderFunc(), passing in anotherFunc as its argument, thus fulfilling its dreams of being called by the higher-order function.
+```
+higherOrderFunc(() => {
+  for (let i = 0; i <= 10; i++){
+    console.log(i);
+  }
+});
+```
+In this example, we invoked higherOrderFunc() with an anonymous function (a function without a name) that counts to 10. Anonymous functions can be arguments too!
+
+### Functions as Data
+
+JavaScript functions behave like any other data type in the language; we can assign functions to variables, and we can reassign them to new variables. The new function name can be invoked with parentheses as if that was the name we originally gave our function. For example:
+```
+const busy = announceThatIAmDoingImportantWork;
+```
+We assign announceThatIAmDoingImportantWork without parentheses as the value to the busy variable because we want to assign the value of the function itself, not the value it returns when invoked.
+
+In JavaScript, functions are first class objects. This means that, like other objects you’ve encountered, JavaScript functions can have properties and methods.Since functions are a type of object, they have properties such as .length and .name, and methods such as .toString(). For example `console.log(function1.name);` indicates the function's name as specified when it was created, or it may be either anonymous or '' (an empty string) for functions created anonymously.
+
+### Functions as Parameters
+
+A parameter is a placeholder for the data that gets passed into a function. Since functions can behave like any other type of data in JavaScript, it might not surprise you to learn that functions can accept other functions as parameters. A higher-order function is a function that either accepts functions as parameters, returns a function, or both! We call functions that get passed in as parameters callback functions. Callback functions get invoked during the execution of the higher-order function.When we invoke a higher-order function, and pass another function in as an argument, we don’t invoke the argument function. Invoking it would evaluate to passing in the return value of that function call. With callback functions, we pass in the function itself by typing the function name without the parentheses:
+```
+const higherOrderFunc = param => {
+  param();
+  return `I just invoked ${param.name} as a callback function!`
+}
+ 
+const anotherFunc = () => {
+  return 'I\'m being invoked by the higher-order function!';
+}
+ 
+higherOrderFunc(anotherFunc);
 ```
 ## Operators <a id="Operators"></a>
 
@@ -555,8 +595,8 @@ console.log(nestedArr[1][0]); // Output: 2
 
 You’ll hear the generic term iterate when referring to loops; iterate simply means “to repeat”.
 
-- for
-- while
+- for: Loops can execute a block of code a number of times.
+- while: The while loop loops through a block of code as long as a specified condition is true.
 - do-while
 - forEach()
 - map()
@@ -565,24 +605,21 @@ You’ll hear the generic term iterate when referring to loops; iterate simply m
 
 ### `for` loop
 
-The while loop and the for loop works exactly same.The for loop increases the readability & reduces the chances of error. It contains three expressions separated by ; inside the parentheses:
-
-1. an initialization starts the loop and can also be used to declare the iterator variable.
-2. a stopping condition is the condition that the iterator variable is evaluated against— if the condition evaluates to true the code block will run, and if it evaluates to false the code will stop.
-3. an iteration statement is used to update the iterator variable on each loop.
-
-Syntax
+Let’s learn the meaning of `for` by example. The loop below runs alert(i) for i from 0 up to (but not including) 3:
 ```
-for ([initialization];[condition];[final-expression]){
-   Block of code
+for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
+  alert(i);
 }
 ```
-Example
-```
-for (let counter = 0; counter < 4; counter++) {
-  console.log(counter);
-}
-```
+Here, the “counter” variable i is declared right in the loop. This is called an “inline” variable declaration. Such variables are visible only inside the loop. We can also use an existing variable.
+
+- begin: `let i = 0`	Executes once upon entering the loop.
+- a stopping condition: `i < 3`	Checked before every loop iteration. If false, the loop stops. <font color=red> If you omit it, you must provide a break inside the loop. Otherwise the loop will never end. This will crash your browser.</font>
+- body: `alert(i)`	Runs again and again while the condition is truthy.
+- step: `i++`	Executes after the body on each iteration.
+
+The for loop increases the readability & reduces the chances of error. It contains three optional expressions separated by ; inside the parentheses:
+
 #### Looping in Reverse
 
 To run a backward for loop, we must:
@@ -593,15 +630,13 @@ To run a backward for loop, we must:
 
 #### Looping through Arrays
 
-To loop through each element in an array, a for loop should use the array’s .length property in its condition.
+When we use i to iterate through arrays we can think of it as being short-hand for the word index. To loop through each element in an array, a for loop should use the array’s .length property in its condition.
 ```
 const animals = ['Grizzly Bear', 'Sloth', 'Sea Lion'];
 for (let i = 0; i < animals.length; i++){
   console.log(animals[i]);
 }
 ```
-When we use i to iterate through arrays we can think of it as being short-hand for the word index.
-
 #### Nested Loops
 
 One use for a nested for loop is to compare the elements in two arrays.
@@ -616,58 +651,111 @@ for (let i = 0; i < myArray.length; i++) {
   }
 }
 ```
+#### Breaking the loop
+
+Normally, a loop exits when its condition becomes falsy. But we can force the exit at any time using the special break directive. For example, the loop below asks the user for a series of numbers, “breaking” when no number is entered:
+```
+let sum = 0;
+
+while (true) {
+
+  let value = +prompt("Enter a number", '');
+
+  if (!value) break; // (*)
+
+  sum += value;
+
+}
+alert( 'Sum: ' + sum );
+```
+#### Continue to the next iteration
+
+The continue directive is a “lighter version” of break. It doesn’t stop the whole loop. Instead, it stops the current iteration and forces the loop to start a new one (if the condition allows).
+
+We can use it if we’re done with the current iteration and would like to move on to the next one.
+
+The loop below uses continue to output only odd values:
+```
+for (let i = 0; i < 10; i++) {
+
+  // if true, skip the remaining part of the body
+  if (i % 2 == 0) continue;
+
+  alert(i); // 1, then 3, 5, 7, 9
+}
+```
+For even values of i, the continue directive stops executing the body and passes control to the next iteration of for (with the next number). So the alert is only called for odd values.
+
+We can use `continue` with the `if condition` as follows:
+```
+if (i > 5) {
+  alert(i);
+} else {
+  continue;
+}
+```
+Please note that syntax constructs that are not expressions cannot be used with the ternary operator ?. In particular, directives such as break/continue aren’t allowed there.
+
 ### `while` loop
 
 The syntax of a while loop is ideal when we don’t know in advance how many times the loop should run. In situations when we want a loop to execute an undetermined number of times, while loops are the best choice. The while loop syntax is the following:
-
-```
-for (let counterOne = 1; counterOne < 4; counterOne++){
-  console.log(counterOne);
-}
-
-let counterTwo = 1; //The counterTwo variable is declared before the loop.
-while (counterTwo < 4) { //stopping condition, or test condition
-  console.log(counterTwo);
-  counterTwo++;
-}
-```
-
-The while statement generates a loop that gets executed over a particular block of statement (code) as long as the condition is true. Every time before executing the block of code the condition gets checked.
-
-Syntax
 ```
 while (condition) {
-  Block of code
+  // code
+  // so-called "loop body"
 }
 ```
-Example:
+While the condition is truthy, the code from the loop body is executed.
 ```
-let i=8;
-while (i<10){
- console.log("I is less than 10");
- i++;
+let i = 0;
+while (i < 3) { // shows 0, then 1, then 2
+  alert( i );
+  i++;
 }
 ```
-In the above example, the condition is getting checked if the value of i is less than 10 or not. If the condition is true, the block of code gets executed and before iterating next time the value of i is getting increases by 1 as we’ve added a statement i++.
+A single execution of the loop body is called an iteration. The loop in the example above makes three iterations. If i++ was missing from the example above, the loop would repeat (in theory) forever.
+
+Any expression or variable can be a loop condition, not just comparisons: the condition is evaluated and converted to a boolean by while.
+
+For instance, a shorter way to write while (i != 0) is while (i):
+```
+let i = 3;
+while (i) { // when i becomes 0, the condition becomes falsy, and the loop stops
+  alert( i );
+  i--;
+}
+```
 
 ### `do-while` loop
 
-do-while loop is slightly different from while as it includes one extra feature. 
+This loop will execute the code block once, before checking if the condition is true, then it will repeat the loop as long as the condition is true. This form of syntax should only be used when you want the body of the loop to execute at least once regardless of the condition being truthy. Usually, the other form is preferred: while(…) {…}.
+
+The condition check can be moved below the loop body using the do..while syntax:
 
 Syntax
 ```
 do {
-    Block of code
- }
-while (condition);
+  // loop body
+} while (condition);
 ```
-Example
+The loop will first execute the body, then check the condition, and, while it’s truthy, execute it again and again. Example:
 ```
-let i=7;
-do{
-    console.log("The value of i is " + i);
-    i++;
+do {
+  text += "The number is " + i;
+  i++;
 }
-while(i>7 && i<10);
+while (i < 10);
 ```
+<font color=red> Do not forget to increase the variable used in the condition, otherwise the loop will never end!</font>
+
+## Errors <a id="Errors"></a>
+
+**Syntax Error**: occurs when the code you are trying to run is not written correctly.
+   
+**ReferenceError**: these arise because whatever variable you are trying to reference does not exist (within the current scope) - or it has been spelled incorrectly.
+   
+**Type Error**: A good note to keep in mind when faced with a TypeError is to consider the data type you are trying to run a method or operation against. You’ll likely find that it is not what you think, or the operation or method is not compatible with that type. Per MDN, a TypeError may be thrown when:
+- an operand or argument passed to a function is incompatible with the type expected by that operator or function;
+- or when attempting to modify a value that cannot be changed;
+- or when attempting to use a value in an inappropriate way.
 
