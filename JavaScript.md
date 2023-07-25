@@ -778,7 +778,7 @@ while (i < 10);
 
 ### map() <a id="map"></a>
 
-You can use map() to do something to each item in a collection and create a new collection containing the changed items. For example:
+When .map() is called on an array, it takes an argument of a callback function and returns a new array. For example:
 ```
 function toUpper(string) {
   return string.toUpperCase();
@@ -789,6 +789,14 @@ const cats = ["Leopard", "Serval", "Jaguar", "Tiger", "Caracal", "Lion"];
 const upperCats = cats.map(toUpper);
 
 console.log(upperCats);
+```
+Example 2:
+```
+const numbers = [1, 2, 3, 4, 5]; 
+ 
+const bigNumbers = numbers.map(number => {
+  return number * 10;
+});
 ```
 ### filter() <a id="filter"></a>
 
@@ -817,14 +825,22 @@ console.log(filtered);
 
 The forEach() method executes a provided function once for each array element.Unlike map(), forEach() always returns undefined and is not chainable. The typical use case is to execute side effects at the end of a chain.forEach() does not mutate the array on which it is called, but the function provided as callbackFn can.
 ```
-const array1 = ['a', 'b', 'c'];
+const groceries = ['Brown sugar', 'Salt']
+groceries.forEach(function(groceryItem) {console.log(' - ' + groceryItem);
+});
 
-array1.forEach(element => console.log(element));
-
-// Expected output: "a"
-// Expected output: "b"
-// Expected output: "c"
+- Brown sugar
+- Salt
 ```
+- groceries.forEach() calls the forEach method on the groceries array.
+- .forEach() takes an argument of callback function. Remember, a callback function is a function passed as an argument into another function.
+- .forEach() loops through the array and executes the callback function for each element. During each execution, the current element is passed as an argument to the callback function.
+- The return value for .forEach() will always be undefined.
+
+Another way to pass a callback for .forEach() is to use arrow function syntax.
+
+groceries.forEach(groceryItem => console.log(groceryItem));
+
 ## Errors <a id="Errors"></a>
 
 **Syntax Error**: occurs when the code you are trying to run is not written correctly.
