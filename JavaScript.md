@@ -5,13 +5,14 @@
 1. [Introduction](#Introduction)
 2. [Datatypes](#Datatypes)
 3. [Arrays](#Arrays)
-4. [Methods and Properties](#Methods)
-5. [Functions](#Functions)
-6. [Operators](#Operators)
-7. [Conditionals](#Conditionals)
-8. [Loops](#Loops)
-9. [Errors](#Errors)
-10. [EventTarget](#EventTarget)
+4. [Objects](#Objects)
+5. [Methods and Properties](#Methods)
+6. [Functions](#Functions)
+7. [Operators](#Operators)
+8. [Conditionals](#Conditionals)
+9. [Loops](#Loops)
+10. [Errors](#Errors)
+11. [Events](#Events)
 
 ## Introduction <a id="Introduction"></a>
 
@@ -126,6 +127,7 @@ Iterators are methods called on arrays to manipulate elements and return values.
 - `.toSorted()`: Takes an array and returns a new array with all the elements sorted in ascending order.
 - `.toString()`: Returns a string with each of the array values, separated by commas. Does not mutate the original array.
 - `.valueOf()`: Returns the value of all the elements of the original array.
+- `.every()`: tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.
 
 When you pass an array into a function, if the array is mutated inside the function, that change will be maintained outside the function as well.
 
@@ -135,6 +137,43 @@ const nestedArr = [[1], [2, 3]];
 
 console.log(nestedArr[1]); // Output: [2, 3]
 console.log(nestedArr[1][0]); // Output: 2
+```
+## Objects <a id="Objects"></a>
+
+There are two ways we can access an object’s property:
+- dot notation .
+- bracket notation [ ]
+
+```
+let spaceship = {
+  homePlanet: 'Earth',
+  color: 'silver'
+};
+spaceship.homePlanet;
+
+spaceship['homePlanet'];
+```
+To use bracket notation to access an object’s property, we pass in the property name (key) as a string. With bracket notation you can also use a variable inside the brackets to select the keys of an object.
+
+You can delete a property from an object with the delete operator.
+```
+const spaceship = {
+  'Fuel Type': 'Turbo Fuel',
+  homePlanet: 'Earth',
+  mission: 'Explore the universe' 
+};
+```
+delete spaceship.mission;  // Removes the mission property
+
+When the data stored on an object is a function we call that a method. A property is what an object has, while a method is what an object does.
+
+With the new method syntax introduced in ES6 we can omit the colon and the function keyword.
+```
+const alienShip = {
+  invade () { 
+    console.log('Hello! We have come to dominate your planet. Instead of Earth, it shall be called New Xaculon.')
+  }
+};
 ```
 ## Methods and Properties <a id="Methods"></a>
 
@@ -841,6 +880,24 @@ Another way to pass a callback for .forEach() is to use arrow function syntax.
 
 groceries.forEach(groceryItem => console.log(groceryItem));
 
+### reduce() <a id="reduce"></a>
+
+The .reduce() method returns a single value after iterating through the elements of an array, thereby reducing the array.
+
+- numbers.reduce() calls the .reduce() method on the numbers array and takes in a callback function as argument.
+- The callback function has two parameters, accumulator and currentValue. The value of accumulator starts off as the value of the first element in the array and the currentValue starts as the second element. To see the value of accumulator and currentValue change, review the chart above.
+- As .reduce() iterates through the array, the return value of the callback function becomes the accumulator value for the next iteration, currentValue takes on the value of the current element in the looping process.
+
+The .reduce() method can also take an optional second parameter to set an initial value for accumulator (remember, the first argument is the callback function!). For instance:
+```
+const numbers = [1, 2, 4, 10];
+ 
+const summedNums = numbers.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue
+}, 100)  // <- Second argument for .reduce()
+ 
+console.log(summedNums); // Output: 117
+```
 ## Errors <a id="Errors"></a>
 
 **Syntax Error**: occurs when the code you are trying to run is not written correctly.
@@ -852,12 +909,362 @@ groceries.forEach(groceryItem => console.log(groceryItem));
 - or when attempting to modify a value that cannot be changed;
 - or when attempting to use a value in an inappropriate way.
 
-## EventTarget <a id="EventTarget"></a>
+## Events <a id="Events"></a>
 
-Element, and its children, as well as Document and Window, are the most common event targets, but other objects can be event targets, too. 
+Events are actions that occur on your webpage such as mouse-clicks or keypresses, and using JavaScript we can make our webpage listen and react to these events. There are three primary ways to go about this: 
+1. Method 1: Specify function attributes directly on your HTML elements.
+2. Method 2: Set properties of form on eventType on the DOM nodes in your JavaScript.
+3. Method 3: Attach event listeners to the DOM nodes in your JavaScript. 
 
-### EventTarget() constructor
+### Method 1
 
-Syntax:
+`<button onclick="alert('Hello World')">Click Me</button>`
 
-### Instance methods
+This solution is less than ideal because we’re cluttering our HTML with JavaScript. Also, we can only set one “onclick” property per DOM element, so we’re unable to run multiple separate functions in response to a click event using this method.
+
+### Method 2
+```
+<!-- the HTML file -->
+<button id="btn">Click Me</button>
+
+<!-- the JavaScript file -->
+const btn = document.querySelector('#btn');
+btn.onclick = () => alert("Hello World");
+```
+This is a little better. We’ve moved the JS out of the HTML and into a JS file, but we still have the problem that a DOM element can only have 1 “onclick” property.
+
+### Method 3
+
+```
+<!-- the HTML file -->
+<button id="btn">Click Me Too</button>
+
+<!-- the JavaScript file -->
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  alert("Hello World");
+});
+```
+Using named functions can clean up your code considerably, and is a really good idea if the function is something that you are going to want to do in multiple places.
+
+With all three methods we can access more information about the event by passing a parameter to the function that we are calling. Try this out on your own machine:
+
+```
+btn.addEventListener('click', function (e) {
+  console.log(e);
+});
+```
+The e in that function is an object that references the event itself. Within that object you have access to many useful properties and methods (functions that live inside an object) such as which mouse button or key was pressed, or information about the event’s target - the DOM node that was clicked. For example:
+```
+btn.addEventListener('click', function (e) {
+  console.log(e.target);
+});
+
+
+btn.addEventListener('click', function (e) {
+  e.target.style.background = 'blue';
+});
+```
+#### Attaching listeners to groups of nodes
+```
+<div id="container">
+    <button id="1">Click Me</button>
+    <button id="2">Click Me</button>
+    <button id="3">Click Me</button>
+</div>
+// buttons is a node list. It looks and acts much like an array.
+const buttons = document.querySelectorAll('button');
+
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+
+  // and for each one we add a 'click' listener
+  button.addEventListener('click', () => {
+    alert(button.id);
+  });
+});
+```
+In our examples so far we have been using the ‘click’ event exclusively, but there are many more available to you. Some useful events include:
+- click
+- dblclick
+- keydown
+- keyup
+
+## React - JSX Introduction (UNSORTED)
+
+### Event Listeners in JSX
+
+An event listener attribute’s name should be something like onClick or onMouseOver: the word on plus the type of event that you’re listening for. An event listener attribute’s value should be a function. 
+
+Note that in HTML, event listener names are written in all lowercase, such as onclick or onmouseover. In JSX, event listener names are written in camelCase, such as onClick or onMouseOver.
+
+Here’s a rule that you need to know: you can not inject an if statement into a JSX expression.
+
+### JSX Conditionals: &&
+
+&& works best for conditionals that will sometimes do an action but other times do nothing at all.
+
+Here’s an example:
+```
+const tasty = (
+  <ul>
+    <li>Applesauce</li>
+    { !baby && <li>Pizza</li> }
+    { age > 15 && <li>Brussels Sprouts</li> }
+    { age > 20 && <li>Oysters</li> }
+    { age > 25 && <li>Grappa</li> }
+  </ul>
+);
+```
+If the expression on the left of the && evaluates as true, then the JSX on the right of the && will be rendered. If the first expression is false, however, then the JSX to the right of the && will be ignored and not rendered.
+
+### .map in JSX
+
+If you want to create a list of JSX elements, then using .map() is often the most efficient way. 
+```
+const strings = ['Home', 'Shop', 'About Me'];
+ 
+const listItems = strings.map(string => <li>{string}</li>);
+ 
+<ul>{listItems}</ul>
+```
+
+### Keys
+
+A key is a JSX attribute. The attribute’s name is key. The attribute’s value should be something unique, similar to an id attribute.
+
+Not all lists need to have keys. A list needs keys if either of the following is true:
+
+The list items have memory from one render to the next. For instance, when a to-do list renders, each item must “remember” whether it was checked off. The items shouldn’t get amnesia when they render.
+A list’s order might be shuffled. For instance, a list of search results might be shuffled from one render to the next.
+If neither of these conditions is true, then you don’t have to worry about keys. If you aren’t sure, then it never hurts to use them!
+```
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleList = people.map((person, i) =>
+  <li key={'person_' + i}>{person}</li>
+);
+```
+### React without JSX
+
+You can write React code without using JSX at all!
+
+The majority of React programmers do use JSX, but you should understand that it is possible to write React code without it.
+
+The following JSX expression:
+
+const h1 = <h1>Hello world</h1>;
+ 
+can be rewritten without JSX, like this:
+
+const h1 = React.createElement(
+  "h1",
+  null,
+  "Hello world"
+);
+ 
+When a JSX element is compiled, the compiler transforms the JSX element into the method that you see above: React.createElement(). Every JSX element is secretly a call to React.createElement().
+
+## React Components
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+Import React
+The first React component we created in the last exercise started with importing react. The line that did this is:
+
+`import React from 'react';`
+ 
+This creates an object named React, which contains methods necessary to use the React library. React is imported from the 'react' package, which should be installed in your project as a dependency. With the object, we can start utilizing features of the react library!
+
+In a React application, the App.js file typically is the top level of your application, and index.js is the entry point.
+
+import ReactDOM from 'react-dom/client';  
+
+Another import we need in addition to React is ReactDOM:
+
+import ReactDOM from 'react-dom/client';
+ 
+The methods imported from 'react-dom' interact with the DOM.
+
+The methods imported from 'react' do not deal with the DOM at all. They don’t engage directly with anything that isn’t part of React.
+
+To clarify: the DOM is used in React applications, but it isn’t part of React. After all, the DOM is also used in countless non-React applications. Methods imported from 'react' are only for pure React purposes, such as creating components or writing JSX elements.
+
+Although we imported React in both App.js and index.js in the previous exercise, we will only import ReactDOM in index.js.
+
+ReactDOM deals with DOM-specific methods that should be used in index.js, which is the entry point of our application.
+
+we can use JavaScript functions to define a new React component. This is called a function component.In the past, React components were defined using Javascript classes. But since the introduction of Hooks (something we’ll discuss later), function components have become the standard in modern React applications.
+
+Function component names must start with capitalization and are conventionally created with PascalCase! Due to how JSX tags are compiled, capitalization indicates that it is a React component rather than an HTML tag.This is a React-specific nuance! If you are creating a component, be sure to name it starting with a capital letter so it interprets it as a React component. If it begins with a lowercase letter, React will begin looking for a built-in component such as div and input instead and fail.
+
+when we define functional components, we must return a JSX element.
+
+React application typically has two core files: App.js and index.js. App.js file is the top level of your application, and index.js is the entry point.
+
+So far, we’ve defined the component inside of App.js, but because index.js is the entry point, we have to export it to index.js to render.
+
+To export them, we can prefix it with the export declaration and specify if it is a default or named export. In this case, we’ll stick with default. 
+
+export : https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
+
+After the function component definition, in App.js, we can default export our component like so:
+
+export default MyComponent;
+ 
+We can head into our index.js file to import our component from './App':
+
+import MyComponent from './App';
+
+Now that we have a defined function component, we can start using it.
+
+We can use it with an HTML-like syntax that resembles a self-closing tag:
+
+<MyComponent />
+ 
+If you need to nest other components in between, you may also use an opening and corresponding closing tag structure:
+
+<MyComponent>
+  <OtherComponent />
+</MyComponent>
+ 
+ However, to render our component to the browser, we must rely on the .createRoot() and .render() methods from the react-dom library. This should be done in our entry point, index.js.
+
+First, we call the createRoot method to create a React root container for displaying content. React applications typically have a single root DOM node, and everything inside it is managed by React DOM.
+
+In other words, we give createRoot a DOM element to render in, and React will take over managing the DOM inside it.
+
+Here’s an example:
+
+ReactDOM.createRoot(document.getElementById('app'));
+
+Great! Let’s break it down a bit further:
+
+document.getElementById('app') returns a DOM element from index.html.
+.createRoot() receives the DOM element as the first argument and creates a root for it.
+.createRoot() returns a reference to the root container on which you can call methods like .render().
+After the root is created, all that’s left to do is call the .render() method on the returned root and display the React component like so:
+
+ReactDOM.createRoot(document.getElementById('app')).render(<MyComponent />);
+ 
+From here, React will display <MyComponent /> in the root and make it appear on the screen.
+
+In an application fully built with React, you will only need to do this once. Once this is set up, React will manage the DOM of your application, and any updates to the UI is taken care of efficiently. Adding more components should take place in your top-level App.js file.
+
+## DOM - Document Object Model
+
+The DOM is a tree-like representation of the contents of a webpage - a tree of “nodes” with different relationships depending on how they’re arranged in the HTML document.
+
+### Targeting nodes with selectors
+
+When working with the DOM, you use “selectors” to target the nodes you want to work with:
+```
+<div id="container">
+  <div class="display"></div>
+  <div class="controls"></div>
+</div>
+```
+- div.display
+- .display
+- #container > .display
+- div#container > div.display
+
+You can also use relational selectors (i.e. firstElementChild or lastElementChild etc.) with special properties owned by the nodes.
+- container.firstElementChild: selects the first child of #container => .display
+- controls.previousElementSibling: selects the prior sibling => .display
+
+### DOM methods
+
+1. Query selectors: helps us target nodes
+2. Element creation
+3. Append elements
+4. Remove elements
+5. Altering elements
+6. Adding inline style
+7. Editing attributes
+
+#### Query selectors
+
+`element.querySelector(selector)` returns a reference to the first match of selector.
+
+`element.querySelectorAll(selectors)` returns a “nodelist” containing references to all of the matches of the selectors. It’s important to note that when using querySelectorAll, the return value is not an array. It looks like an array, and it somewhat acts like an array, but it’s really a “nodelist”. The big distinction is that several array methods are missing from nodelists. One solution, if problems arise, is to convert the nodelist into an array. You can do this with Array.from() or the spread operator.
+
+#### Element creation
+
+`document.createElement(tagName, [options])` creates a new element of tag type tagName. [options] in this case means you can add some optional parameters to the function.This function does NOT put your new element into the DOM - it simply creates it in memory. This is so that you can manipulate the element (by adding styles, classes, ids, text, etc.) before placing it on the page. 
+
+#### Append elements
+
+`parentNode.appendChild(childNode)` appends childNode as the last child of parentNode.
+
+`parentNode.insertBefore(newNode, referenceNode)` inserts newNode into parentNode before referenceNode.
+
+#### Remove elements
+
+`parentNode.removeChild(child)` removes child from parentNode on the DOM and returns a reference to child.
+
+#### Altering elements
+When you have a reference to an element, you can use that reference to alter the element’s own properties. This allows you to do many useful alterations, like adding/removing and altering attributes, changing classes, adding inline style information and more.
+```
+const div = document.createElement('div');                     
+// creates a new div referenced in the variable 'div'
+```
+#### Adding inline style
+```
+div.style.color = 'blue';                                      
+// adds the indicated style rule
+
+div.style.cssText = 'color: blue; background: white;';          
+// adds several style rules
+
+div.setAttribute('style', 'color: blue; background: white;');    
+// adds several style rules
+
+Note that if you’re accessing a kebab-cased CSS rule from JS, you’ll either need to use camelCase or you’ll need to use bracket notation instead of dash notation.
+```
+#### Editing attributes
+```
+div.setAttribute('id', 'theDiv');                              
+// if id exists, update it to 'theDiv', else create an id
+// with value "theDiv"
+
+div.getAttribute('id');                                        
+// returns value of specified attribute, in this case
+// "theDiv"
+
+div.removeAttribute('id');                                     
+// removes specified attribute
+
+```
+#### Working with classes
+It is often standard (and cleaner) to toggle a CSS style rather than adding and removing inline CSS.
+```
+div.classList.add('new');                                      
+// adds class "new" to your new div
+
+div.classList.remove('new');                                   
+// removes "new" class from div
+
+div.classList.toggle('active');                                
+// if div doesn't have class "active" then add it, or if
+// it does, then remove it
+```
+#### Adding text content
+```
+div.textContent = 'Hello World!'                               
+// creates a text node containing "Hello World!" and
+// inserts it in div
+```
+#### Adding HTML content
+```
+div.innerHTML = '<span>Hello World!</span>';                   
+// renders the HTML inside div
+*Note that textContent is preferable for adding text, and innerHTML should be used sparingly as it can create security risks if misused.
+```
+
+You can link the JavaScript file in the <head> of your HTML document. Use the <script> tag with the src attribute containing the path to the JS file, and include the defer keyword to load the file after the HTML is parsed, as such:
+```
+<head>
+  <script src="js-file.js" defer></script>
+</head>
+```
