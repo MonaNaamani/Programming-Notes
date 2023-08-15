@@ -56,61 +56,89 @@
 
 In order to clone your repository from GitHub onto your computer we type git clone followed by the URL with the SHH option. The full command should look similar to `git clone git@github.com:USER-NAME/REPOSITORY-NAME.git`
 
-`git remote -v` will display the URL of the repository you created on GitHub, which is the remote for your local copy
-`git status`: if a file is in red it means it is not staged, if it's green it means that it is staged.
-`git add`: This command adds your file to the staging area in Git. 
-`git commit -m "Add hello_world.txt"` or `git commit`
-`git log` allows us to look at our commit history
-`git add .` to add all files in the current directory and all subsequent directories to the staging area.
-`git push` allows us to upload your work to the GitHub repository
-`git pull`allows us to fetch and download content from a remote repository and update the local repository to match that content. 
+- `git remote -v` will display the URL of the repository you created on GitHub, which is the remote for your local copy.
+- `git status`: if a file is in red it means it is not staged, if it's green it means that it is staged.
+- `git add`: This command adds your file to the staging area in Git. 
+- `git commit -m "Add hello_world.txt"` or `git commit`.
+- `git log` allows us to look at our commit history.
+- `git add .` to add all files in the current directory and all subsequent directories to the staging area.
+- `git push` allows us to upload your work to the GitHub repository.
+- `git pull` allows us to fetch and download content from a remote repository and update the local repository to match that content. 
+- `git branch <branch_name>` creates new branches.
+- `git checkout <branch_name>` changes to the specified branch.
+- `git checkout -b <branch_name>` creates a new branch and change to it in a single command.
+- `git branch` shows us all our current branches, the branch that you’re currently on will be indicated with an asterisk. 
+- `git checkout main` to change back to main from any other branch.
+- `git merge <branch_name>` which will take the changes you’ve committed in branch_name and add them to the branch that you’re currently on.
+- `git branch -d <branch_name>` to delete a branch if the branch has already been merged into main.
+- `git branch -D <branch_name>` if the branch hasn't already been merged into main.
 
 ## HTML basics <a id="HTML"></a>
 
-All HTML documents must start with a document type declaration: `<!DOCTYPE html>`. The `<!DOCTYPE>` declaration represents the document type, and helps browsers to display web pages correctly. It must only appear once, at the top of the page (before any HTML tags). The HTML document itself begins with `<html>` and ends with `</html>`. The visible part of the HTML document is between `<body>` and `</body>`. You should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language: `<html lang="en">`. Country codes can also be added to the language code in the lang attribute. So, the first two characters define the language of the HTML page, and the last two characters define the country, for example `<html lang="en-US">`
+All HTML documents must start with a document type declaration: `<!DOCTYPE html>`. The `<!DOCTYPE>` declaration represents the document type, and helps browsers to display web pages correctly. It must only appear once, at the top of the page (before any HTML tags). The HTML document itself begins with `<html>` and ends with `</html>`. The visible part of the HTML document is between `<body>` and `</body>`. You should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language: `<html lang="en">`. Country codes can also be added to the language code in the lang attribute, for example `<html lang="en-US">`. You should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language: `<html lang="en">`. Country codes can also be added to the language code in the lang attribute, for example `<html lang="en-US">`.
 
-#### Meta Tag
+### HTML head Tag
 
-The `<meta>` tag defines metadata about an HTML document. Metadata is data (information) about data. `<meta>` tags always go inside the `<head>` element, and are typically used to specify character set, page description, keywords, author of the document, and viewport settings.
-Metadata will not be displayed on the page, but is machine parsable.
+The `<head>` tag in HTML is used to define the head portion of the document which contains information related to the document. It contains other head elements such as `<title>, <meta>, <link>, <style> <link> etc.` 
 
-- `<meta charset="utf-8"/>` This element specifies the document's character encoding — the character set that the document is permitted to use. utf-8 is a universal character set that includes pretty much any character from any human language. This means that your web page will be able to handle displaying any language; it's therefore a good idea to set this on every web page you create! 
-- `<meta name="keywords" content="HTML, CSS, JavaScript">` Keywords for search engines
-- `<meta name="description" content="Free Web tutorials for HTML and CSS">` Description of the web page
-- `<meta name="author" content="John Doe">` Defines the author of a page
-- `<meta http-equiv="refresh" content="30">` Refresh document every 30 seconds
-- `<meta name="viewport" content="width=device-width, initial-scale=1.0">` Sets the viewport to make the website look good on all devices. The viewport is the user's visible area of a web page. It varies with the device - it will be smaller on a mobile phone than on a computer screen. This code gives the browser instructions on how to control the page's dimensions and scaling. The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device). The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
+```
+<head>
+<title>Title of the document</title>
+<link rel="stylesheet" href="resetstyle.css">
+<link rel="stylesheet" href="style.css">
+<script src="main.js" defer></script>
+</head>
+```
+### Meta Tags
 
-#### Other HTML Tags
+The `<meta>` tag defines information about an HTML document. `<meta>` tags always go inside the `<head>` element, and are typically used to specify character set, page description, keywords, author of the document, and viewport settings. Metadata will not be displayed on the page, but is machine parsable.
 
-- `<head>` The head tag contains all the elements describing the document
-- `<title>` The title tag specifies the HTML page title, which is shown in the browser's title bar
-- `<body>` The body tag is where you insert your web page's content
-- `<br>`: defines a line break, and is an empty element without a closing tag
+- `<meta charset="utf-8"/>`: This element specifies the document's character encoding — the character set that the document is permitted to use. utf-8 is a universal character set that includes pretty much any character from any human language. This means that your web page will be able to handle displaying any language; it's therefore a good idea to set this on every web page you create! 
+
+Many `<meta>` elements include name and content attributes: `name` specifies the type of meta element it is; what type of information it contains. `content` specifies the actual meta content.
+
+- `<meta name="description" content="Free Web tutorials for HTML and CSS">`
+- `<meta name="author" content="John Doe">`
+- `<meta http-equiv="refresh" content="30">`: Refresh document every 30 seconds.
+- `<meta name="viewport" content="width=device-width, initial-scale=1.0">`: Sets the viewport to make the website look good on all devices. The viewport is the user's visible area of a web page. It varies with the device - it will be smaller on a mobile phone than on a computer screen. This code gives the browser instructions on how to control the page's dimensions and scaling. The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device). The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
+
+Specifying an author is beneficial in many ways: it is useful to be able to understand who wrote the page, if you have any questions about the content and you would like to contact them. Some content management systems have facilities to automatically extract page author information and make it available for such purposes.
+
+Specifying a description that includes keywords relating to the content of your page is useful as it has the potential to make your page appear higher in relevant searches performed in search engines (such activities are termed Search Engine Optimization, or SEO.)
+
+#### Favicon
+
+The humble favicon has been around for many years. It is the first icon of this type: a 16-pixel square icon used in multiple places. You may see (depending on the browser) favicons displayed in the browser tab containing each open page, and next to bookmarked pages in the bookmarks panel.
+
+1. Saving it in the same directory as the site's index page, saved in .ico format (most also support favicons in more common formats like .gif or .png).
+2. Adding the following line into your HTML's <head> block to reference it:
+HTML `<link rel="icon" href="favicon.ico" type="image/x-icon" />`
+
+### Other HTML Tags
+
+- `<br>` defines a line break, and is an empty element without a closing tag
 - `<p>` Paragraph
-- `<h1>` Heading. The `<h1>` tag defines the most important tag, and `<h6>` defines the least.
+- `<h1>` Heading. The `<h1>` tag defines the most important tag, and `<h6>` defines the least
 - `<strong>`
 - `<em>` Emphasize
 - `<b>` Bold
 - `<i>` Italic
 - `<u>` Underline
 - `<abbr>` Abbreviation
-- `<address>` Contact Information
+- `<address>` Contact information
 - `<q>` Inline Quotation
-- `<code>` Display A Part Of Programming Code
-- `<div>` Division
+- `<code>` Display a part of programming code
+- `<div>`
 - `<section>` Defines a section in a document
-- `<ul>` Unordered List
-- `<ol>` Ordered List
-- `<li>` List: `list-style-type: none` this removes the dots on the list items
-- `<dl>` Description List
-- `<dt>` Term In Description List
-- `<dd>` Definition/Description Of A Term In Description List
-- `<!--...-->` Defines a comment
-- `<button>` Defines a clickable button
+- `<ul>` Unordered list
+- `<ol>` Ordered list
+- `<li>`
+- `<dl>` Description list
+- `<dt>` Term in description list
+- `<dd>` Definition/Description of a term in description list
+- `<button>`
 - `<hr>` Separates content (or defines a change)
 - `<a>` Hyperlink. The href attribute specifies the URL of the page the link goes to: `<a href="https://www.w3schools.com">Visit W3Schools</a>`. `text-decoration: none` removes the line under the links.
-  
 
 #### Image Tag
 
@@ -159,9 +187,11 @@ The `<img>` tag should also contain the width and height attributes, which speci
 - Height/Width
 - Line-height
 - Cursor
+- Box-shadow
 - `list-style-type: none`: removes the dots on the list items
 - [Background-image](#background-image)
 - [Button](#button)
+- Transition
 - [Font-family](#font-family)
 - [Display](#display)
 - **padding** increases the space between the border of a box and the content of the box.
@@ -195,6 +225,31 @@ To style buttons, you can use the following properties:
 - `cursor: not-allowed`: you can add the cursor property with a value of "not-allowed", which changes the cursor to a "no parking sign" symbol when hovering over the button.
 - `.button:active`
 - `transition`
+
+#### Transition
+
+```
+transition: [transition-property] [transition-duration] [transition-timing-function] [transition-delay];
+```
+transition properties allow elements to change values over a specified duration, animating the property changes, rather than having them occur immediately. So, if we have, say, a box with a red background that we want to change to a green background when it is hovered, we can reach right for the transition property to move between background colors.
+
+Notice that we’ve called out the background-color property in the transition declaration. That tells the browser that we’re planning to transition background colors and nothing else when a transition occurs between hovered and non-hovered states. Notice, too, that we told the browser that the transition should take two seconds and follow and ease-out timing function, which means the transition starts fast, then slows down towards the end.
+
+You can specify a particular property as we have above, or use a value of all to refer to transition properties.
+
+all specified for the transition-property portion of the shorthand. You may also comma separate value sets to do different transitions on different properties:
+```
+.element {
+  transition: background 0.2s ease,
+              padding 0.8s linear;
+}
+```
+Some properties cannot be transitioned because they are not animatable properties.
+
+By specifying the transition on the element itself, you define the transition to occur in both directions. That is, when the styles are changed (e.g. on hover on), they properties will transition, and when the styles change back (e.g. on hover off) they will transition. 
+
+#### Transform
+
 
 #### Font Family <a id="font-family"></a>
 
@@ -336,3 +391,12 @@ you'll learn about it later.
 @import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;1,900&display=swap');
 
 position: fixed;?
+
+
+
+rem
+kbd
+text-transform
+letter-spacing
+min-height
+vh
