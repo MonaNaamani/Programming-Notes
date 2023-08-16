@@ -1,5 +1,5 @@
 # Programming Notes 
-## Table of contents
+## Table of contents <a id="top"></a>
 
 1. [Markdown](#Markdown)
 2. [Terminal](#Terminal)
@@ -20,6 +20,8 @@
     - `[I'm an inline-style link with title](https://www.google.com "Google's Homepage")` 
     - `[I'm a relative reference to a repository file](../blob/master/LICENSE)`
 - Internal links: To link to a heading, use this code: `[heading title](#heading-title)` For the text in the parentheses, replace spaces and special characters with a hyphen. Alternatively, you can add an ID for a heading right above the title. Use this code: `<a id="heading_ID"></a>` Make sure that the heading_ID is unique within the notebook.
+
+[Back to top](#top)
 
 ## Terminal <a id="Terminal"></a>
 
@@ -52,6 +54,8 @@
 - `sudo apt update && sudo apt upgrade -y`
 - `cat` : print the content of a file onto the standard output stream.
 
+[Back to top](#top)
+
 ## GitHub <a id="GitHub"></a>
 
 In order to clone your repository from GitHub onto your computer we type git clone followed by the URL with the SHH option. The full command should look similar to `git clone git@github.com:USER-NAME/REPOSITORY-NAME.git`
@@ -73,11 +77,21 @@ In order to clone your repository from GitHub onto your computer we type git clo
 - `git branch -d <branch_name>` to delete a branch if the branch has already been merged into main.
 - `git branch -D <branch_name>` if the branch hasn't already been merged into main.
 
+[Back to top](#top)
+
 ## HTML basics <a id="HTML"></a>
+
+1. [HTML Tag](#htmlTag)
+2. [HTML head Tag](#headTag)
+3. [Meta Tags](#metaTags)
+4. [Other HTML Tags](#otherTags)
+5. [Attributes](#attributes)
+
+### HTML Tag <a id="htmlTag"></a>
 
 All HTML documents must start with a document type declaration: `<!DOCTYPE html>`. The `<!DOCTYPE>` declaration represents the document type, and helps browsers to display web pages correctly. It must only appear once, at the top of the page (before any HTML tags). The HTML document itself begins with `<html>` and ends with `</html>`. The visible part of the HTML document is between `<body>` and `</body>`. You should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language: `<html lang="en">`. Country codes can also be added to the language code in the lang attribute, for example `<html lang="en-US">`. You should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language: `<html lang="en">`. Country codes can also be added to the language code in the lang attribute, for example `<html lang="en-US">`.
 
-### HTML head Tag
+### HTML head Tag <a id="headTag"></a>
 
 The `<head>` tag in HTML is used to define the head portion of the document which contains information related to the document. It contains other head elements such as `<title>, <meta>, <link>, <style> <link> etc.` 
 
@@ -89,7 +103,7 @@ The `<head>` tag in HTML is used to define the head portion of the document whic
 <script src="main.js" defer></script>
 </head>
 ```
-### Meta Tags
+### Meta Tags <a id="metaTags"></a>
 
 The `<meta>` tag defines information about an HTML document. `<meta>` tags always go inside the `<head>` element, and are typically used to specify character set, page description, keywords, author of the document, and viewport settings. Metadata will not be displayed on the page, but is machine parsable.
 
@@ -114,7 +128,7 @@ The humble favicon has been around for many years. It is the first icon of this 
 2. Adding the following line into your HTML's <head> block to reference it:
 HTML `<link rel="icon" href="favicon.ico" type="image/x-icon" />`
 
-### Other HTML Tags
+### Other HTML Tags <a id="otherTags"></a>
 
 - `<br>` defines a line break, and is an empty element without a closing tag
 - `<p>` Paragraph
@@ -138,72 +152,144 @@ HTML `<link rel="icon" href="favicon.ico" type="image/x-icon" />`
 - `<dd>` Definition/Description of a term in description list
 - `<button>`
 - `<hr>` Separates content (or defines a change)
-- `<a>` Hyperlink. The href attribute specifies the URL of the page the link goes to: `<a href="https://www.w3schools.com">Visit W3Schools</a>`. `text-decoration: none` removes the line under the links.
+- `<a>` Hyperlink
+- `<span>`
+- `<kbd>`
+- `<form>`
+- `<input>` 
+
+#### Hyperlink Tag
+
+The href attribute specifies the URL of the page the link goes to: `<a href="https://www.w3schools.com">Visit W3Schools</a>`. 
+
+`text-decoration: none` removes the line under the links.
+
+#### input Tag
+
+The Input tag is an empty element which only contains attributes. Syntax:
+```
+<input type = "value" .... />
+```
+How an `<input>` works varies considerably depending on the value of its type attribute. If this attribute is not specified, the default type adopted is text. For example:
+
+- checkbox: `<input type="checkbox" name="checkbox"/>`
+- date: `<input type="date" name="date"/>`
 
 #### Image Tag
 
-There are two ways to specify the URL in the **src attribute**:
+There are two ways to specify the URL in the src attribute:
 1. Absolute URL - Links to an external image that is hosted on another website. Example: `src="https://www.w3schools.com/images/img_girl.jpg"`
 2. Relative URL - Links to an image that is hosted within the website. Here, the URL does not include the domain name. If the URL begins without a slash, it will be relative to the current page. Example: `src="img_girl.jpg"`. If the URL begins with a slash, it will be relative to the domain. Example: `src="/images/img_girl.jpg"`.
 
-The required **alt attribute** for the `<img>` tag specifies an alternate text for an image, if the image for some reason cannot be displayed. This can be due to a slow connection, or an error in the src attribute, or if the user uses a screen reader. Example:
+The required alt attribute for the `<img>` tag specifies an alternate text for an image, if the image for some reason cannot be displayed. Example:
 ```
 <img src="img_girl.jpg" alt="Girl with a jacket">
 ```
-The **width and height Attributes**
+The width and height Attributes
 The `<img>` tag should also contain the width and height attributes, which specify the width and height of the image (in pixels), example:
 ```
 <img src="img_girl.jpg" width="500" height="600">
 ```
+### Attributes <a id="attributes"></a>
+ 
+An attribute is used to define the characteristics of an HTML element and is placed inside the element's opening tag. The four core attributes that can be used on the majority of HTML elements (although not all) are: Id, title, class, and style.
+
+The behavior of the title attribute will depend upon the element that carries it, although it is often displayed as a tooltip when cursor comes over the element or while the element is loading.
+
+#### Data attributes
+
+The syntax is simple. Any attribute on any element whose attribute name starts with data- is a data attribute. 
+```
+<article
+  id="electric-cars"
+  data-columns="3"
+  data-index-number="12314"
+  data-parent="cars">
+  …
+</article>
+```
+#### JavaScript access via dataset property
+
+To get a data attribute through the dataset object, get the property by the part of the attribute name after data- (note that dashes are converted to camelCase).
+```
+const article = document.querySelector("#electric-cars");
+// The following would also work:
+// const article = document.getElementById("electric-cars")
+
+article.dataset.columns; // "3"
+article.dataset.indexNumber; // "12314"
+article.dataset.parent; // "cars"
+```
+#### CSS access
+
+We can use the attribute selectors in CSS to change styles according to the data:
+```
+article[data-columns="3"] {
+  width: 400px;
+}
+article[data-columns="4"] {
+  width: 600px;
+}
+```
+Data values are strings. Number values must be quoted in the selector for the styling to take effect.
+
+[Back to top](#top)
 
 ## CSS Basics <a id="CSS"></a>
 
-#### CSS stylesheet
+1. [CSS stylesheet](#stylesheet)
+2. [Class and ID selectors](#selectors)
+3. [Cascade](#Cascade)
+4. [CSS Properties](#Properties)
+5. [The Box Model Tip](#Box)
+6. [Pseudo-classes](#Pseudo)
+7. [Custom properties and Variables](#customProperties)
 
-- External: involves creating a separate file for the CSS and linking it inside of an HTML’s opening and closing `<head>` tags with a self-closing `<link>` element: ```<head> <link rel="stylesheet" href="styles.css" /> </head>``` The href attribute is the location of the CSS file.
+
+### CSS stylesheet <a id="stylesheet"></a>
+
+- External: ```<head> <link rel="stylesheet" href="styles.css" /> </head>```
 
 - Internal: With the internal method, you place all the rules inside of a pair of opening and closing `<style>` tags, which are then placed inside of the opening and closing `<head>` tags of your HTML file.
 
 - Inline: `<body> <div style="color: white; background-color: black;">...</div> </body>`
 
-#### Class and ID selectors
+### Class and ID selectors <a id="selectors"></a>
 
 - `* { }` The universal selector will select elements of any type, hence the name “universal”, and the syntax for it is a simple asterisk.
 - `.alert-text { color: red;}` One class selector
 - `.read,.unread { color: white; background-color: black;}` Two class selectors
 - `class="alert-text severe-alert"` A single element with 2 classes
-- `.subsection.header { color: red;}` An element that has both subsection as a first class and header as a second class
-- `.subsection#preview { color: blue;}` chainning a class and an ID
-- `.ancestor .child` **descendant combinator**
+- `.subsection#preview { color: blue;}` chaining a class and an ID
+- `.ancestor .child` descendant combinator
 - `.container > div` all the direct kids 
 
-#### CSS Properties
+### Cascade <a id="Cascade"></a>
 
-- Color
+Specificity: A CSS declaration that is more specific will take precedence over less specific ones.
+1. ID selectors (most specific selector)
+2. Class selectors
+3. Type selectors
+
+### CSS Properties <a id="Properties"></a>
+
 - Font-size
 - Text-align
 - Font-weight
-- Background Color
-- Height/Width
 - Line-height
 - Cursor
-- Box-shadow
-- `list-style-type: none`: removes the dots on the list items
+- Border
+- Opacity
+- Padding
+- Margin
+- Box shadow
+- Border Radius
 - [Background-image](#background-image)
-- [Button](#button)
-- Transition
 - [Font-family](#font-family)
 - [Display](#display)
-- **padding** increases the space between the border of a box and the content of the box.
-- **border** adds space (even if it’s only a pixel or two) between the margin and the padding.
-- **margin** increases the space between the borders of a box and the borders of adjacent boxes. Margins are set using lengths, percentages, or the keyword auto and can have negative values. Margin is a shorthand property and accepts up to four values. If fewer than four values are set, the missing values are assumed based on the ones that are defined. Each of the margin properties can also accept a value of auto. Auto is useful only for horizontal centering, and so using auto for top and bottom margins will not center an element vertically. The order is `margin-top, margin-right, margin-bottom, margin-left`
-
-**The Box Model Tip**: Always start by setting margin and padding to 0 for all elements to clear out all margins and paddings in the document. `box-sizing: border-box` tells the browser to account for any border and padding in the values you specify for an element's width and height. If you set an element's width to 100 pixels, that 100 pixels will include any border or padding you added, and the content box will shrink to absorb that extra width. This typically makes it much easier to size elements.
-```
-* {margin: 0;
-  padding: 0;
-  box-sizing: border-box;}
-```
+- [Transition](#Transition)
+- [Transform](#Transform)
+- [Filters](#Filters)
 
 #### Background Image <a id="background-image"></a>
 
@@ -214,46 +300,9 @@ Some of the properties to add to a background image are:
 - background-size
 - background-position
 
-#### Button Styling <a id="button"></a>
-
-To style buttons, you can use the following properties:
-
-- `Border Radius`: both px and %, example: {border-radius: 50%;}
-- `box-shadow`: box Shadow on hover example: {box-shadow: ...;}
-- `width`: both px and % to change the button size. By default, the size of a button is determined by its text content.
-- `opacity`: creates a disabled look for button by adding transparency to the button, giving it a faded appearance. Example: {opacity: 0.5;}. 
-- `cursor: not-allowed`: you can add the cursor property with a value of "not-allowed", which changes the cursor to a "no parking sign" symbol when hovering over the button.
-- `.button:active`
-- `transition`
-
-#### Transition
-
-```
-transition: [transition-property] [transition-duration] [transition-timing-function] [transition-delay];
-```
-transition properties allow elements to change values over a specified duration, animating the property changes, rather than having them occur immediately. So, if we have, say, a box with a red background that we want to change to a green background when it is hovered, we can reach right for the transition property to move between background colors.
-
-Notice that we’ve called out the background-color property in the transition declaration. That tells the browser that we’re planning to transition background colors and nothing else when a transition occurs between hovered and non-hovered states. Notice, too, that we told the browser that the transition should take two seconds and follow and ease-out timing function, which means the transition starts fast, then slows down towards the end.
-
-You can specify a particular property as we have above, or use a value of all to refer to transition properties.
-
-all specified for the transition-property portion of the shorthand. You may also comma separate value sets to do different transitions on different properties:
-```
-.element {
-  transition: background 0.2s ease,
-              padding 0.8s linear;
-}
-```
-Some properties cannot be transitioned because they are not animatable properties.
-
-By specifying the transition on the element itself, you define the transition to occur in both directions. That is, when the styles are changed (e.g. on hover on), they properties will transition, and when the styles change back (e.g. on hover off) they will transition. 
-
-#### Transform
-
-
 #### Font Family <a id="font-family"></a>
 
-- Serif: The most prominent style attribute of serif fonts is the presence of small, additional strokes by the edges of the letters. While initially used for ink printing purposes, the style is now associated with a sense of formality and elegance.Websites mainly use Serif for body text, as it is highly legible and helps readers quickly skim written content. Popular Serif fonts include Times New Roman, Cambria, and Garamond. 
+- Serif: While initially used for ink printing purposes, the style is now associated with a sense of formality and elegance. Websites mainly use Serif for body text, as it is highly legible and helps readers quickly skim written content. Popular Serif fonts include Times New Roman, Cambria, and Garamond. 
 - Sans serif: These fonts are simple and straightforward, they do not display additional strokes attached to their letters.
 - Cursive: Cursive fonts imitate handwriting, usually having the letters joined together in a looped, flowing manner.
 - Fantasy: The Fantasy font family generally features decorative attributes present on each letter.
@@ -274,13 +323,13 @@ Web-safe fonts are fonts that come pre-installed across most operating systems. 
 6. <p style="font-family: Verdana">Verdana</p>
 7. <p style="font-family: Candara">Candara</p>
 8. <p style="font-family: Geneva">Geneva</p>
-10. <p style="font-family: Calibri">Calibri</p>
-11. <p style="font-family: Optima">Optima</p>
-12. <p style="font-family: Cambria">Cambria</p>
-13. <p style="font-family: Garamond">Garamond</p>
-14. <p style="font-family: Perpetua">Perpetua</p>
-15. <p style="font-family: 'Brush Script'">Brush Script</p>
-16. <p style="font-family: 'Lucida Bright'">Lucida Bright</p>
+9.  <p style="font-family: Calibri">Calibri</p>
+10. <p style="font-family: Optima">Optima</p>
+11. <p style="font-family: Cambria">Cambria</p>
+12. <p style="font-family: Garamond">Garamond</p>
+13. <p style="font-family: Perpetua">Perpetua</p>
+14. <p style="font-family: 'Brush Script'">Brush Script</p>
+15. <p style="font-family: 'Lucida Bright'">Lucida Bright</p>
 
 #### Display <a id="display"></a>
 
@@ -290,34 +339,178 @@ The display property specifies the display behavior (the type of rendering box) 
 - block: displays an element as a block element `(like <p>)`. It starts on a new line and takes up the full width available.
 - inline-block: The element itself is formatted as an inline element, but you can apply height and width values. inline-block brought a new way to create side by side boxes that collapse and wrap properly depending on the available space in the containing element. The major difference between inline-block and inline is that it allows us to set a width and height on the element, as for inline top and bottom margins and paddings are not respected. Now, the difference between inline-block and block is that, block, a line break happens after the element, so a block element doesn’t sit next to other elements.
 
-##### Here are all the block-level elements in HTML:
-```
-<address> / <article> / <aside> / <blockquote> / <canvas> / <dd> / <div> / <dl> / <dt> / <fieldset> / <figcaption> / <figure> / <footer> / <form> / <h1>-<h6> / <header> / <hr> / <li> / <main> / <nav> / <noscript> / <ol> / <p> / <pre> / <section> / <table> / <tfoot> / <ul> / <video>
-```
-##### Here are all the inline elements in HTML:
-```
-<a> / <abbr> /<acronym> / <b> / <bdo> / <big> / <br> / <button> / <cite>/ <code> / <dfn> / <em> / <i> / <img> / <input> / <kbd> / <label> / <map> / <object> / <output> / <q> / <samp> / <script> / <select> / <small> / <span> / <strong> / <sub> / <sup> / <textarea> / <time> / <tt> / <var>
-```
-#### Link Styling
+#### Transition <a id="Transition"></a>
 
-Links can be styled differently depending on their state. The four link states commonly used are:
+To use transitions in CSS, you can use the various transition properties or the transition shorthand property. The most common properties you can transition are: 
+
+```
+transition: [transition-property] [transition-duration] [transition-timing-function] [transition-delay];
+```
+1. <u>Transition-property</u>
+
+The transition-property property specifies which style(s) to transition. The transition-property accepts one or more CSS property names in a comma-separated list. `transition-property: background-color, transform;`
+
+Optionally, you may use `transition-property: all` to indicate that every property should transition.
+
+2. <u>Transition-duration</u>
+
+The transition-duration property is used to define the length of time that a transition will take to complete. transition-duration accepts time units, either in seconds (s) or milliseconds (ms) and defaults to 0s.
+
+3. <u>Transition-timing-function</u>
+
+By default, CSS will transition your elements at a constant speed (transition-timing-function: linear). Linear transitions can end up looking somewhat artificial, though: in real life, objects have weight and can't stop and start instantly. Easing into or out of a transition can make your transitions more lively and natural. Other timing functions are: ease, ease-in, ease-out, ease-in-out, steps, and cubic.
+
+4. <u>Transition-delay</u>
+
+Use the transition-delay property to specify the time at which a transition will start. If transition-duration is not specified, transitions will start instantly because the default value is 0s. This property accepts a time unit, for example seconds (s) or milliseconds (ms). This property is useful for staggering transitions, achieved by setting a longer transition-delay for each subsequent element in a group.
+
+Different transitions for enter or exit
+```
+.my-element {
+  background: red;
+
+  /* This transition is applied on the "exit" transition */
+  transition: background 2000ms ease-in;
+}
+
+.my-element:hover {
+  background: blue;
+
+  /* This transition is applied on the "enter" transition */
+  transition: background 150ms ease;
+}
+```
+#### Transform <a id="Transform"></a> 
+
+All of the following functions are used with the transform property.
+- Rotation
+- Scale
+- Translate
+- Skewing
+- Perspective
+  
+**Rotation**
+
+You can rotate an element using the rotate() function, which will rotate an element on its center axis. You can also use the rotateX(), rotateY() and rotateZ() functions to rotate an element on a specific axis instead. You can pass degree, turn and radian units to determine the level of rotation.
+```
+.my-element {
+  transform: rotateX(10deg) rotateY(10deg) rotateZ(10deg);
+}
+```
+The rotate3d() function takes four arguments. The first 3 arguments are numbers, which define the X, Y and Z coordinates. The fourth argument is the rotation which, like the other rotation functions, accepts degrees, angle and turns.
+
+**Scale**
+
+You can change the scaling of an element with transform and the scale() function. The function accepts one or two numbers as a value which determine a positive or negative scaling. If you only define one number argument, both the X and Y axis will be scaled the same and defining both is a shorthand for X and Y. Just like rotate(), there are scaleX(), scaleY() and scaleZ() functions to scale an element on a specific axis instead. Also like the rotate function, there is a scale3d() function. This is similar to scale(), but it takes three arguments: the X, Y and Z scale factor.
+```
+.my-element {
+  transform: scaleX(1.2) scaleY(1.2);
+}
+```
+**Translate**
+
+The translate() functions move an element while it maintains its position in the document flow. They accept length and percentage values as arguments. The translate() function translates an element along the X axis if one argument is defined, and translates an element along the X and Y axis if both arguments are defined. You can—just like with other transform functions—use specific functions for a specific axis, using translateX, translateY and translateZ. You can also use translate3d which allows you to define the X, Y and Z translation in one function.
+```
+.my-element {
+  transform: translateX(-100px) translatey(25px);
+}
+```
+**Skewing**
+
+If you only define one argument, it will only affect the X axis and if you define both, it will affect the X and Y axis. You can also use skewX and skewY to affect each axis independently.
+```
+.my-element {
+  transform: skew(10deg);
+}
+```
+**Perspective**
+
+Prespective gives the feeling of distance and can be used to create a depth of field in your designs.
+
+#### Filters <a id="Filters"></a> 
+
+`filter: blur(0.2em);` This applies a gaussian blur and the only argument you can pass is a radius, which is how much blur is applied. This needs to be a length unit, like 10px. Percentages are not accepted. 
+
+`filter: brightness(80%);` The brightness value is expressed as a percentage with the unchanged image being expressed as a value of 100%. A value of 0% turns the image completely black, therefore values between 0% and 100% make the image less bright. Use values over 100% to increase the brightness.
+
+`filter: drop-shadow(5px 5px 10px orange);` The drop-shadow filter takes a shadow parameter which contains space separated offset-x, offset-y, blur and color values. 
+
+Other properties include: contrast, grayscale, and opacity.
+
+#### Other Information 
+
+Margin is a shorthand property and accepts up to four values `margin-top, margin-right, margin-bottom, margin-left`
+
+`list-style-type: none` removes the dots on the list items
+
+### The Box Model Tip <a id="Box"></a>
+
+Always start by setting margin and padding to 0 for all elements to clear out all margins and paddings in the document. `box-sizing: border-box` tells the browser to account for any border and padding in the values you specify for an element's width and height. If you set an element's width to 100 pixels, that 100 pixels will include any border or padding you added, and the content box will shrink to absorb that extra width. This typically makes it much easier to size elements.
+```
+* {margin: 0;
+  padding: 0;
+  box-sizing: border-box;}
+```
+
+### Pseudo-classes <a id="Pseudo"></a> 
+
+Below is a list of some pseudo-classes and events that can trigger state changes in elements.
+
+- `:hover`: matches if the cursor is over the element.
+- `:focus`: matches if the element is focused.
+- `:focus-within`: matches if the element or any of its descendants are focused.
+- `:target:` matches when the current URL's fragment matches the element's id.
+:active: matches when the element is being activated (typically when the mouse is pressed over it).
+- class change from JavaScript: when an element's CSS class changes via JavaScript, CSS will transition eligible properties that have changed.
+
+Links can be styled differently depending on their state. If you define a :visited style, it can be overridden by a link pseudo-class with at least equal specificity. Because of this, it's recommended that you use the LVHA rule for styling links with pseudo-classes in a particular order: :link, :visited, :hover, :active.
 
 - a:link - Represents a normal, unvisited link.
 - a:visited - Represents a link that the user has visited.
 - a:hover - Represents a link when the user hovers over it.
 - a:active - Represents a link at the moment it is clicked.
 
-`Text Decoration`: The text-decoration property controls the appearance of the link's text decoration, such as underlining. When set to none it removes the line under the links. Here are some commonly used text decoration values for styling links:
-- Underline: Adds a line beneath the link text.
-- Overline: Adds a line above the link text.
-- Line-through: Adds a line through the link text.
+`Text Decoration`: The text-decoration property controls the appearance of the link's text decoration, such as underlining. When set to none it removes the line under the links.
 
-#### Cascade
+#### Form states `:disabled and :enabled`
 
-Specificity: A CSS declaration that is more specific will take precedence over less specific ones.
-1. ID selectors (most specific selector)
-2. Class selectors
-3. Type selectors
+If a form element, such as a button is disabled by the browser, you can hook on to that state with the :disabled pseudo-class. The :enabled pseudo-class is available for the opposite state, though form elements are also :enabled by default, therefore you might not find yourself reaching for this pseudo-class.
+
+#### `:checked and :indeterminate`
+
+The :checked state is a binary(true or false) state, but checkboxes do have an in-between state when they are neither checked or unchecked. This is known as the :indeterminate state.
+
+#### Validation states
+
+The :valid and :invalid pseudo-classes are useful for contexts such as an email field that has a pattern that needs to be matched, for it to be a valid field. 
+
+The :in-range pseudo-class is available if an input has a min and max, such as a numeric input and the value is within those bounds.
+
+With HTML forms, you can determine that a field is required with the required attribute. The :required pseudo-class will be available for required fields. Fields that are not required can be selected with the :optional pseudo-class.
+
+### Custom properties and Variables <a id="customProperties"></a> 
+A custom property is a variable which allows you to tokenize values in your CSS code. Custom properties are also affected by the cascade which means they can be contextually manipulated or redefined. A custom property must be prefixed with two dashes (--) and are case sensitive.
+
+```
+:root {
+	--base-color: #ff00ff;
+}
+
+.my-element {
+	background: var(--base-color);
+}
+```
+The var() function takes one required argument: the custom property that you are trying to return as a value. In the above snippet, the var() function has --base-color passed as an argument. If --base-color is defined, then var() will return the value.
+```
+.my-element {
+	background: var(--base-color, hotpink);
+}
+```
+You can also pass a fallback declaration value into the var() function. This means that if --base-color can't be found, the passed declaration will be used instead, which in this sample's case is the hotpink color.
+
+
+[Back to top](#top)
+
 
 ## Flexbox <a id="Flexbox"></a>
 
@@ -384,7 +577,7 @@ In addition to the properties mentioned earlier (justify-content, align-items, a
 
 ## Notes for Later
 
-- We've added `height: 100vh` to the `body`... this makes the body exactly the same height as the viewport. To stick the footer to the bottom you will need to use flex and change the direction to column.
+- We've added `height: 100vh` to the `body`... this makes the body exactly the same height as the viewport.
 
 this is some magical font-importing.  
 you'll learn about it later.
@@ -392,10 +585,9 @@ you'll learn about it later.
 
 position: fixed;?
 
-
+[Back to top](#top)
 
 rem
-kbd
 text-transform
 letter-spacing
 min-height
