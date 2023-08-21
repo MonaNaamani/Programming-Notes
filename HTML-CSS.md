@@ -339,7 +339,7 @@ The display property specifies the display behavior (the type of rendering box) 
 
 #### Transition <a id="Transition"></a>
 
-To use transitions in CSS, you can use the various transition properties or the transition shorthand property. The most common properties you can transition are: 
+To use transitions in CSS, you can use the various transition properties or the transition shorthand property.
 
 ```
 transition: [transition-property] [transition-duration] [transition-timing-function] [transition-delay];
