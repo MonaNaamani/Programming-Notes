@@ -140,6 +140,29 @@ console.log(nestedArr[1][0]); // Output: 2
 ```
 ## Objects <a id="Objects"></a>
 
+An object can be created with figure brackets {…} with an optional list of properties. A property is a “key: value” pair, where key is a string (also called a “property name”), and value can be anything.
+
+An empty object (“empty cabinet”) can be created using one of two syntaxes:
+```
+let user = new Object(); // "object constructor" syntax
+let user = {};  // "object literal" syntax
+```
+Usually, the figure brackets {...} are used. That declaration is called an object literal.
+
+### Literals and properties
+
+To remove a property, we can use the delete operator:
+
+`delete user.age;`
+
+We can also use multiword property names, but then they must be quoted:
+```
+let user = {
+  name: "John",
+  age: 30,
+  "likes birds": true  // multiword property name must be quoted
+};
+```
 There are two ways we can access an object’s property:
 - dot notation .
 - bracket notation [ ]
@@ -155,19 +178,7 @@ spaceship['homePlanet'];
 ```
 To use bracket notation to access an object’s property, we pass in the property name (key) as a string. With bracket notation you can also use a variable inside the brackets to select the keys of an object.
 
-You can delete a property from an object with the delete operator.
-```
-const spaceship = {
-  'Fuel Type': 'Turbo Fuel',
-  homePlanet: 'Earth',
-  mission: 'Explore the universe' 
-};
-```
-delete spaceship.mission;  // Removes the mission property
-
-When the data stored on an object is a function we call that a method. A property is what an object has, while a method is what an object does.
-
-With the new method syntax introduced in ES6 we can omit the colon and the function keyword.
+When the data stored on an object is a function we call that a method. A property is what an object has, while a method is what an object does. With the new method syntax introduced in ES6 we can omit the colon and the function keyword.
 ```
 const alienShip = {
   invade () { 
@@ -175,6 +186,89 @@ const alienShip = {
   }
 };
 ```
+We can use square brackets in an object literal, when creating an object. That’s called computed properties. For instance:
+```
+let fruit = prompt("Which fruit to buy?", "apple");
+
+let bag = {
+  [fruit]: 5, // the name of the property is taken from the variable fruit
+};
+
+alert( bag.apple ); // 5 if fruit="apple"
+```
+In real code, we often use existing variables as values for property names. For instance:
+```
+function makeUser(name, age) {
+  return {
+    name: name,
+    age: age,
+    // ...other properties
+  };
+}
+let user = makeUser("John", 30);
+alert(user.name); // John
+```
+
+In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there’s a special property value shorthand to make it shorter.
+
+Instead of name:name we can just write name, like this:
+```
+function makeUser(name, age) {
+  return {
+    name, // same as name: name
+    age,  // same as age: age
+    // ...
+  };
+}
+```
+### Property existence test, “in” operator
+
+The syntax is:
+```
+"key" in object
+```
+For instance:
+```
+let user = { name: "John", age: 30 };
+
+alert( "age" in user ); // true, user.age exists
+alert( "bla" in user ); // false, user.bla doesn't exist
+```
+
+Please note that on the left side of in there must be a property name. That’s usually a quoted string.
+
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+```
+let user = { age: 30 };
+
+let key = "age";
+alert( key in user ); // true, property "age" exists
+```
+### The "for..in" loop <a id="forIn"></a>
+
+The for...in statement iterates over all enumerable string properties of an object. If the keys are non-integer, then they are listed in the creation order. If the loop has started, there is a property in the object.
+
+Syntax:
+```
+for (key in object) {
+  // executes the body for each key among object properties
+}
+```
+Also, we could use another variable name here instead of key. For instance, "for (let prop in obj)" is also widely used. Example:
+```
+let user = {
+  name: "John",
+  age: 30,
+  isAdmin: true
+};
+
+for (let key in user) {
+  alert( key );  // name, age, isAdmin
+  alert( user[key] ); // John, 30, true
+}
+```
+
+
 ## Methods and Properties <a id="Methods"></a>
 
 JavaScript is an interpreted, object-oriented language that has two main data types: primitives and objects. This data within JavaScript is contained as fields (properties or variables) and code (procedures or methods). Properties and variables are similar in nature, but properties are specifically tied to objects while variables are not.
@@ -740,29 +834,6 @@ for (const value of iterable) {
 // "o"
 // "o"
 ```
-### `for...in` <a id="forIn"></a>
-
-The for...in statement iterates over all enumerable string properties of an object. The loop will iterate over all enumerable properties of the object itself and those the object inherits from its prototype chain.
-
-Syntax:
-```
-for (variable in object)
-  statement
-```
-Example:
-```
-const object = { a: 1, b: 2, c: 3 };
-
-for (const property in object) {
-  console.log(`${property}: ${object[property]}`);
-}
-
-// Expected output:
-// "a: 1"
-// "b: 2"
-// "c: 3"
-```
-
 ### `while` <a id="while"></a>
 
 The syntax of a while loop is ideal when we don’t know in advance how many times the loop should run. In situations when we want a loop to execute an undetermined number of times, while loops are the best choice. The while loop syntax is the following:
@@ -1268,3 +1339,8 @@ You can link the JavaScript file in the <head> of your HTML document. Use the <s
   <script src="js-file.js" defer></script>
 </head>
 ```
+
+
+
+
+
