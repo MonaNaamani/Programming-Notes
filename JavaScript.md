@@ -2,41 +2,18 @@
 
 ## Outline
 
-1. [Introduction](#Introduction)
-2. [Datatypes](#Datatypes)
-3. [Arrays](#Arrays)
-4. [Objects](#Objects)
-5. [Methods and Properties](#Methods)
-6. [Functions](#Functions)
-7. [Operators](#Operators)
-8. [Conditionals](#Conditionals)
-9. [Loops](#Loops)
-10. [Errors](#Errors)
-11. [Events](#Events)
+1. [Datatypes](#Datatypes)
+2. [Arrays](#Arrays)
+3. [Objects](#Objects)
+4. [Methods and Properties](#Methods)
+5. [Functions](#Functions)
+6. [Operators](#Operators)
+7. [Conditionals](#Conditionals)
+8. [Loops](#Loops)
+9. [Errors](#Errors)
+10. [Events](#Events)
+11. [React](#React)
 
-## Introduction <a id="Introduction"></a>
-
-The programs in this language are called scripts. They can be written right in a web page’s HTML and run automatically as the page loads. These are called **Internal script**: `<script> </script>`. They can also be in a a separate file, you then link it inside of an HTML’s body, preferably towards the end. **External script** `<script src="javascript.js"></script>`. The old HTML standard, HTML4, required a script to have a type. Usually it was type="text/javascript". It’s not required anymore. 
-
-A single `<script>` tag can’t have both the src attribute and code inside. We must choose either an external `<script src="…">` or a regular `<script>` with code. As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files. The benefit of a separate file is that the browser will download it and store it in its cache. Other pages that reference the same script will take it from the cache instead of downloading it, so the file is actually downloaded only once. That reduces traffic and makes pages faster.
-
-JavaScript can execute not only in the browser, but also on the server, or actually on any device that has a special program called the JavaScript engine. The browser has an embedded engine sometimes called a “JavaScript virtual machine”. Different engines have different “codenames”. For example:
-- V8 – in Chrome, Opera and Edge.
-- SpiderMonkey – in Firefox.
-
-The terms above are good to remember because they are used in developer articles on the internet. We’ll use them too. For instance, if “a feature X is supported by V8”, then it probably works in Chrome, Opera and Edge.
-
-For a long time, JavaScript evolved without compatibility issues. New features were added to the language while old functionality didn’t change. That had the benefit of never breaking existing code. But the downside was that any mistake or an imperfect decision made by JavaScript’s creators got stuck in the language forever. This was the case until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most such modifications are off by default. You need to explicitly enable them with a special directive: `"use strict"`. Quite soon we’re going to learn functions (a way to group commands), so let’s note in advance that "use strict" can be put at the beginning of a function. Doing that enables strict mode in that function only. But usually people use it for the whole script. Please make sure that "use strict" is at the top of your scripts, otherwise strict mode may not be enabled.
-
-JavaScript ignores multiple spaces. You can add white space to your script to make it more readable.
-
-JavaScript statements can be grouped together in code blocks, inside curly brackets {...}. Variables declared inside a { } block cannot be accessed from outside the block. For example:
-``` 
-{
-  let x = 2;
-}
-// x can NOT be used here
-```
 ## Datatypes <a id="Datatypes"></a>
 
 #### 1. String
@@ -52,7 +29,7 @@ Double and single quotes are “simple” quotes. There’s practically no diffe
 #### 2. Number
 
 Besides regular numbers, there are so-called “special numeric values” which also belong to this data type: Infinity, -Infinity, and NaN
-- NaN represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance: alert( "not a number" / 2 ); // NaN, such division is erroneous. If there’s a NaN somewhere in a mathematical expression, it propagates to the whole result (there’s only one exception to that: NaN ** 0 is 1).
+- NaN represents a computational error. If there’s a NaN somewhere in a mathematical expression, it propagates to the whole result (there’s only one exception to that: NaN ** 0 is 1).
 
 #### 3. Bigint
 
@@ -62,15 +39,13 @@ In JavaScript, the “number” type cannot safely represent integer values larg
 
 The boolean type has only two values: true and false. This type is commonly used to store yes/no values: true means “yes, correct”, and false means “no, incorrect”. `let nameFieldChecked = true;`
 
-Boolean values also come as a result of comparisons `let isGreater = 4 > 1;`
-
 #### 5. Null
 
 Null is a special value which represents “nothing”, “empty” or “value unknown”. `let age = null;`
 
 #### 6. Undefined
 
-The meaning of undefined is “value is not assigned”. If a variable is declared, but not assigned, then its value is undefined. Technically, it is possible to explicitly assign undefined to a variable. …But we don’t recommend doing that. Normally, one uses null to assign an “empty” or “unknown” value to a variable, while undefined is reserved as a default initial value for unassigned things.
+The meaning of undefined is “value is not assigned”. If a variable is declared, but not assigned, then its value is undefined.
 
 #### 7. Symbols 
 
@@ -78,13 +53,19 @@ The meaning of undefined is “value is not assigned”. If a variable is declar
 
 The object data type can contain: an object, an array, a date. 
 
-  - Object: objects are written with curly braces {}. `const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};` The object (person) in the example above has 4 properties: firstName, lastName, age, and eyeColor.
-  - Array object: arrays are written with square brackets `const cars = ["Saab", "Volvo", "BMW"];` 
+  - Array object: arrays are written with square brackets 
+  - Object: objects are written with curly braces {}.
   - Date object: `const date = new Date("2022-03-25");`
 
 ## Arrays <a id="Arrays"></a>
 
-Each element in an array has a numbered position known as its index. Arrays in JavaScript are zero-indexed, meaning the positions start counting from 0 rather than 1. Therefore, the first item in an array will be at position 0. Variables declared with the const keyword cannot be reassigned. However, elements in an array declared with const remain mutable. Meaning that we can change the contents of a const array, but cannot reassign a new array or a different value.
+1. [Add/remove items](#Array1)
+2. [Iterate: forEach()](#Array2)
+3. [Searching in array](#Array3)
+4. [Transform an array](#Array4)
+5. [Other Array Methods](#Array5)
+
+Each element in an array has a numbered position known as its index. Arrays in JavaScript are zero-indexed, meaning the positions start counting from 0 rather than 1. Variables declared with the const keyword cannot be reassigned. However, elements in an array declared with const remain mutable. Meaning that we can change the contents of a const array, but cannot reassign a new array or a different value.
 ```
 let cities = [ index0, index1, ...]
 cities[0] will access the element at index 0 in the array cities.
@@ -94,41 +75,6 @@ You can also access individual characters in a string using bracket notation and
 const hello = 'Hello World';
 console.log(hello[6]); // Output: W
 ```
-### Iterators
-
-Iterators are methods called on arrays to manipulate elements and return values.
-
-- `.length()`: returns the number of items in the array.
-- `.push()`: allows us to add items to the end of an array.
-- `.join()`: Elements of an array are converted to strings and concatenated together, returning the resulting string.
-- `.slice()`: Returns a shallow copy of part of array, while original array is not modified. (from, to).
-- `.splice()`: Modifies an array by inserting, deleting, and/or replacing array elements then returns an array of deleted elements.
-- `.shift()`: Removes and returns the first element of the array. All subsequent elements will shift down one place.
-- `.unshift()`: Adds one or more elements to beginning of array and returns new length.
-- `.concat()`: Merges, or concatenates, two or more arrays.
-- `.copyWithin()`: Returns a mutated array with part of it copied to another location in the same array, and its length unchanged.
-- `.filter()`: Creates a new array with all elements that pass the test from the provided function.
-- `.find()`: Returns the first element in the array that satisfies the given function.
-- `.findIndex()`: Returns the first index that passes the callback function's test. Returns -1 if no element passes the test.
-- `.findLast()`: Returns the last instance of an element in an array that meets the specified condition.
-- `.findLastIndex()`: Iterates through the array in reverse order and returns the index that passes the provided testing function.
-- `.forEach()`: Loops over the array, passing each item in the array into the callback function provided.
-- `.includes()`: Returns true if a given value is included in an array.
-- `.indexOf()`: Returns the first index at which an element can be found. Returns -1 if element is not found.
-- `.isArray()`: Returns true for arrays, otherwise false.
-- `.lastIndexOf()`: Returns the last index at which an element can be found.
-- `.length`: Returns the specific number of elements in the array.
-- `.map()`: Creates a new array with the results of calling a function for every element in array.
-- `.pop()`: Removes the last element of an array, decrements the array length, and returns the value that it removed.
-- `.reduce()`: Combines each element of an array, using a specified reducer function, and returns a single value.
-- `.reverse()`: Reverses the order of the elements of an array in place and returns the reversed array.
-- `.some()`: Runs a conditional through an array and returns a boolean if any value fulfills the conditional.
-- `.sort()`: Returns an array with its items sorted in place.
-- `.toSorted()`: Takes an array and returns a new array with all the elements sorted in ascending order.
-- `.toString()`: Returns a string with each of the array values, separated by commas. Does not mutate the original array.
-- `.valueOf()`: Returns the value of all the elements of the original array.
-- `.every()`: tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.
-
 When you pass an array into a function, if the array is mutated inside the function, that change will be maintained outside the function as well.
 
 When an array contains another array it is known as a nested array. 
@@ -138,7 +84,218 @@ const nestedArr = [[1], [2, 3]];
 console.log(nestedArr[1]); // Output: [2, 3]
 console.log(nestedArr[1][0]); // Output: 2
 ```
+#### Add/remove items <a id="Array1"></a>
+
+- `arr.push(...items)` – adds items to the end of an array,
+- `arr.pop()` – removes the last element of an array, decrements the array length, and returns the value that it removed,
+- `arr.shift()`: Removes and returns the first element of the array. All subsequent elements will shift down one place.
+- `arr.unshift()`: Adds one or more elements to beginning of array and returns new length.
+- `arr.splice()`: The arr.splice method can do everything: insert, remove and replace elements. Syntax: `arr.splice(start[, deleteCount, elem1, ..., elemN])`. It modifies arr starting from the index start: removes deleteCount elements and then inserts elem1, ..., elemN at their place. Returns the array of removed elements. The splice method is also able to insert the elements without any removals. For that we need to set deleteCount to 0. Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array.
+
+Example:
+```
+let arr = ["I", "study", "JavaScript", "right", "now"];
+
+// remove 3 first elements and replace them with another
+arr.splice(0, 3, "Let's", "dance");
+
+alert( arr ) // now ["Let's", "dance", "right", "now"]
+```
+- `arr.slice([start], [end])`: Returns a shallow copy of part of array, while original array is not modified. It returns a new array copying to it all items from index start to end (not including end). Both start and end can be negative, in that case position from array end is assumed. We can also call it without arguments: arr.slice() creates a copy of arr. That’s often used to obtain a copy for further transformations that should not affect the original array.
+
+- `.concat()`: The method arr.concat creates a new array that includes values from other arrays and additional items. The syntax is: `arr.concat(arg1, arg2...)`. Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole. But if an array-like object has a special Symbol.isConcatSpreadable property, then it’s treated as an array by concat: its elements are added instead.
+
+### Iterate: forEach() <a id="Array2"></a>
+
+```
+arr.forEach(function(item, index, array) {
+  // ... do something with item
+});
+```
+```
+["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
+  alert(`${item} is at index ${index} in ${array}`);
+});
+```
+
+- .forEach() loops through the array and executes the callback function for each element. During each execution, the current element is passed as an argument to the callback function.
+- The return value for .forEach() will always be undefined.
+
+### Searching in array <a id="Array3"></a>
+
+Please note that indexOf uses the strict equality === for comparison. So, if we look for false, it finds exactly false and not the zero. If we want to check if item exists in the array, and don’t need the index, then arr.includes is preferred.
+
+- `arr.indexOf(item, from)` – looks for item starting from index from, and returns the index where it was found, otherwise -1.
+- `arr.includes(item, from)` – looks for item starting from index from, returns true if found.
+
+The method `arr.lastIndexOf` is the same as indexOf, but looks for from right to left.
+
+#### `.find()`
+
+Returns the first element in the array that satisfies the given function.
+```
+let result = arr.find(function(item, index, array) {
+  // if true is returned, item is returned and iteration is stopped
+  // for falsy scenario returns undefined
+});
+```
+For example:
+```
+let users = [
+  {id: 1, name: "John"},
+  {id: 2, name: "Pete"},
+  {id: 3, name: "Mary"}
+];
+
+let user = users.find(item => item.id == 1);
+
+alert(user.name); // John
+```
+The `arr.findIndex` method has the same syntax, but returns the index where the element was found instead of the element itself. The value of -1 is returned if nothing is found.
+
+The `arr.findLastIndex` method is like findIndex, but searches from right to left, similar to lastIndexOf.
+
+`arr.findLast()`: Returns the last instance of an element in an array that meets the specified condition.
+
+#### `filter()`
+
+`.filter()`: Creates a new array with all elements that pass the test from the provided function.
+
+The find method looks for a single (first) element that makes the function return true.
+
+If there may be many, we can use arr.filter(fn).
+
+The syntax is similar to find, but filter returns an array of all matching elements:
+```
+let results = arr.filter(function(item, index, array) {
+  // if true item is pushed to results and the iteration continues
+  // returns empty array if nothing found
+});
+```
+For instance:
+```
+let users = [
+  {id: 1, name: "John"},
+  {id: 2, name: "Pete"},
+  {id: 3, name: "Mary"}
+];
+
+// returns array of the first two users
+let someUsers = users.filter(item => item.id < 3);
+
+alert(someUsers.length); // 2
+```
+### Transform an array <a id="Array4"></a>
+
+Methods that transform and reorder an array.
+
+#### `.map()`
+
+It calls the function for each element of the array and returns the array of results. The syntax is:
+```
+let result = arr.map(function(item, index, array) {
+  // returns the new value instead of item
+});
+```
+For instance, here we transform each element into its length:
+```
+let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
+alert(lengths); // 5,7,6
+```
+
+#### `.sort(fn)`
+
+The call to arr.sort() sorts the array in place, changing its element order. It also returns the sorted array, but the returned value is usually ignored, as arr itself is modified. <font color="blue">The items are sorted as strings by default.</font> To use our own sorting order, we need to supply a function as the argument of arr.sort(). The function should compare two arbitrary values and return.
+```
+function compare(a, b) {
+  if (a > b) return 1; // if the first value is greater than the second
+  if (a == b) return 0; // if values are equal
+  if (a < b) return -1; // if the first value is less than the second
+}
+```
+A comparison function is only required to return a positive number to say “greater” and a negative number to say “less”. That allows to write shorter functions:
+```
+let arr = [ 1, 2, 15 ];
+
+arr.sort(function(a, b) { return a - b; });
+
+alert(arr);  // 1, 2, 15
+```
+
+- `.reverse()`: Reverses the order of the elements of an array in place and returns the reversed array.
+
+#### `split and join`
+
+The str.split(delim) method does exactly that. It splits the string into an array by the given delimiter delim. The split method has an optional second numeric argument – a limit on the array length. If it is provided, then the extra elements are ignored. The call to split(''). In the example below, we split by a comma followed by space:
+```
+let names = 'Bilbo, Gandalf, Nazgul';
+
+let arr = names.split(', ');
+```
+.join(): Elements of an array are converted to strings and concatenated together, returning the resulting string.
+```
+let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
+
+let str = arr.join(';'); // glue the array into a string using ;
+
+alert( str ); // Bilbo;Gandalf;Nazgul
+```
+#### reduce/reduceRight
+
+When we need to iterate over an array – we can use forEach, for or for..of.
+
+When we need to iterate and return the data for each element – we can use map.
+
+The methods arr.reduce and arr.reduceRight also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+
+The syntax is:
+```
+let value = arr.reduce(function(accumulator, item, index, array) {
+  // ...
+}, [initial]);
+```
+Arguments:
+
+accumulator – is the result of the previous function call, equals initial the first time (if initial is provided).
+item – is the current array item.
+index – is its position.
+array – is the array.
+
+```
+let arr = [1, 2, 3, 4, 5];
+
+let result = arr.reduce((sum, current) => sum + current, 0);
+
+alert(result); // 15
+```
+The function passed to reduce uses only 2 arguments, that’s typically enough.
+
+Let’s see the details of what’s going on.
+
+On the first run, sum is the initial value (the last argument of reduce), equals 0, and current is the first array element, equals 1. So the function result is 1.
+On the second run, sum = 1, we add the second array element (2) to it and return.
+On the 3rd run, sum = 3 and we add one more element to it, and so on…
+
+### Other Array Methods <a id="Array5"></a>
+
+Iterators are methods called on arrays to manipulate elements and return values.
+
+- `.length()`: returns the number of items in the array.
+- `.copyWithin()`: Returns a mutated array with part of it copied to another location in the same array, and its length unchanged.
+- `.isArray()`: Returns true for arrays, otherwise false.
+- `.lastIndexOf()`: Returns the last index at which an element can be found.
+- `.length`: Returns the specific number of elements in the array.
+- `.some()`: Runs a conditional through an array and returns a boolean if any value fulfills the conditional.
+- `.toSorted()`: Takes an array and returns a new array with all the elements sorted in ascending order.
+- `.toString()`: Returns a string with each of the array values, separated by commas. Does not mutate the original array.
+- `.valueOf()`: Returns the value of all the elements of the original array.
+- `.every()`: tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.
+
 ## Objects <a id="Objects"></a>
+
+1. [Literals and properties](#Objects1)
+2. [“in” operator](#Objects2)
+3. [The "for..in" loop](#Objects3)
 
 An object can be created with figure brackets {…} with an optional list of properties. A property is a “key: value” pair, where key is a string (also called a “property name”), and value can be anything.
 
@@ -149,7 +306,7 @@ let user = {};  // "object literal" syntax
 ```
 Usually, the figure brackets {...} are used. That declaration is called an object literal.
 
-### Literals and properties
+### Literals and properties <a id="Objects1"></a>
 
 To remove a property, we can use the delete operator:
 
@@ -221,9 +378,9 @@ function makeUser(name, age) {
   };
 }
 ```
-### Property existence test, “in” operator
+### “in” operator <a id="Objects2"></a>
 
-The syntax is:
+Property existence test. The syntax is:
 ```
 "key" in object
 ```
@@ -244,7 +401,7 @@ let user = { age: 30 };
 let key = "age";
 alert( key in user ); // true, property "age" exists
 ```
-### The "for..in" loop <a id="forIn"></a>
+### The "for..in" loop <a id="forIn"></a> <a id="Objects3"></a>
 
 The for...in statement iterates over all enumerable string properties of an object. If the keys are non-integer, then they are listed in the creation order. If the loop has started, there is a property in the object.
 
@@ -267,16 +424,12 @@ for (let key in user) {
   alert( user[key] ); // John, 30, true
 }
 ```
-
-
 ## Methods and Properties <a id="Methods"></a>
 
-JavaScript is an interpreted, object-oriented language that has two main data types: primitives and objects. This data within JavaScript is contained as fields (properties or variables) and code (procedures or methods). Properties and variables are similar in nature, but properties are specifically tied to objects while variables are not.
+JavaScript is an interpreted, object-oriented language that has two main data types: primitives and objects. This data within JavaScript is contained as fields (properties or variables) and code (procedures or methods). Properties and variables are similar in nature, but properties are specifically tied to objects while variables are not. A property is what an object has, while a method is what an object does.
 
 - Properties: using a method causes something to happen to an object
 - Methods: A method is a bit of functionality that is built into the language or into specific data types. Parentheses must be included when a method is used. 
-
-A JavaScript method is a property containing a function definition. In other words, when the data stored on an object is a function we call that a method. To differentiate between properties and methods, we can think of it this way: A property is what an object has, while a method is what an object does.
 
 We call, or use, methods by appending an instance with:
 
@@ -293,7 +446,6 @@ The methodName property will execute (as a function) when it is invoked with ().
 ### Properties
 
 - `string.length`: Returns the length of a string.
-- 
 ### Methods
 
 - `string.replace(searchFor, replaceWith)`: Finds every instance of the search for substring and replaces it with the given new substring. 
@@ -323,19 +475,21 @@ if (confirm("Do you want to save changes?") == true) {
 
 ## Functions <a id="Functions"></a>
 
-### Function Declaration
+1. [Function Declaration](#Functions1)
+2. [Returning a value](#Functions2)
+3. [Function Expression](#Functions3)
+4. [Arrow Functions](#Functions4)
+5. [Functions as Data](#Functions5)
+6. [Functions as Parameters](#Functions6)
 
-Just like how a variable declaration binds a value to a variable name, a function declaration binds a function to a name, or an identifier. The function keyword goes first, then goes the name of the function, then a list of parameters between the parentheses (comma-separated, or empty) and finally the code of the function, also named “the function body”, between curly braces.
+### Function Declaration <a id="Functions1"></a>
+
 ```
 function showMessage() {
   alert( 'Hello everyone!' );
 }
 ```
-Our new function can be called by its name: `showMessage();`. The call showMessage() executes the code of the function. We should be aware of the hoisting feature in JavaScript which allows access to function declarations before they’re defined.
-
-A variable declared inside a function is only visible inside that function, but a function can access an outer variable. If a same-named variable is declared inside the function then it shadows the outer one.
-
-Variables declared outside of any function, such as the outer userName in the code above, are called global. Global variables are visible from any function (unless shadowed by locals). It’s a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
+The call showMessage() executes the code of the function. We should be aware of the hoisting feature in JavaScript which allows access to function declarations before they’re defined. A variable declared inside a function is only visible inside that function, but a function can access an outer variable. If a same-named variable is declared inside the function then it shadows the outer one. Global variables are visible from any function (unless shadowed by locals). It’s a good practice to minimize the use of global variables.
 
 If a function is called, but an argument is not provided, then the corresponding value becomes undefined. We can specify the so-called **“default”** (to use if omitted) value for a parameter in the function declaration, using =:
 ```
@@ -344,63 +498,6 @@ function showMessage(from, text = "no text given") {
 }
 showMessage("Ann"); // Ann: no text given
 ```
-
-### Returning a value
-
-The return statement can only be used within function bodies. 
-
-JavaScript allows us to return an “undefined” value. It's not defined. We don't know what the value is, so we can say it's empty. You can do that by writing `return undefined`, `return`, or by removing the statement altogether.
-
-`return` is a “blocking” statement in the scope of the parent function. Which means that it indicates the stopping of the function in which it is. It's important to understand because it means that the code is located after a return statement will never be executed. The code located after a return statement is what we call “dead code”. In fact, the return statement literally means : “this function is done running properly, here is the result you can show to the parent context. No need to read further.”.
-
-```
-function getRectArea(width, height) {
-  if (width > 0 && height > 0) {
-    return width * height;
-  }
-  return 0;
-}
-
-console.log(getRectArea(3, 4));
-// Expected output: 12
-
-console.log(getRectArea(-3, 4));
-// Expected output: 0
-```
-The directive return can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code. 
-```
-function checkAge(age) {
-  if (age >= 18) {
-    return true;
-  } else {
-    return confirm('Do you have permission from your parents?');
-  }
-}
-```
-It is possible to use return without a value. That causes the function to exit immediately. If checkAge(age) returns false, then showMovie won’t proceed to the alert.
-```
-function showMovie(age) {
-  if ( !checkAge(age) ) {
-    return;
-  }
-
-  alert( "Showing you the movie" ); // (*)
-  // ...
-}
-```
-A function with an empty return or without it returns undefined
-
-For a long expression in return, it might be tempting to put it on a separate line. That doesn’t work, because JavaScript assumes a semicolon after return. If we want the returned expression to wrap across multiple lines, we should start it at the same line as return. Or at least put the opening parentheses there as follows:
-```
-return (
-  some + long + expression
-  + or +
-  whatever * f(a) + f(b)
-  )
-```
-
-### Naming a function
-
 Functions are actions. So their name is usually a verb. Function starting with:
 - "get…" – return a value,
 - "show…" – usually show something,
@@ -410,46 +507,35 @@ Functions are actions. So their name is usually a verb. Function starting with:
 
 A function should do exactly what is suggested by its name, no more. Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
 
-#### Function expression vs declaration
+### Returning a value <a id="Functions2"></a>
 
-A **function expression** is often stored in a variable in order to refer to it. Since the release of ES6, it is common practice to use const as the keyword to declare the variable. To invoke a function expression, write the name of the variable in which the function is stored followed by parentheses enclosing any arguments being passed into the function. `variableName(argument1, argument2)`. Unlike function declarations, function expressions are not hoisted so they cannot be called before they are defined.
+The return statement can only be used within function bodies. JavaScript allows us to return an “undefined” value. You can do that by writing `return undefined`, `return`, or by removing the statement altogether.
 
-A function expression is very similar to, and has almost the same syntax as, a function declaration. The main difference between a function expression and a function declaration is the function name, which can be omitted in function expressions to create anonymous functions. Function expressions in JavaScript are not hoisted, unlike function declarations. You can't use function expressions before you create them.
+`return` is a “blocking” statement in the scope of the parent function. Which means that it indicates the stopping of the function in which it is. It's important to understand because it means that the code is located after a return statement will never be executed. 
 
-Function declaration: `function doStuff() {};`
-Function expression: `const doStuff = function() {}`
+For a long expression in return, it might be tempting to put it on a separate line. That doesn’t work, because JavaScript assumes a semicolon after return. If we want the returned expression to wrap across multiple lines, we should start it at the same line as return. Or at least put the opening parentheses there as follows:
+```
+return (
+  some + long + expression
+  + or +
+  whatever * f(a) + f(b)
+  )
+```
+### Function Expression <a id="Functions3"></a>
+
+A **function expression** is often stored in a variable in order to refer to it. Since the release of ES6, it is common practice to use const as the keyword to declare the variable. Unlike function declarations, function expressions are not hoisted so they cannot be called before they are defined. The main difference between a function expression and a function declaration is the function name, which can be omitted in function expressions to create anonymous functions. Function expressions in JavaScript are not hoisted, unlike function declarations. You can't use function expressions before you create them.
+
+- Function declaration: `function doStuff() {};`
+- Function expression: `const doStuff = function() {}`
 Arrow function: `() => {}`
 
-#### Arrow functions
+### Arrow Functions <a id="Functions4"></a>
 
 Functions that take only a single parameter do not need that parameter to be enclosed in parentheses. However, if a function takes zero or multiple parameters, parentheses are required.
 
 A function body composed of a single-line block does not need curly braces. Without the curly braces, whatever that line evaluates will be automatically returned. The contents of the block should immediately follow the arrow => and the return keyword can be removed. This is referred to as implicit return.
 
-So if we have a function:
-```
-const squareNum = (num) => {
-  return num * num;
-};
-We can refactor the function to:
-
-const squareNum = num => num * num;
-```
-We wrote a higher-order function higherOrderFunc that accepts a single parameter, param. Inside the body, param gets invoked using parentheses. And finally, a string is returned, telling us the name of the callback function that was passed in.
-
-Below the higher-order function, we have another function aptly named anotherFunc. This function aspires to be called inside the higher-order function.
-
-Lastly, we invoke higherOrderFunc(), passing in anotherFunc as its argument, thus fulfilling its dreams of being called by the higher-order function.
-```
-higherOrderFunc(() => {
-  for (let i = 0; i <= 10; i++){
-    console.log(i);
-  }
-});
-```
-In this example, we invoked higherOrderFunc() with an anonymous function (a function without a name) that counts to 10. Anonymous functions can be arguments too!
-
-### Functions as Data
+### Functions as Data <a id="Functions5"></a>
 
 JavaScript functions behave like any other data type in the language; we can assign functions to variables, and we can reassign them to new variables. The new function name can be invoked with parentheses as if that was the name we originally gave our function. For example:
 ```
@@ -457,13 +543,11 @@ const busy = announceThatIAmDoingImportantWork;
 ```
 We assign announceThatIAmDoingImportantWork without parentheses as the value to the busy variable because we want to assign the value of the function itself, not the value it returns when invoked.
 
-In JavaScript, functions are first class objects. This means that, like other objects you’ve encountered, JavaScript functions can have properties and methods.Since functions are a type of object, they have properties such as .length and .name, and methods such as .toString(). For example `console.log(function1.name);` indicates the function's name as specified when it was created, or it may be either anonymous or '' (an empty string) for functions created anonymously.
+In JavaScript, functions are first class objects. This means that, like other objects you’ve encountered, JavaScript functions can have properties and methods. Since functions are a type of object, they have properties such as .length and .name, and methods such as .toString(). For example `console.log(function1.name);` indicates the function's name as specified when it was created, or it may be either anonymous or '' (an empty string) for functions created anonymously.
 
-### Functions as Parameters
+### Functions as Parameters <a id="Functions6"></a>
 
-A higher-order function is a function that either accepts functions as parameters, returns a function, or both! We call functions that get passed in as parameters callback functions. Callback functions get invoked during the execution of the higher-order function.
-
-When we invoke a higher-order function, and pass another function in as an argument, we don’t invoke the argument function. Invoking it would evaluate to passing in the return value of that function call. With callback functions, we pass in the function itself by typing the function name without the parentheses:
+A higher-order function is a function that either accepts functions as parameters, returns a function, or both! We call functions that get passed in as parameters callback functions. Callback functions get invoked during the execution of the higher-order function. When we invoke a higher-order function, and pass another function in as an argument, we don’t invoke the argument function. Invoking it would evaluate to passing in the return value of that function call. With callback functions, we pass in the function itself by typing the function name without the parentheses:
 ```
 const higherOrderFunc = param => {
   param();
@@ -697,17 +781,8 @@ You’ll hear the generic term iterate when referring to loops; iterate simply m
 
 - [for](#for)
 - [for…of](#forOf)
-- [for…in](#forIn)
 - [while](#while)
 - [do-while](#doWhile)
-
-Iteration methods: 
-
-- [map()](#map)
-- [filter()](#filter)
-- [forEach()](#forEach)
-- [findIndex()](#findIndex)
-- [reduce()](#reduce)
 
 ### `for` <a id="for"></a>
 
@@ -931,25 +1006,6 @@ const filtered = cats.filter((cat) => cat.startsWith("L"));
 console.log(filtered);
 // [ "Leopard", "Lion" ]
 ```
-### forEach() <a id="forEach"></a>
-
-The forEach() method executes a provided function once for each array element.Unlike map(), forEach() always returns undefined and is not chainable. The typical use case is to execute side effects at the end of a chain.forEach() does not mutate the array on which it is called, but the function provided as callbackFn can.
-```
-const groceries = ['Brown sugar', 'Salt']
-groceries.forEach(function(groceryItem) {console.log(' - ' + groceryItem);
-});
-
-- Brown sugar
-- Salt
-```
-- groceries.forEach() calls the forEach method on the groceries array.
-- .forEach() takes an argument of callback function. Remember, a callback function is a function passed as an argument into another function.
-- .forEach() loops through the array and executes the callback function for each element. During each execution, the current element is passed as an argument to the callback function.
-- The return value for .forEach() will always be undefined.
-
-Another way to pass a callback for .forEach() is to use arrow function syntax.
-
-groceries.forEach(groceryItem => console.log(groceryItem));
 
 ### reduce() <a id="reduce"></a>
 
@@ -1031,7 +1087,6 @@ btn.addEventListener('click', function (e) {
   console.log(e.target);
 });
 
-
 btn.addEventListener('click', function (e) {
   e.target.style.background = 'blue';
 });
@@ -1061,7 +1116,7 @@ In our examples so far we have been using the ‘click’ event exclusively, but
 - keydown
 - keyup
 
-## React - JSX Introduction (UNSORTED)
+## React - JSX Introduction (UNSORTED) <a id="React"></a>
 
 ### Event Listeners in JSX
 
