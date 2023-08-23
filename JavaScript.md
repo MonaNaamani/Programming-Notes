@@ -64,6 +64,7 @@ The object data type can contain: an object, an array, a date.
 3. [Searching in array](#Array3)
 4. [Transform an array](#Array4)
 5. [Other Array Methods](#Array5)
+6. [Spread ...](#Array6)
 
 Each element in an array has a numbered position known as its index. Arrays in JavaScript are zero-indexed, meaning the positions start counting from 0 rather than 1. Variables declared with the const keyword cannot be reassigned. However, elements in an array declared with const remain mutable. Meaning that we can change the contents of a const array, but cannot reassign a new array or a different value.
 ```
@@ -290,6 +291,67 @@ Iterators are methods called on arrays to manipulate elements and return values.
 - `.toString()`: Returns a string with each of the array values, separated by commas. Does not mutate the original array.
 - `.valueOf()`: Returns the value of all the elements of the original array.
 - `.every()`: tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.
+
+### Spread ... <a id="Array6"></a>
+
+The best use for the Spread syntax is for array manipulation. It can be used for the following purposes:
+
+- Merging Array
+- Cloning Array
+- Iterables to Array
+- Rest Parameter
+
+#### Merging Array
+
+Syntax:
+```
+const mergedArray = [
+  ...array1,
+  ...array2
+];
+```
+When you try to merge an array without the spread syntax, you wind up with a nested or multi-dimensional array.
+
+#### Cloning Array
+
+```
+const original = ['zero', 'one'];
+const newArray = [...original];
+
+original; // ['zero', 'one']
+newArray; // ['zero', 'one']
+```
+#### Iterables to Array
+
+When we spread a string, it will return an array of individual substrings.
+```
+const string = 'hi';
+const array = [...string];
+array;
+// [ 'h' , 'i' ]
+```
+You can also use the spread operator with object literals. For example,
+```
+const obj1 = { x : 1, y : 2 };
+const obj2 = { z : 3 };
+
+// add members obj1 and obj2  to obj3
+const obj3 = {...obj1, ...obj2};
+
+console.log(obj3); // {x: 1, y: 2, z: 3}
+```
+#### Rest Parameter
+
+You can accept multiple arguments in a function call using the rest parameter. For example,
+```
+let func = function(...args) {
+    console.log(args);
+}
+
+func(3); // [3]
+func(4, 5, 6); // [4, 5, 6]
+```
+Note: Using the rest parameter will pass the arguments as array elements.
 
 ## Objects <a id="Objects"></a>
 
