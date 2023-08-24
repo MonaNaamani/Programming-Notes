@@ -12,8 +12,15 @@
 8. [Loops](#Loops)
 9. [Errors](#Errors)
 10. [Events](#Events)
-11. [React](#React)
+11. [DOM](#DOM)
+12. [React](#React)
 
+You can link the JavaScript file in the head of your HTML document. Use the script tag with the src attribute containing the path to the JS file, and include the defer keyword to load the file after the HTML is parsed, as such:
+```
+<head>
+  <script src="js-file.js" defer></script>
+</head>
+```
 ## Datatypes <a id="Datatypes"></a>
 
 #### 1. String
@@ -1178,168 +1185,7 @@ In our examples so far we have been using the ‘click’ event exclusively, but
 - keydown
 - keyup
 
-## React - JSX Introduction (UNSORTED) <a id="React"></a>
-
-### Event Listeners in JSX
-
-An event listener attribute’s name should be something like onClick or onMouseOver: the word on plus the type of event that you’re listening for. An event listener attribute’s value should be a function. 
-
-Note that in HTML, event listener names are written in all lowercase, such as onclick or onmouseover. In JSX, event listener names are written in camelCase, such as onClick or onMouseOver.
-
-Here’s a rule that you need to know: you can not inject an if statement into a JSX expression.
-
-### JSX Conditionals: &&
-
-&& works best for conditionals that will sometimes do an action but other times do nothing at all.
-
-Here’s an example:
-```
-const tasty = (
-  <ul>
-    <li>Applesauce</li>
-    { !baby && <li>Pizza</li> }
-    { age > 15 && <li>Brussels Sprouts</li> }
-    { age > 20 && <li>Oysters</li> }
-    { age > 25 && <li>Grappa</li> }
-  </ul>
-);
-```
-If the expression on the left of the && evaluates as true, then the JSX on the right of the && will be rendered. If the first expression is false, however, then the JSX to the right of the && will be ignored and not rendered.
-
-### .map in JSX
-
-If you want to create a list of JSX elements, then using .map() is often the most efficient way. 
-```
-const strings = ['Home', 'Shop', 'About Me'];
- 
-const listItems = strings.map(string => <li>{string}</li>);
- 
-<ul>{listItems}</ul>
-```
-
-### Keys
-
-A key is a JSX attribute. The attribute’s name is key. The attribute’s value should be something unique, similar to an id attribute.
-
-Not all lists need to have keys. A list needs keys if either of the following is true:
-
-The list items have memory from one render to the next. For instance, when a to-do list renders, each item must “remember” whether it was checked off. The items shouldn’t get amnesia when they render.
-A list’s order might be shuffled. For instance, a list of search results might be shuffled from one render to the next.
-If neither of these conditions is true, then you don’t have to worry about keys. If you aren’t sure, then it never hurts to use them!
-```
-const people = ['Rowe', 'Prevost', 'Gare'];
-
-const peopleList = people.map((person, i) =>
-  <li key={'person_' + i}>{person}</li>
-);
-```
-### React without JSX
-
-You can write React code without using JSX at all!
-
-The majority of React programmers do use JSX, but you should understand that it is possible to write React code without it.
-
-The following JSX expression:
-
-const h1 = <h1>Hello world</h1>;
- 
-can be rewritten without JSX, like this:
-
-const h1 = React.createElement(
-  "h1",
-  null,
-  "Hello world"
-);
- 
-When a JSX element is compiled, the compiler transforms the JSX element into the method that you see above: React.createElement(). Every JSX element is secretly a call to React.createElement().
-
-## React Components
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-
-Import React
-The first React component we created in the last exercise started with importing react. The line that did this is:
-
-`import React from 'react';`
- 
-This creates an object named React, which contains methods necessary to use the React library. React is imported from the 'react' package, which should be installed in your project as a dependency. With the object, we can start utilizing features of the react library!
-
-In a React application, the App.js file typically is the top level of your application, and index.js is the entry point.
-
-import ReactDOM from 'react-dom/client';  
-
-Another import we need in addition to React is ReactDOM:
-
-import ReactDOM from 'react-dom/client';
- 
-The methods imported from 'react-dom' interact with the DOM.
-
-The methods imported from 'react' do not deal with the DOM at all. They don’t engage directly with anything that isn’t part of React.
-
-To clarify: the DOM is used in React applications, but it isn’t part of React. After all, the DOM is also used in countless non-React applications. Methods imported from 'react' are only for pure React purposes, such as creating components or writing JSX elements.
-
-Although we imported React in both App.js and index.js in the previous exercise, we will only import ReactDOM in index.js.
-
-ReactDOM deals with DOM-specific methods that should be used in index.js, which is the entry point of our application.
-
-we can use JavaScript functions to define a new React component. This is called a function component.In the past, React components were defined using Javascript classes. But since the introduction of Hooks (something we’ll discuss later), function components have become the standard in modern React applications.
-
-Function component names must start with capitalization and are conventionally created with PascalCase! Due to how JSX tags are compiled, capitalization indicates that it is a React component rather than an HTML tag.This is a React-specific nuance! If you are creating a component, be sure to name it starting with a capital letter so it interprets it as a React component. If it begins with a lowercase letter, React will begin looking for a built-in component such as div and input instead and fail.
-
-when we define functional components, we must return a JSX element.
-
-React application typically has two core files: App.js and index.js. App.js file is the top level of your application, and index.js is the entry point.
-
-So far, we’ve defined the component inside of App.js, but because index.js is the entry point, we have to export it to index.js to render.
-
-To export them, we can prefix it with the export declaration and specify if it is a default or named export. In this case, we’ll stick with default. 
-
-export : https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
-
-After the function component definition, in App.js, we can default export our component like so:
-
-export default MyComponent;
- 
-We can head into our index.js file to import our component from './App':
-
-import MyComponent from './App';
-
-Now that we have a defined function component, we can start using it.
-
-We can use it with an HTML-like syntax that resembles a self-closing tag:
-
-<MyComponent />
- 
-If you need to nest other components in between, you may also use an opening and corresponding closing tag structure:
-
-<MyComponent>
-  <OtherComponent />
-</MyComponent>
- 
- However, to render our component to the browser, we must rely on the .createRoot() and .render() methods from the react-dom library. This should be done in our entry point, index.js.
-
-First, we call the createRoot method to create a React root container for displaying content. React applications typically have a single root DOM node, and everything inside it is managed by React DOM.
-
-In other words, we give createRoot a DOM element to render in, and React will take over managing the DOM inside it.
-
-Here’s an example:
-
-ReactDOM.createRoot(document.getElementById('app'));
-
-Great! Let’s break it down a bit further:
-
-document.getElementById('app') returns a DOM element from index.html.
-.createRoot() receives the DOM element as the first argument and creates a root for it.
-.createRoot() returns a reference to the root container on which you can call methods like .render().
-After the root is created, all that’s left to do is call the .render() method on the returned root and display the React component like so:
-
-ReactDOM.createRoot(document.getElementById('app')).render(<MyComponent />);
- 
-From here, React will display <MyComponent /> in the root and make it appear on the screen.
-
-In an application fully built with React, you will only need to do this once. Once this is set up, React will manage the DOM of your application, and any updates to the UI is taken care of efficiently. Adding more components should take place in your top-level App.js file.
-
-## DOM - Document Object Model
+## DOM - Document Object Model <a id="DOM"></a>
 
 The DOM is a tree-like representation of the contents of a webpage - a tree of “nodes” with different relationships depending on how they’re arranged in the HTML document.
 
@@ -1449,15 +1295,163 @@ div.innerHTML = '<span>Hello World!</span>';
 // renders the HTML inside div
 *Note that textContent is preferable for adding text, and innerHTML should be used sparingly as it can create security risks if misused.
 ```
+## React - JSX Introduction (UNSORTED) <a id="React"></a>
 
-You can link the JavaScript file in the <head> of your HTML document. Use the <script> tag with the src attribute containing the path to the JS file, and include the defer keyword to load the file after the HTML is parsed, as such:
+1. [Event Listeners in JSX](#React1)
+2. [JSX Conditionals: &&](#React2)
+3. [.map in JSX](#React3)
+4. [Keys](#React4)
+5. [React/ReactDom Import](#React5)
+6. [React Components](#React6)
+
+### Event Listeners in JSX <a id="React1"></a>
+
+An event listener attribute’s name should be something like onClick or onMouseOver: the word on plus the type of event that you’re listening for. An event listener attribute’s value should be a function. Note that in HTML, event listener names are written in all lowercase, such as onclick or onmouseover. In JSX, event listener names are written in camelCase, such as onClick or onMouseOver.
+
+Here’s a rule that you need to know: you can not inject an if statement into a JSX expression.
+
+### JSX Conditionals: && <a id="React2"></a>
+
+&& works best for conditionals that will sometimes do an action but other times do nothing at all. Here’s an example:
 ```
-<head>
-  <script src="js-file.js" defer></script>
-</head>
+onst tasty = (
+  <ul>
+    <li>Applesauce</li>
+    { !baby && <li>Pizza</li> }
+    { age > 15 && <li>Brussels Sprouts</li> }
+    { age > 20 && <li>Oysters</li> }
+    { age > 25 && <li>Grappa</li> }
+  </ul>
+)
+  ```
+
+If the expression on the left of the && evaluates as true, then the JSX on the right of the && will be rendered. If the first expression is false, however, then the JSX to the right of the && will be ignored and not rendered.
+
+### `.map` in JSX <a id="React3"></a>
+
+If you want to create a list of JSX elements, then using .map() is often the most efficient way. 
+```
+const strings = ['Home', 'Shop', 'About Me'];
+ 
+const listItems = strings.map(string => <li>{string}</li>);
+ 
+<ul>{listItems}</ul>
+```
+### Keys <a id="React4"></a>
+
+A key is a JSX attribute. The attribute’s name is key. The attribute’s value should be something unique, similar to an id attribute. Not all lists need to have keys. A list needs keys if either of the following is true:
+
+- The list items have memory from one render to the next. For instance, when a to-do list renders, each item must “remember” whether it was checked off. The items shouldn’t get amnesia when they render.
+- A list’s order might be shuffled. For instance, a list of search results might be shuffled from one render to the next.
+- If neither of these conditions is true, then you don’t have to worry about keys. If you aren’t sure, then it never hurts to use them!
+```
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleList = people.map((person, i) =>
+  <li key={'person_' + i}>{person}</li>
+);
+```
+### React/ReactDom Import <a id="React5"></a>
+
+We import React in both App.js and index.js, but only import ReactDOM in index.js.
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 ```
 
+`import React from 'react';` creates an object named React, which contains methods necessary to use the React library. React is imported from the 'react' package, which should be installed in your project as a dependency. With the object, we can start utilizing features of the react library!
 
+`import ReactDOM from 'react-dom/client';`  The methods imported from 'react-dom' interact with the DOM. The methods imported from 'react' do not deal with the DOM at all. They don’t engage directly with anything that isn’t part of React. ReactDOM deals with DOM-specific methods that should be used in index.js, which is the entry point of our application.
 
+### React Components <a id="React6"></a>
 
+we can use JavaScript functions to define a new React component. This is called a function component. In the past, React components were defined using Javascript classes. But since the introduction of Hooks (something we’ll discuss later), function components have become the standard in modern React applications. Function component names must start with capitalization and are conventionally created with PascalCase! Due to how JSX tags are compiled, capitalization indicates that it is a React component rather than an HTML tag.
 
+React application typically has two core files: App.js and index.js. App.js file is the top level of your application, and index.js is the entry point. When we define functional components, we must return a JSX element. To export them, we can prefix it with the export declaration and specify if it is a default or named export. After the function component definition, in App.js, we can default export our component like so:
+```
+export default MyComponent;
+``` 
+We can head into our index.js file to import our component from './App':
+```
+import MyComponent from './App';
+```
+Now that we have a defined function component, we can start using it. We can use it with an HTML-like syntax that resembles a self-closing tag:
+```
+<MyComponent />
+```
+If you need to nest other components in between, you may also use an opening and corresponding closing tag structure:
+```
+<MyComponent>
+  <OtherComponent />
+</MyComponent>
+``` 
+However, to render our component to the browser, we must rely on the .createRoot() and .render() methods from the react-dom library. This should be done in our entry point, index.js. First, we call the createRoot method to create a React root container for displaying content. React applications typically have a single root DOM node, and everything inside it is managed by React DOM. In other words, we give createRoot a DOM element to render in, and React will take over managing the DOM inside it. Here’s an example:
+```
+ReactDOM.createRoot(document.getElementById('app')).render(<MyComponent />);
+```
+- document.getElementById('app') returns a DOM element from index.html.
+- .createRoot() receives the DOM element as the first argument and creates a root for it.
+- .createRoot() returns a reference to the root container on which you can call methods like .render().
+- From here, React will display `<MyComponent />` in the root and make it appear on the screen.
+
+In an application fully built with React, you will only need to do this once. Once this is set up, React will manage the DOM of your application, and any updates to the UI is taken care of efficiently. Adding more components should take place in your top-level App.js file.
+
+### Variable Attributes in Components <a id="React7"></a>
+
+In RedPanda.js
+```
+import React from 'react';
+
+const redPanda = {
+  src: 'https://',
+  alt: 'Red Panda',
+  width:  '200px'
+};
+
+function RedPanda(){
+    return (
+      <div>
+        <h1>Cute Red Panda</h1>
+        <img 
+          src={redPanda.src}
+          alt={redPanda.alt}
+          width={redPanda.width} />
+      </div>
+    );
+}
+
+export default RedPanda;
+```
+### Event Listener and Event Handlers in a Component <a id="React8"></a>
+
+Event handler functions are defined inside the function component and, by convention, start with the word “handle” followed by the type of event it is handling.
+
+The handleHover() function is passed without the parentheses we would typically see when calling a function. This is because passing it as handleHover indicates it should only be called once the event has happened. Passing it as handleHover() would trigger the function immediately, so be careful!
+```
+function MyComponent(){
+  function handleHover() {
+    alert('Stop it.  Stop hovering.');
+  }
+  return <div onHover={handleHover}></div>;
+}
+```
+## Creating a React App
+
+We will be using the Node package manager (npm). To upgrade to the latest version of npm, you can run this command in your terminal: `sudo apt-get install npm`. 
+
+`node -v` will return a version number, like v12.18.1.
+
+It is possible to manually create a React app, but Facebook has created a Node package create-react-app to generate a boilerplate version of a React application. We will use npx, a package runner tool that comes with npm 5.2+ and higher, to install and run create-react-app. This will ensure that the latest version of create-react-app is used.
+
+If you’ve previously installed create-react-app globally via npm install -g create-react-app, it is recommended that you uninstall the package first. In your terminal run these commands:
+```
+npm uninstall -g create-react-app
+npx create-react-app myfirstreactapp
+```
+If you’ve never installed create-react-app before, you can simply run this command:
+`npx create-react-app myfirstreactapp`
+
+If you have Yarn installed, create-react-app will use it by default to create new projects. If you would prefer to use npm, you can append --use-npm to the creation command. It will look like this: `npx create-react-app myfirstreactapp --use-npm`
+
+You can replace myfirstreactapp with whatever name you want, as long as it doesn’t contain capital letters.
