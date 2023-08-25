@@ -1297,20 +1297,26 @@ div.innerHTML = '<span>Hello World!</span>';
 ```
 ## React - JSX Introduction (UNSORTED) <a id="React"></a>
 
-1. [Event Listeners in JSX](#React1)
-2. [JSX Conditionals: &&](#React2)
-3. [.map in JSX](#React3)
-4. [Keys](#React4)
-5. [React/ReactDom Import](#React5)
-6. [React Components](#React6)
+1. [JSX Introduction](#React1)
+2. [React Components](#React2)
+4. [Creating a React App](#React3)
+5. [Props](#React4)
 
-### Event Listeners in JSX <a id="React1"></a>
+### JSX Introduction <a id="React1"></a>
+
+- [Event Listeners in JSX](#JSX1)
+- [JSX Conditionals: &&](#JSX2)
+- [.map in JSX](#JSX3)
+- [Keys](#JSX4)
+- [React/ReactDom Import](#JSX5)
+
+#### Event Listeners in JSX <a id="JSX1"></a>
 
 An event listener attribute’s name should be something like onClick or onMouseOver: the word on plus the type of event that you’re listening for. An event listener attribute’s value should be a function. Note that in HTML, event listener names are written in all lowercase, such as onclick or onmouseover. In JSX, event listener names are written in camelCase, such as onClick or onMouseOver.
 
 Here’s a rule that you need to know: you can not inject an if statement into a JSX expression.
 
-### JSX Conditionals: && <a id="React2"></a>
+### JSX Conditionals: && <a id="JSX2"></a>
 
 && works best for conditionals that will sometimes do an action but other times do nothing at all. Here’s an example:
 ```
@@ -1327,7 +1333,7 @@ onst tasty = (
 
 If the expression on the left of the && evaluates as true, then the JSX on the right of the && will be rendered. If the first expression is false, however, then the JSX to the right of the && will be ignored and not rendered.
 
-### `.map` in JSX <a id="React3"></a>
+### `.map` in JSX <a id="JSX3"></a>
 
 If you want to create a list of JSX elements, then using .map() is often the most efficient way. 
 ```
@@ -1337,7 +1343,7 @@ const listItems = strings.map(string => <li>{string}</li>);
  
 <ul>{listItems}</ul>
 ```
-### Keys <a id="React4"></a>
+### Keys <a id="JSX4"></a>
 
 A key is a JSX attribute. The attribute’s name is key. The attribute’s value should be something unique, similar to an id attribute. Not all lists need to have keys. A list needs keys if either of the following is true:
 
@@ -1351,7 +1357,7 @@ const peopleList = people.map((person, i) =>
   <li key={'person_' + i}>{person}</li>
 );
 ```
-### React/ReactDom Import <a id="React5"></a>
+### React/ReactDom Import <a id="JSX5"></a>
 
 We import React in both App.js and index.js, but only import ReactDOM in index.js.
 
@@ -1364,7 +1370,7 @@ import ReactDOM from 'react-dom/client';
 
 `import ReactDOM from 'react-dom/client';`  The methods imported from 'react-dom' interact with the DOM. The methods imported from 'react' do not deal with the DOM at all. They don’t engage directly with anything that isn’t part of React. ReactDOM deals with DOM-specific methods that should be used in index.js, which is the entry point of our application.
 
-### React Components <a id="React6"></a>
+### React Components <a id="React2"></a>
 
 we can use JavaScript functions to define a new React component. This is called a function component. In the past, React components were defined using Javascript classes. But since the introduction of Hooks (something we’ll discuss later), function components have become the standard in modern React applications. Function component names must start with capitalization and are conventionally created with PascalCase! Due to how JSX tags are compiled, capitalization indicates that it is a React component rather than an HTML tag.
 
@@ -1397,7 +1403,7 @@ ReactDOM.createRoot(document.getElementById('app')).render(<MyComponent />);
 
 In an application fully built with React, you will only need to do this once. Once this is set up, React will manage the DOM of your application, and any updates to the UI is taken care of efficiently. Adding more components should take place in your top-level App.js file.
 
-### Variable Attributes in Components <a id="React7"></a>
+#### Variable Attributes in Components
 
 In RedPanda.js
 ```
@@ -1423,7 +1429,7 @@ function RedPanda(){
 
 export default RedPanda;
 ```
-### Event Listener and Event Handlers in a Component <a id="React8"></a>
+#### Event Listener and Event Handlers in a Component
 
 Event handler functions are defined inside the function component and, by convention, start with the word “handle” followed by the type of event it is handling.
 
@@ -1436,7 +1442,7 @@ function MyComponent(){
   return <div onHover={handleHover}></div>;
 }
 ```
-## Creating a React App
+### Creating a React App <a id="React3"></a>
 
 We will be using the Node package manager (npm). To upgrade to the latest version of npm, you can run this command in your terminal: `sudo apt-get install npm`. 
 
@@ -1455,3 +1461,47 @@ If you’ve never installed create-react-app before, you can simply run this com
 If you have Yarn installed, create-react-app will use it by default to create new projects. If you would prefer to use npm, you can append --use-npm to the creation command. It will look like this: `npx create-react-app myfirstreactapp --use-npm`
 
 You can replace myfirstreactapp with whatever name you want, as long as it doesn’t contain capital letters.
+
+### Props <a id="React4"></a>
+
+Information that gets passed from one component to another is known as props. Props serve the same purpose for components as arguments do for functions. To access a component’s props object, you can reference the props object and the dot notation for its properties. Here’s an example: `props.name`
+
+In this example, App is the parent and Product is the child. App passes three props to Product (name, price, and rating), which can then be read inside the child component.
+```
+function App() {
+    return <Product name="Apple Watch" price = {399} rating = "4.5/5.0" />;
+}
+```
+In the following example, props is accepted as a parameter, and the object values are accessed with the dot notation accessors pattern (object.propertyName).
+```
+function Button(props) {
+  return <button>{props.displayText}</button>;
+}
+```
+Alternatively, since props is an object, you can also use destructuring syntax like so:
+```
+function Button({displayText}) {
+  return <button>{displayText}</button>;
+}
+```
+Props in React travel in a one-way direction, from the top to bottom, parent to child
+
+You can pass an Event Handler as a prop as long as it is located inside the component function. When you pass an event handler as a prop, there are two names that you have to choose. Both naming choices occur in the parent component, the component that defines the event handler and passes it. The first name that you have to choose is the name of the event handler itself. The second name that you have to choose is the name of the prop that you will use to pass the event handler. This is the same thing as the attribute name. For example: `return <Button talk={talk} />;` These two names can be whatever we want. However, there is a naming convention that is commonly used. Here’s how the naming convention works: first, think about what type of event you are listening for. 
+
+For example:
+
+- The event type was “click”. If you are listening for a “click” event, then you name your event handler handleClick. If you are listening for a “hover” event, then you name your event handler handleHover.
+- Your prop name should be the word on, plus your event type. If you are listening for a “click” event, then you name your prop onClick. If you are listening for a “hover” event, then you name your prop onHover.
+
+```
+function myClass(){
+  function handleHover() {
+    alert('I am an event handler.');
+    alert('I will listen for a "hover" event.');
+  }
+   return <Child onHover={handleHover} />;
+}
+```
+Names like onClick only create event listeners if they’re used on HTML-like JSX elements. Otherwise, they’re just ordinary prop names.
+- `<Button />` is not an HTML-like JSX element; it’s a component instance.
+- `<button></button>` is an HTML-like JSX element, it's not a component.
