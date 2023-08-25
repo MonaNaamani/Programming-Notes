@@ -1372,6 +1372,8 @@ import ReactDOM from 'react-dom/client';
 
 ### React Components <a id="React2"></a>
 
+Components don't have to be self-closing tags, such as `<MyFunctionComponent />`. You could write `<MyFunctionComponent></MyFunctionComponent>`.
+ 
 we can use JavaScript functions to define a new React component. This is called a function component. In the past, React components were defined using Javascript classes. But since the introduction of Hooks (something we’ll discuss later), function components have become the standard in modern React applications. Function component names must start with capitalization and are conventionally created with PascalCase! Due to how JSX tags are compiled, capitalization indicates that it is a React component rather than an HTML tag.
 
 React application typically has two core files: App.js and index.js. App.js file is the top level of your application, and index.js is the entry point. When we define functional components, we must return a JSX element. To export them, we can prefix it with the export declaration and specify if it is a default or named export. After the function component definition, in App.js, we can default export our component like so:
@@ -1505,3 +1507,52 @@ function myClass(){
 Names like onClick only create event listeners if they’re used on HTML-like JSX elements. Otherwise, they’re just ordinary prop names.
 - `<Button />` is not an HTML-like JSX element; it’s a component instance.
 - `<button></button>` is an HTML-like JSX element, it's not a component.
+
+3 ways to give default values to props:
+
+1. Adding a defaultProps static property to the component
+```
+function Example(props) {
+  return <h1>{props.text}</h1>
+}
+
+Example.defaultProps = {
+  text: 'This is default text',
+};
+```
+2. You can also specify the default value directly in the function definition
+```
+function Example({text='This is default text'}) {
+   return <h1>{text}</h1>
+}
+```
+3. Lastly, you can also set the default value in the function body:
+```
+function Example(props) {
+  const {text = 'This is default text'} = props;
+  return <h1>{text}</h1>
+}
+```
+#### `props.children`
+
+`props.children` will return everything in between a component’s opening and closing JSX tags. If a component has more than one child between its JSX tags, then props.children will return those children in an array. However, if a component has only one child, then props.children will return the single child, not wrapped in an array.
+
+```
+// Example 1
+<BigButton>
+  I am a child of BigButton.
+</BigButton>
+
+
+// Example 2
+<BigButton>
+  <LilButton />
+</BigButton>
+
+
+// Example 3
+<BigButton />
+```
+In Example 1, `<BigButton>`‘s props.children would equal the text, “I am a child of BigButton.”
+In Example 2, `<BigButton>`‘s props.children would equal a `<LilButton />` component.
+In Example 3, `<BigButton>`‘s props.children would equal undefined.
