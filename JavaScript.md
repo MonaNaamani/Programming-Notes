@@ -1295,7 +1295,7 @@ div.innerHTML = '<span>Hello World!</span>';
 // renders the HTML inside div
 *Note that textContent is preferable for adding text, and innerHTML should be used sparingly as it can create security risks if misused.
 ```
-## React - JSX Introduction (UNSORTED) <a id="React"></a>
+## React <a id="React"></a>
 
 1. [JSX Introduction](#React1)
 2. [React Components](#React2)
@@ -1396,7 +1396,7 @@ If you need to nest other components in between, you may also use an opening and
 ``` 
 However, to render our component to the browser, we must rely on the .createRoot() and .render() methods from the react-dom library. This should be done in our entry point, index.js. First, we call the createRoot method to create a React root container for displaying content. React applications typically have a single root DOM node, and everything inside it is managed by React DOM. In other words, we give createRoot a DOM element to render in, and React will take over managing the DOM inside it. Here’s an example:
 ```
-ReactDOM.createRoot(document.getElementById('app')).render(<MyComponent />);
+createRoot(document.getElementById('app')).render(<MyComponent />);
 ```
 - document.getElementById('app') returns a DOM element from index.html.
 - .createRoot() receives the DOM element as the first argument and creates a root for it.
