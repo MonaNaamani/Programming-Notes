@@ -7,6 +7,7 @@
 4. [HTML basics](#HTML)
 5. [CSS basics](#CSS)
 6. [Flexbox](#Flexbox)
+7. [Open Source Projects](#Open-Source)
 
 
 ## Markdown <a id="Markdown"></a>
@@ -602,12 +603,153 @@ this is some magical font-importing.
 you'll learn about it later.
 @import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;1,900&display=swap');
 
-position: fixed;?
-
-[Back to top](#top)
-
 rem
 text-transform
 letter-spacing
-min-height
 vh
+
+## FreeCodeCamp Notes to Sort Later
+
+min-height
+
+## HTML 
+
+HTML5 has some elements that identify different content areas. These elements make your HTML easier to read and help with Search Engine Optimization (SEO) and accessibility.
+
+Identify the **main section** of this page by adding a `<main>` opening tag before the h1 element, and a </main> closing tag after the p element.
+
+The **figure element** represents self-contained content and will allow you to associate an image with a caption.
+A **figure caption** (figcaption) element is used to add a caption to describe the image contained within the figure element.
+
+```
+<figure>
+  <img>
+  <figcaption></figcaption>
+</figure>
+```
+
+Form Element: Now you will add a web form to collect information from users.
+The action attribute indicates where form data should be sent. For example, <form action="/submit-url"></form> tells the browser that the form data should be sent to the path /submit-url.
+
+In order for a form's data to be accessed by the location specified in the action attribute, you must give the text field a name attribute and assign it a value to represent the data being submitted. For example, you could use the following syntax for an email address text field: <input type="text" name="email">.
+
+Placeholder text is used to give people a hint about what kind of information to enter into an input. For example, <input type="text" placeholder="Email address">.
+
+To prevent a user from submitting your form when required information is missing, you need to add the required attribute to an input element. There's no need to set a value to the required attribute. Instead, just add the word required to the input element, making sure there is space between it and other attributes.
+
+You can use radio buttons for questions where you want only one answer out of multiple options.
+
+label elements are used to help associate the text for an input element with the input element itself (especially for assistive technologies like screen readers). For example, <label><input type="radio"> cat</label> makes it so clicking the word cat also selects the corresponding radio button.
+
+Notice that both radio buttons can be selected at the same time. To make it so selecting one radio button automatically deselects the other, both buttons must have a name attribute with the same value
+
+If you select the Indoor radio button and submit the form, the form data for the button is based on its name and value attributes. Since your radio buttons do not have a value attribute, the form data will include indoor-outdoor=on, which is not useful when you have multiple buttons.
+
+The fieldset element is used to group related inputs and labels together in a web form. fieldset elements are block-level elements, meaning that they appear on a new line.
+
+The legend element acts as a caption for the content in the fieldset element. It gives usersThere's another way to associate an input element's text with the element itself. You can nest the text within a label element and add a for attribute with the same value as the input element's id attribute.
+
+Like radio buttons, form data for selected checkboxes are name / value attribute pairs. While the value attribute is optional, it's best practice to include it with any checkboxes or radio buttons on the page.
+`<label for="email" >Enter Your Email: <input id="email" /></label>`
+Now you will add a footer section to the page.
+
+After the main element, add a footer element.
+
+
+Another project - Registration Form
+
+The vh unit stands for viewport height, and is relative to 1% of the height of the viewport.
+
+It is time to spruce the project up with some CSS. Begin by giving the body a width of 100%, and a height of 100vh.
+
+The HTML | action Attribute is used to specify where the form data is to be sent to the server after the submission of the form. It can be used in the <form> element. Attribute Values: URL: It is used to specify the URL of the document where the data is to be sent after the submission of the form.
+
+The method attribute specifies how to send form-data to the URL specified in the action attribute. The form-data can be sent via a GET request as URL parameters (with method="get") or via a POST request as data in the request body (with method="post").
+
+Specifying the type attribute of a form element is important for the browser to know what kind of data it should expect. If the type is not specified, the browser will default to text.
+
+Give the first two input elements a type attribute of text, the third a type attribute of email, and the fourth a type attribute of password.
+
+The email type only allows emails with a @ and a . in the domain. The password type obscures the input, and warns if the site does not use HTTPS.
+```
+ <fieldset>
+        <label for="profile-picture">Upload a profile picture: <input id="profile-picture" type="file" /></label>
+        <label for="age">Input your age (years): <input id="age" type="number" min="13" max="120" /></label>
+        <label for="referrer">How did you hear about us?
+          <select id="referrer">
+            <option value="">(select one)</option>
+            <option value="1">freeCodeCamp News</option>
+            <option value="2">freeCodeCamp YouTube Channel</option>
+            <option value="3">freeCodeCamp Forum</option>
+            <option value="4">Other</option>
+          </select>
+        </label>
+        <label for="bio">Provide a bio:
+          <textarea id="bio"></textarea>
+        </label>
+      </fieldset>
+```
+Certain type attribute values come with built-in form validation. For example, type="email" requires that the value be a valid email address.
+
+Add custom validation to the password input element, by adding a minlength attribute with a value of 8. Doing so prevents inputs of less than 8 characters being submitted.
+
+With type="password" you can use the pattern attribute to define a regular expression that the password must match to be considered valid.
+
+Add a pattern attribute to the password input element to require the input match: [a-z0-5]{8,}
+
+The above is a regular expression which matches eight or more lowercase letters or the digits 0 to 5. Then, remove the minlength attribute, and try it out.
+
+You only want one radio input to be selectable at a time. However, the form does not know the radio inputs are related.
+
+To relate the radio inputs, give them the same name attribute with a value of account-type. Now, it is not possible to select both radio inputs at the same time.
+
+Nest the select element (with its option elements) within a label element with the text How did you hear about us?. The text should come before the select element.
+```
+ <fieldset>
+        <label>Upload a profile picture: <input type="file" /></label>
+        <label>Input your age (years): <input type="number" min="13" max="120" /></label>
+        <label>How did you hear about us?
+          <select>
+            <option value="">(select one)</option>
+            <option value="1">freeCodeCamp News</option>
+            <option value="2">freeCodeCamp YouTube Channel</option>
+            <option value="3">freeCodeCamp Forum</option>
+            <option value="4">Other</option>
+          </select>
+        </label>
+      </fieldset>
+```
+
+The textarea element acts like an input element of type text, but comes with the added benefit of being able to receive multi-line text, and an initial number of text rows and columns.
+
+With form submissions, it is useful, and good practice, to provide each submittable element with a name attribute. This attribute is used to identify the element in the form submission.
+
+The border of the last fieldset element looks a little out of place. You can select the last element of a specific type using the last-of-type CSS pseudo-class, like this:
+
+`p:last-of-type { }` That will select the last p element. 
+
+Select all input, textarea, and select elements, and make them take up the full width of their parent elements. `width:100%;`
+
+width of unset. This will remove the earlier rule which set all the input elements to width: 100%.
+
+If you look close enough, you will notice the .inline elements are too high on the line.
+
+To combat this, set the vertical-align property to middle.
+
+To style the submit button, you can use an attribute selector, which selects an element based on the given attribute value. Here is an example:
+
+input[name="password"]
+The above selects input elements with a name attribute value of password.
+
+When you have specified a width on the object that you have applied margin: 0 auto to, the object will sit centrally within it's parent container.
+
+Specifying auto as the second parameter basically tells the browser to automatically determine the left and right margins itself, which it does by setting them equally. It guarantees that the left and right margins will be set to the same size. The first parameter 0 indicates that the top and bottom margins will both be set to 0.
+
+margin-top: 0;
+margin-bottom: 0;
+margin-left: auto;
+margin-right: auto;
+
+## Open Source Projects <a id="Open-Source"></a>
+
+Select an issue to start contributing. You can find such issues under the tag good first issue for beginners.

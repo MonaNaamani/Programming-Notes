@@ -1428,6 +1428,10 @@ function Button({displayText}) {
 }
 ```
 You can pass an Event Handler as a prop as long as it is located inside the component function. When you pass an event handler as a prop, there are two names that you have to choose. Both naming choices occur in the parent component, the component that defines the event handler and passes it. The first name that you have to choose is the name of the event handler itself. The second name that you have to choose is the name of the prop that you will use to pass the event handler. This is the same thing as the attribute name. For example, if the event type was “click”, you are then listening for a “click” event, and you name your event handler handleClick. Your prop name should be the word on, plus your event type. If you are listening for a “click” event, then you name your prop onClick.
+- onHover={handleHover}
+- onChange={handleChange}: 
+- 
+
 ```
 function myClass(){
   function handleHover() {
@@ -1495,10 +1499,6 @@ React offers a number of built-in Hooks. A few of these include useState(), useE
 
 #### State Hook
 
-The State Hook is a named export from the React library, so we import with object destructuring like the following: 
-```
-import React, { useState } from 'react';
-```
 Syntax
 ```
 const [currentState, setCurrentState] = useState();
@@ -1506,4 +1506,88 @@ const [currentState, setCurrentState] = useState();
 - The current state: The current value of this state.
 - The state setter: A function that we can use to update the value of this state.
 
+To update the state we pass it a new value like this:
+```
+setCurrentState(newStateValue);
+```
 
+Example:
+```
+import React, { useState } from 'react';
+
+function ToggleLoading() {
+  const [isLoading, setIsLoading] = useState();
+
+  return (
+    <div>
+      <p>The data is {isLoading ? 'Loading' : 'Not Loading'}</p>
+      <button onClick={() => setIsLoading(true)}>
+        Turn Loading On
+      </button>
+      <button onClick={() => setIsLoading(false)}>
+        Turn Loading Off
+      </button>
+    </div>
+  );
+}
+```
+#### Initialize State
+
+To initialize our state with any value we want, we simply pass the initial value as an argument to the useState() function call. If we don’t pass an initial value when calling useState(), the current value of the state during the first render will be undefined. Often, this is perfectly fine for the computers running the code, but it can be unclear to the humans reading our code. So, we prefer to explicitly initialize our state. If we don’t have the value needed during the first render, we can explicitly pass null instead of passively leaving the value as undefined.
+```
+const [isLoading, setIsLoading] = useState(true);
+```
+Another example: to clear the input's value, we have to set the message state variable to an empty string.
+
+```
+const [userName, setUserName] = useState('');
+OR
+const [userName, setUserName] = useState(null);
+```
+#### Use State Setter Outside of JSX
+```
+import React, { useState } from "react";
+
+const validPhoneNumber = /^\d{1,10}$/;
+
+export default function PhoneNumber() {
+  const [phone, setPhone] = useState('');
+  
+   const handleChange = ({ target })=> {
+     const newPhone = target.value;
+     const isValid = validPhoneNumber.test(newPhone);
+     if (isValid) {
+       setPhone(newPhone);
+     }
+    };
+
+  return (
+    <div className='phone'>
+      <label for='phone-input'>Phone: </label>
+      <input value={phone} onChange={handleChange} id='phone-input' />
+    </div>
+  );
+}
+```
+#### Set From Previous State
+
+React state updates are asynchronous. This means that there are some scenarios where portions of your code will run before the state is finished updating.
+
+This is a good and a bad thing! Grouping the state updates together can improve performance in your application, but it can result in outdated state values. Consequently, it is best practice to update a state with a callback function, preventing accidental outdated values.
+
+```
+import React, { useState } from 'react';
+ 
+export default function Counter() {
+  const [count, setCount] = useState(0);
+ 
+  const increment = () => setCount(prevCount => prevCount + 1);
+ 
+  return (
+    <div>
+      <p>Wow, you've clicked that button: {count} times</p>
+      <button onClick={increment}>Click here!</button>
+    </div>
+  );
+}
+```
