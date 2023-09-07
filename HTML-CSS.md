@@ -7,8 +7,7 @@
 4. [HTML basics](#HTML)
 5. [CSS basics](#CSS)
 6. [Flexbox](#Flexbox)
-7. [Open Source Projects](#Open-Source)
-
+7. [Additional Notes](#later)
 
 ## Markdown <a id="Markdown"></a>
 
@@ -158,6 +157,57 @@ HTML `<link rel="icon" href="favicon.ico" type="image/x-icon" />`
 - `<kbd>`
 - `<form>`
 - `<input>` 
+- `<main>`
+- `<figure>` represents self-contained content and will allow you to associate an image with a caption.
+- `<figcaption>` is used to add a caption to describe the image contained within the figure element.
+- `<form>` web form used to collect information from users.
+- `<fieldset>` element is used to group related inputs and labels together in a web form. 
+- `<footer>`
+- `<textarea>` element acts like an input element of type text, but comes with the added benefit of being able to receive multi-line text, and an initial number of text rows and columns.
+
+```
+<figure>
+  <img>
+  <figcaption></figcaption>
+</figure>
+```
+#### Form 
+
+The action attribute indicates where form data should be sent. For example, `<form action="/submit-url"></form>` tells the browser that the form data should be sent to the path /submit-url.
+
+The method attribute specifies how to send form-data to the URL specified in the action attribute. The form-data can be sent via a GET request as URL parameters (with method="get") or via a POST request as data in the request body (with method="post").
+
+In order for a form's data to be accessed by the location specified in the action attribute, you must give the text field a name attribute and assign it a value to represent the data being submitted. For example, you could use the following syntax for an email address text field: `<input type="text" name="email">`.
+
+Placeholder text is used to give people a hint about what kind of information to enter into an input. For example, `<input type="text" placeholder="Email address">`.
+
+To prevent a user from submitting your form when required information is missing, you need to add the required attribute to an input element. 
+
+label elements are used to help associate the text for an input element with the input element itself (especially for assistive technologies like screen readers). For example, `<label><input type="radio"> cat</label>` makes it so clicking the word cat also selects the corresponding radio button.
+
+To make it so selecting one radio button automatically deselects the other, both buttons must have a name attribute with the same value.
+
+Like radio buttons, form data for selected checkboxes are name / value attribute pairs. While the value attribute is optional, it's best practice to include it with any checkboxes or radio buttons on the page.
+
+For example:
+```
+ <fieldset>
+        <label for="profile-picture">Upload a profile picture: <input id="profile-picture" type="file" /></label>
+        <label for="age">Input your age (years): <input id="age" type="number" min="13" max="120" /></label>
+        <label for="referrer">How did you hear about us?
+          <select id="referrer">
+            <option value="">(select one)</option>
+            <option value="1">freeCodeCamp News</option>
+            <option value="2">freeCodeCamp YouTube Channel</option>
+            <option value="3">freeCodeCamp Forum</option>
+            <option value="4">Other</option>
+          </select>
+        </label>
+        <label for="bio">Provide a bio:
+          <textarea id="bio"></textarea>
+        </label>
+      </fieldset>
+```
 
 #### Hyperlink Tag
 
@@ -330,6 +380,10 @@ Web-safe fonts are fonts that come pre-installed across most operating systems. 
 14. <p style="font-family: 'Brush Script'">Brush Script</p>
 15. <p style="font-family: 'Lucida Bright'">Lucida Bright</p>
 
+Or we can use a font-importing method, such as 
+```  
+@import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;1,900&display=swap');
+```
 #### Display <a id="display"></a>
 
 The display property specifies the display behavior (the type of rendering box) of an element.
@@ -595,66 +649,18 @@ In addition to the properties mentioned earlier (justify-content, align-items, a
 - `align-self`: This property can be used on individual flex items to override the alignment set by the flex container. It accepts the same values as align-items and allows you to align a specific item differently from the others.
 - `flex-wrap`: This property forces items that don’t fit to get bumped down to the next row.
 
-## Notes for Later
+[Back to top](#top)
+
+## Additional Notes <a id="later"></a>
 
 - We've added `height: 100vh` to the `body`... this makes the body exactly the same height as the viewport.
-
-this is some magical font-importing.  
-you'll learn about it later.
-@import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;1,900&display=swap');
 
 rem
 text-transform
 letter-spacing
 vh
 
-## FreeCodeCamp Notes to Sort Later
-
 min-height
-
-## HTML 
-
-HTML5 has some elements that identify different content areas. These elements make your HTML easier to read and help with Search Engine Optimization (SEO) and accessibility.
-
-Identify the **main section** of this page by adding a `<main>` opening tag before the h1 element, and a </main> closing tag after the p element.
-
-The **figure element** represents self-contained content and will allow you to associate an image with a caption.
-A **figure caption** (figcaption) element is used to add a caption to describe the image contained within the figure element.
-
-```
-<figure>
-  <img>
-  <figcaption></figcaption>
-</figure>
-```
-
-Form Element: Now you will add a web form to collect information from users.
-The action attribute indicates where form data should be sent. For example, <form action="/submit-url"></form> tells the browser that the form data should be sent to the path /submit-url.
-
-In order for a form's data to be accessed by the location specified in the action attribute, you must give the text field a name attribute and assign it a value to represent the data being submitted. For example, you could use the following syntax for an email address text field: <input type="text" name="email">.
-
-Placeholder text is used to give people a hint about what kind of information to enter into an input. For example, <input type="text" placeholder="Email address">.
-
-To prevent a user from submitting your form when required information is missing, you need to add the required attribute to an input element. There's no need to set a value to the required attribute. Instead, just add the word required to the input element, making sure there is space between it and other attributes.
-
-You can use radio buttons for questions where you want only one answer out of multiple options.
-
-label elements are used to help associate the text for an input element with the input element itself (especially for assistive technologies like screen readers). For example, <label><input type="radio"> cat</label> makes it so clicking the word cat also selects the corresponding radio button.
-
-Notice that both radio buttons can be selected at the same time. To make it so selecting one radio button automatically deselects the other, both buttons must have a name attribute with the same value
-
-If you select the Indoor radio button and submit the form, the form data for the button is based on its name and value attributes. Since your radio buttons do not have a value attribute, the form data will include indoor-outdoor=on, which is not useful when you have multiple buttons.
-
-The fieldset element is used to group related inputs and labels together in a web form. fieldset elements are block-level elements, meaning that they appear on a new line.
-
-The legend element acts as a caption for the content in the fieldset element. It gives usersThere's another way to associate an input element's text with the element itself. You can nest the text within a label element and add a for attribute with the same value as the input element's id attribute.
-
-Like radio buttons, form data for selected checkboxes are name / value attribute pairs. While the value attribute is optional, it's best practice to include it with any checkboxes or radio buttons on the page.
-`<label for="email" >Enter Your Email: <input id="email" /></label>`
-Now you will add a footer section to the page.
-
-After the main element, add a footer element.
-
 
 Another project - Registration Form
 
@@ -750,6 +756,10 @@ margin-bottom: 0;
 margin-left: auto;
 margin-right: auto;
 
-## Open Source Projects <a id="Open-Source"></a>
 
-Select an issue to start contributing. You can find such issues under the tag good first issue for beginners.
+The <form> HTML element represents a document section containing interactive controls for submitting information.
+You should see an a element with a corresponding id="tribute-link", which links to an outside site, that contains additional information about the subject of the tribute page. HINT: You must give your element an attribute of target and set it to _blank in order for your link to open in a new tab
+
+
+
+
